@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_04_102033) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_04_112353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,7 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_102033) do
 
   create_table "offices", force: :cascade do |t|
     t.string "name"
-    t.string "max_capacity"
     t.integer "meeting_rooms"
     t.float "price"
     t.string "address"
@@ -37,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_102033) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "max_capacity"
     t.index ["user_id"], name: "index_offices_on_user_id"
   end
 
