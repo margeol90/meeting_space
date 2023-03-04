@@ -5,7 +5,7 @@ class Office < ApplicationRecord
   has_many :reviews, through: :bookings
 
   validates :name, presence: true, uniqueness: true
-  validates :max_capacity, :price, presence: true
+  validates :price, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
