@@ -3,10 +3,9 @@ class Office < ApplicationRecord
   belongs_to :user
   has_many :bookings, dependent: :destroy
   has_many :reviews, through: :bookings
-  has_many :facilities
 
   validates :name, presence: true, uniqueness: true
-  validates :max_capacity, :price, :facilities, presence: true
+  validates :max_capacity, :price, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
