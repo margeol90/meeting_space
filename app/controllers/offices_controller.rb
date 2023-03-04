@@ -18,8 +18,10 @@ class OfficesController < ApplicationController
   def create
     @office = Office.new(office_params)
     @office.user = current_user
-    if office.save!
-      redirect_to office_path
+    authorize @office
+
+    if @office.save!
+      redirect_to office_path(@office)
     else
       render :new, status: :unprocessable_entity
     end
@@ -44,7 +46,7 @@ class OfficesController < ApplicationController
   private
 
   def office_params
-    params.require(:office).permit(name, meeting_rooms, price, address, description, max_capacity)
+    params.require(:office).permit(:name, :meeting_rooms, :price, :address, :description, :max_capacity)
   end
 
   def set_office
