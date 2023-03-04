@@ -1,20 +1,29 @@
-<div class="container">
-  <div class="grid">
+<div class="index-container">
+  <div class="office-grid">
     <% @offices.each do |office| %>
       <div class="grid-item">
-        <div class="card">
-          <div class="card-content">
-            <h1 class="card-header">
-              <%= office.name %>
-            </h1>
-            <i class="fa-solid fa-person-shelter"></i>
-            <span><%= office.max_capacity %></span>
-            <i class="fa-solid fa-handshake"></i>
-            <span><%= office.meeting_rooms %></span>
-            <i class="fa-solid fa-euro"></i>
-            <span><%= office.price %></span>
+        <%= link_to office_path(office), :class => "text-decoration-none" do %>
+          <div class="office-card">
+            <div class="card-content">
+              <h1 class="card-header">
+                <%= office.name %>
+              </h1>
+              <div class="card-attr">
+                <i class="fa-solid fa-person-shelter"></i>
+                <span><%= office.max_capacity %></span>
+                <i class="fa-solid fa-handshake"></i>
+                <span><%= office.meeting_rooms %></span>
+              </div>
+              <div class="card-price">
+                <i class="fa-solid fa-euro"></i>
+                <span><%= "#{office.price}/day" %></span>
+              </div>
+              <div class="card-rating">
+                <i class="fa-solid fa-star">ratings</i>
+              </div>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>
