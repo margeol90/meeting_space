@@ -3,7 +3,11 @@ class OfficesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index]
 
   def index
-    @offices = policy_scope(Office).all
+    if params[:query].present?
+      @offices = policy_scope(Office).search_by_address(params[:query])
+    else
+      @offices = policy_scope(Office).all
+    end
   end
 
   def show
