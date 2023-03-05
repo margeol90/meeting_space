@@ -7,13 +7,16 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking.user = current_user
     @booking.office = @office
-
-    if @booking.save!
-      redirect_to my_bookings_path
-      flash[:notice] = "Your booking has been successful!"
-    else
-      redirect_to office_path(@office)
-      flash[:alert] = "Your booking was not successful. Please try again"
+    @booking.total_price = cost(@booking.start_date, @booking.end_date, @office.price)
+    if @booking.valid?
+      if @booking.save!
+        redirect_to my_bookings_path
+        flash[:notice] = "Your booking has been successful!"
+      else
+        redirect_to office_path(@office)
+        flash[:alert] = "Your booking was not successful. Please try again"
+      end
+    end
   end
 
   def edit
@@ -31,8 +34,14 @@ class BookingsController < ApplicationController
 
   private
 
+  def cost(startdate, enddate, price)
+    days = enddate - startdate
+    total = days * price
+    return '%.2f' % total
+  end
+
   def booking_params
-    params.require(:booking).permit(start_date, end_date, occupants)
+    params.require(:booking).permit(:start_date, :end_date)
   end
 
   def set_booking
@@ -41,6 +50,6 @@ class BookingsController < ApplicationController
   end
 
   def set_office
-    @office = Office.find(params[:id])
+    @office = Office.find(params[:office_id])
   end
 end

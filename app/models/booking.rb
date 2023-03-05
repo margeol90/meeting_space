@@ -5,7 +5,6 @@ class Booking < ApplicationRecord
 
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates :occupants, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :status, presence: true
   validate :end_date_after_start_date
 

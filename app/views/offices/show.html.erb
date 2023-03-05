@@ -3,6 +3,7 @@
 
 <%= @office.name %>
 <%= link_to "Edit", edit_office_path %>
+
 <div class="col-2">
   <div class="card p-3">
     <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr' } do |f| %>
