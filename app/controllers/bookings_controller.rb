@@ -8,14 +8,12 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.office = @office
     @booking.total_price = cost(@booking.start_date, @booking.end_date, @office.price)
-    if @booking.valid?
-      if @booking.save!
-        redirect_to my_bookings_path
-        flash[:notice] = "Your booking has been successful!"
-      else
-        redirect_to office_path(@office)
-        flash[:alert] = "Your booking was not successful. Please try again"
-      end
+    if @booking.save!
+      redirect_to my_bookings_path
+      flash[:notice] = "Your booking has been successful!"
+    else
+      redirect_to office_path(@office)
+      flash[:alert] = "Your booking was not successful. Please try again"
     end
   end
 

@@ -1,0 +1,5 @@
+<h1>My Bookings</h1>
+
+<% @bookings.each do |booking| %>
+  <li> <%= link_to booking.office.name, office_path(booking.office) %> | Dates: <%= booking.start_date %> to <%= booking.end_date %> | Total cost: <%= booking.total_price %>€ </li>
+<% end %>
