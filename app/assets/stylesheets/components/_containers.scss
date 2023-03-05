@@ -1,17 +1,19 @@
 .index-container {
-  background-color: #eee;
   font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 
 .office-grid {
   display: grid;
   width: 114em;
-  gap: 6rem;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1rem;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(3, 1fr);
   align-items: start;
 }
 
