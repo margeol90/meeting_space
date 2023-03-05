@@ -3,10 +3,10 @@
 <div class="container">
   <h1 class="text-center my-2">MeetingSpace</h1>
   <p class="text-center">The perfect space for your next meeting</p>
-  <%# <%= form_with url: office_path(@office), method: :get, class: "d-flex w-50 p-3 align-middle mx-auto" do %>
-    <%# <%= text_field_tag :query,params[:query], class: "form-control", placeholder: "Find a Space" %>
-    <%# <%= submit_tag "Search", class: "light-blue-btn mx-3" %>
-    <%# <% end %>
-    <div class="h-100 d-flex align-items-center justify-content-center">
-      <%= link_to "View All", offices_path, class: "light-blue-btn" %>
-    </div>
+  <%= form_with url: offices_path, method: :get, class: "d-flex w-50 p-3 align-middle mx-auto" do %>
+    <%= text_field_tag :query,params[:query], class: "form-control", placeholder: "Find a Space" %>
+    <%= submit_tag "Search", class: "light-blue-btn mx-3" %>
+  <% end %>
+  <div class="h-100 d-flex align-items-center justify-content-center">
+    <%= link_to "View All", offices_path, class: "light-blue-btn" %>
+  </div>

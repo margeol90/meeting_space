@@ -7,6 +7,14 @@ class Office < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true
 
+  include PgSearch::Model
+
+  pg_search_scope :search_by_address,
+                  against: [:address],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
+
   #  ONLY UNCOMMENT THE BELOW WHEN WE HAVE THE RELEVANT JS ADDED
 
   # geocoded_by :address
