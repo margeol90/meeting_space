@@ -8,17 +8,14 @@ Rails.application.routes.draw do
 
   resources :offices do
     resources :bookings, only: [:create, :edit, :update]
-    # collection do
-    #   get :my_properties
-    # end
   end
 
   resources :bookings, only: [:destroy] do
     resources :reviews, only: [:create]
-    # collection do
-    #   get :my_bookings
-    # end
   end
 
   resources :reviews, only: [:destroy]
+
+  get "/my_properties", to: "pages#my_flats", as: :my_properties
+  get "/my_bookings", to: "pages#my_bookings", as: :my_bookings
 end
