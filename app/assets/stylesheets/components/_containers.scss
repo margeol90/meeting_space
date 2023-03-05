@@ -1,5 +1,4 @@
 .index-container {
-  font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,9 +25,8 @@
   transition: 0.2s;
   text-decoration: none;
 }
-  
+
 .grid-item:hover {
   transform: translateY(-0.5%);
   box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.5);
 }
-
