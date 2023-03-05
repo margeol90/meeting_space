@@ -1,2 +1,15 @@
+<% require "date" %>
+<% current_day = DateTime.current.to_date %>
+
 <%= @office.name %>
 <%= link_to "Edit", edit_office_path %>
+
+<div class="col-2">
+  <div class="card p-3">
+    <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr' } do |f| %>
+      <%= f.input :start_date, as: :string, placeholder: "#{current_day}", input_html: { data: { flatpickr_target: "startDate" } } %>
+      <%= f.input :end_date, as: :string, placeholder: "#{current_day+1}", input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date' } %>
+      <%= f.submit class: "btn-confirm" %>
+    <% end %>
+  </div>
+</div>

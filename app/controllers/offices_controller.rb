@@ -1,6 +1,6 @@
 class OfficesController < ApplicationController
   before_action :set_office, only: %i[show edit update destroy]
-  skip_before_action :authenticate_user!, only: %i[index]
+  skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
     if params[:query].present?
@@ -12,6 +12,8 @@ class OfficesController < ApplicationController
 
   def show
     @booking = Booking.new
+    @bookings = @office.bookings
+    authorize @booking
   end
 
   def new
