@@ -10,18 +10,19 @@
 }
 
 .card-content {
-  padding: 3rem;
+  padding: 1rem;
 }
 
 .card-header {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: white;
   margin-bottom: 1.5rem;
+  height: 1.5rem;
 }
 
 .card-attr {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.1rem;
   line-height: 1.7;
   color: white;
@@ -29,7 +30,7 @@
 }
 
 .card-price {
-  font-size: 1.8rem;
+  font-size: 1.1rem;
   letter-spacing: 0.1rem;
   line-height: 1.7;
   color: white;
@@ -37,9 +38,9 @@
 }
 
 .card-rating {
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   letter-spacing: 0.1rem;
   line-height: 1.7;
   color: white;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
 }
