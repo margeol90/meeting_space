@@ -8,3 +8,25 @@
   border-radius: 5px;
   margin: 0 auto;
 }
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  background-color: $dark-gray;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 auto;
+
+  @media screen and (min-width: 480px) {
+    width: 90%;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 60%;
+  }
+
+  @media screen and (min-width: 992px) {
+    width: 30%;
+  }
+}

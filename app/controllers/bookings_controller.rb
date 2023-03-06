@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: %i[edit destroy]
-  before_action :set_office, only: %i[new create edit update]
+  before_action :set_booking, only: %i[edit update destroy]
+  before_action :set_office, only: %i[new create]
 
   def create
     @booking = Booking.new(booking_params)
@@ -33,8 +33,12 @@ class BookingsController < ApplicationController
   private
 
   def cost(startdate, enddate, price)
-    days = enddate - startdate
-    total = days * price
+    if enddate > startdate
+      days = enddate - startdate
+      total = days * price
+    elsif enddate == startdate
+      total = price
+    end
     return '%.2f' % total
   end
 
