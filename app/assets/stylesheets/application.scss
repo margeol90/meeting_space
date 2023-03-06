@@ -11,17 +11,3 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-
-@media only screen and (max-width: 60em) {
-  body {
-    padding: 3rem;
-  }
-
-  .office-grid {
-    gap: 3rem;
-  }
-}
-
-body {
-  font-family:$body-font
-}
