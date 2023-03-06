@@ -1,0 +1,11 @@
+<% content_for :title do %>
+  <%= "Edit your booking" %>
+<% end %>
+
+<h1 class=text-center>Update your reservation for <%= @booking.office.name %></h1>
+ <div>
+    <div class="booking-form">
+    <p>Any changes to your booking may need to be approved again by the owner of the property.</p>
+    <%= render "form", office: @office, booking: @booking %>
+    </div>
+ </div>

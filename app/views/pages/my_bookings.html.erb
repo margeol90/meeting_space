@@ -1,5 +1,39 @@
-<h1>My Bookings</h1>
-
-<% @bookings.each do |booking| %>
-  <li> <%= link_to booking.office.name, office_path(booking.office) %> | Dates: <%= booking.start_date %> to <%= booking.end_date %> | Total cost: <%= booking.total_price %>€ </li>
+<% content_for :title do %>
+  <%= "My Bookings" %>
 <% end %>
+
+<% require "date" %>
+<% current_day = DateTime.current.to_date %>
+
+<div class="container">
+  <h1 class="text-center">My Bookings</h1>
+  <h2>Upcoming</h2>
+  <div class="booking-cards">
+    <% @bookings.each do |booking| %>
+      <div class="booking-card">
+        <h3>
+          <%= booking.office.name %>
+        </h3>
+        <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+        <p>Total cost: <%= booking.total_price %>€</p>
+        <%= link_to "Edit", edit_booking_path(booking), class: "btn-edit" %>
+        <%= link_to "View", office_path(booking.office), class: "btn-confirm" %>
+        <%= link_to "Cancel", booking_path(booking), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </div>
+    <% end %>
+  </div>
+  <h2>Past Bookings</h2>
+  <% @bookings.each do |booking| %>
+    <% if booking.end_date  > current_day %>
+      <div class="booking-card">
+        <h3>
+          <%= booking.office.name %>
+        </h3>
+        <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+        <p>Total cost: <%= booking.total_price %>€</p>
+        <%= link_to "Edit", edit_booking_path(booking), class: "btn-edit" %>
+        <%= link_to "View", office_path(booking.office), class: "btn-confirm" %>
+        <%= link_to "Cancel", booking_path(booking), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </div>
+    <% end %>
+</div>

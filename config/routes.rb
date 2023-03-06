@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :offices do
-    resources :bookings, only: [:create, :edit, :update]
+    resources :bookings, only: [:create ]
   end
 
-  resources :bookings, only: [:destroy] do
+  resources :bookings, only: [:destroy, :edit, :update] do
     resources :reviews, only: [:create]
   end
 

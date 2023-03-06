@@ -7,9 +7,13 @@ export default class extends Controller {
   static targets = [ "startDate", "endDate" ]
 
   connect() {
-    flatpickr(this.startDateTarget, {
-      // Provide an id for the plugin to work
-      plugins: [new rangePlugin({ input: "#end_date"})]})
+    flatpickr(this.startDateTarget, {})
     flatpickr(this.endDateTarget, {})
+    const picker = flatpickr("#start_date", {
+      "plugins": [rangePlugin({ input: "#end_date"})],
+      minDate: "today",
+      // calendar is always visible with below:
+      inline: true
+    })
   }
 }
