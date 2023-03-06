@@ -16,6 +16,6 @@ Rails.application.routes.draw do
 
   resources :reviews, only: [:destroy]
 
-  get "/my_properties", to: "pages#my_flats", as: :my_properties
+  get "/my_properties", to: "pages#my_properties", as: :my_properties
   get "/my_bookings", to: "pages#my_bookings", as: :my_bookings
 end
