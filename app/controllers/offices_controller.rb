@@ -21,6 +21,10 @@ class OfficesController < ApplicationController
     @booking = Booking.new
     @bookings = @office.bookings
     authorize @booking
+    @markers = [{
+      lat: @office.latitude,
+      lng: @office.longitude
+    }]
   end
 
   def new
