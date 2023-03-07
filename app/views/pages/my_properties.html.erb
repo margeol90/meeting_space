@@ -5,9 +5,32 @@
       <h3><%= current_user.first_name %></h3>
       <p>Last login: <%= current_user.last_sign_in_at  %></p>
     </div>
-    <div class="col-sm-6 col-md-10">
-    <%= link_to root_path %>
+  <div class="col-sm-6 col-md-10">
     <% @offices.each do |office| %>
-
+        <div class="card-product my-3">
+          <% if office.photo.attached? %>
+            <%= cl_image_tag office.photo.key %>
+          <% else %>
+            <img src="https://liftlearning.com/wp-content/uploads/2020/09/default-image.png" />
+          <% end %>
+          <div class="card-product-infos">
+            <h2 class="my-2"><%= office.name %></h2>
+            <p><%= office.description.truncate(20, separator: ' ')%></p>
+            <div class="card-flat-attr">
+              <i class="fa-solid fa-person-shelter"></i>
+              <span><%= office.max_capacity %></span>
+              <i class="fa-solid fa-euro-sign"></i>
+              <span><%= office.price %></span>
+              <% if policy(office).edit? %>
+                <%= link_to "Edit", edit_office_path(office), class: "btn-edit" %>
+              <% end %>
+              <% if policy(office).destroy? %>
+                <%= link_to "Delete your office", office_path(office), class: "btn-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-<% end %>
