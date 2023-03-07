@@ -4,6 +4,7 @@
       <div class="grid-item">
         <%= link_to office_path(office), :class => "text-decoration-none" do %>
           <div class="office-card">
+            <%= cl_image_tag office.photo.key, :class => "office-card-img", crop: :fill if office.photo.attached? %>
             <div class="card-content">
               <h1 class="card-header">
                 <strong><%= office.name %></strong>
