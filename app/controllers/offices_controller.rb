@@ -13,7 +13,8 @@ class OfficesController < ApplicationController
       {
         lat: office.latitude,
         lng: office.longitude,
-        info_window_html: render_to_string(partial: "popup", locals: { office: office })
+        info_window_html: render_to_string(partial: "popup", locals: { office: office }),
+        image_url: helpers.asset_url("favicon.png")
       }
     end
   end
@@ -25,7 +26,8 @@ class OfficesController < ApplicationController
     @markers = [{
       lat: @office.latitude,
       lng: @office.longitude,
-      info_window_html: render_to_string(partial: "popup", locals: { office: @office })
+      info_window_html: render_to_string(partial: "popup", locals: { office: @office }),
+      image_url: helpers.asset_url("favicon.png")
     }]
   end
 

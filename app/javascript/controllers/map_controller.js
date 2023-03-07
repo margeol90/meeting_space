@@ -28,8 +28,15 @@ export default class extends Controller {
   #addMarkersToMap() {
     // Create a new marker, set the longitude and latitude, and add it to the map.
     this.markersValue.forEach((marker) => {
+      const customMarker = document.createElement('div')
+      customMarker.style.height = "20px"
+      customMarker.style.width = "20px"
+      customMarker.style.backgroundImage = `url('${marker.image_url}')`
+      customMarker.style.backgroundSize = "contain"
+      customMarker.style.backgroundColor = "blue"
+
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({element: customMarker})
         .setLngLat([marker.lng, marker.lat])
         .setPopup(popup)
         .addTo(this.map);
