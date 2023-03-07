@@ -22,14 +22,16 @@ export default class extends Controller {
     this.markersValue.forEach((marker) => {
       bounds.extend([marker.lng, marker.lat])
     })
-    this.map.fitBounds(bounds, { padding: 50, duration:10 })
+    this.map.fitBounds(bounds, { padding: 50, maxZoom: 15, duration:10 })
   }
 
   #addMarkersToMap() {
     // Create a new marker, set the longitude and latitude, and add it to the map.
     this.markersValue.forEach((marker) => {
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
       new mapboxgl.Marker()
         .setLngLat([marker.lng, marker.lat])
+        .setPopup(popup)
         .addTo(this.map);
     })
   }
