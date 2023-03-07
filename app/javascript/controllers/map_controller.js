@@ -2,13 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="map"
 export default class extends Controller {
+  static values = { apiKey: String }
   connect() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiamlkZS1tdXJpdGFsYSIsImEiOiJjbGV4eXV6YmwwaTg2M3hwNDBscnhwMWF6In0.6dCNpQr0FVCgmeW52OrNJQ';
+    mapboxgl.accessToken = this.apiKeyValue
     const map = new mapboxgl.Map({
-    container: 'map', // container ID
+    container: this.element,
     style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 9, // starting zoom
     });
   }
 }
