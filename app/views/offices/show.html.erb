@@ -5,8 +5,11 @@
   <%= @office.name %>
 <% end %>
 
-<%= @office.name %>
-<%= link_to "Edit", edit_office_path %>
+<div class="text-center mt-3">
+  <h1>
+    <%= @office.name %> <%= link_to "Edit", edit_office_path %>
+  </h1>
+</div>
 
 <div class="col-2">
   <div class="card p-3">
@@ -15,5 +18,14 @@
       <%= f.input :end_date, as: :string, label: false, input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date', class: "d-none" } %>
       <%= f.submit class: "btn-confirm" %>
     <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <div data-controller="map"
+      id='map'
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      data-map-markers-value="<%= @markers.to_json %>"
+      style='width: 75%; height: 300px;'>
   </div>
 </div>

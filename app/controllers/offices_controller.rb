@@ -8,12 +8,27 @@ class OfficesController < ApplicationController
     else
       @offices = policy_scope(Office).all
     end
+    # The `geocoded` scope filters only offices with coordinates
+    @markers = @offices.geocoded.map do |office|
+      {
+        lat: office.latitude,
+        lng: office.longitude,
+        info_window_html: render_to_string(partial: "popup", locals: { office: office }),
+        image_url: helpers.asset_url("favicon.png")
+      }
+    end
   end
 
   def show
     @booking = Booking.new
     @bookings = @office.bookings
     authorize @booking
+    @markers = [{
+      lat: @office.latitude,
+      lng: @office.longitude,
+      info_window_html: render_to_string(partial: "popup", locals: { office: @office }),
+      image_url: helpers.asset_url("favicon.png")
+    }]
   end
 
   def new
