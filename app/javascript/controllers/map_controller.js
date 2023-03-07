@@ -13,7 +13,16 @@ export default class extends Controller {
       container: this.element,
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
     });
-    this.#addMarkersToMap
+    this.#addMarkersToMap()
+    this.#fitMapToMarkers()
+  }
+
+  #fitMapToMarkers() {
+    const bounds = new mapboxgl.LngLatBounds()
+    this.markersValue.forEach((marker) => {
+      bounds.extend([marker.lng, marker.lat])
+    })
+    this.map.fitBounds(bounds, { padding: 50, duration:10 })
   }
 
   #addMarkersToMap() {
