@@ -1,14 +1,14 @@
-<div class="text-center mt-3"><h1>Office spaces</h1></div>
-
+<div class="text-center mt-3">
+  <h1>Office spaces</h1>
+</div>
 <div class="container">
   <div data-controller="map"
-      id='map'
+      id='index-map'
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
       data-map-markers-value="<%= @markers.to_json %>"
       style='width: 100%; height: 300px;'>
   </div>
 </div>
-
 <div class="index-container">
   <div class="office-grid">
     <% @offices.each do |office| %>
