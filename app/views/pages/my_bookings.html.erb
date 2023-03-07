@@ -1,10 +1,8 @@
 <% content_for :title do %>
   <%= "My Bookings" %>
 <% end %>
-
 <% require "date" %>
 <% current_day = DateTime.current.to_date %>
-
 <div class="container">
   <h1 class="text-center">My Bookings</h1>
   <h3>Upcoming</h3>
@@ -26,24 +24,6 @@
         <%= link_to "View", office_path(booking.office), class: "btn-confirm" %>
         <%= link_to "Cancel", booking_path(booking), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
       </div>
-    <% end %>
-  </div>
-  <div class="my-3">
-    <h3>Past Bookings</h3>
-    <% past_bookings = @bookings.map { |booking| booking.end_date < current_day }%>
-    <% if !past_bookings.nil? %>
-      <% past_bookings.each do |booking| %>
-        <div class="booking-card">
-          <h4>
-            <%= booking.office.name %>
-          </h4>
-          <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-          <p>Total cost: <%= booking.total_price %>€</p>
-          <%= link_to "View", office_path(booking.office), class: "btn-confirm" %>
-        </div>
-      <% end %>
-    <% else %>
-      <p>You have no bookings</p>
     <% end %>
   </div>
 </div>
