@@ -5,8 +5,11 @@
   <%= @office.name %>
 <% end %>
 
-<%= @office.name %>
-<%= link_to "Edit", edit_office_path %>
+<div class="text-center mt-3">
+  <h1>
+    <%= @office.name %> <%= link_to "Edit", edit_office_path %>
+  </h1>
+</div>
 
 <div class="col-2">
   <div class="card p-3">
@@ -17,3 +20,5 @@
     <% end %>
   </div>
 </div>
+
+<div id='map' style='width: 400px; height: 300px;'></div>
