@@ -16,9 +16,16 @@
     <% end %>
     <h3>Location</h3>
     <p><%= @office.address %></p>
-    <%# <% if @office.geocoded? %>
-    <%# <div data-controller="map" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] " data-map-markers-value="<%= @markers.to_json " data-map-zoom-value=15 id='show-map'></div> %>
-    <%# <% end %>
+    <% if @office.geocoded? %>
+      <div class="container">
+        <div data-controller="map"
+      id='map'
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      data-map-markers-value="<%= @markers.to_json %>"
+      style='width: 75%; height: 300px;'>
+        </div>
+      </div>
+    <% end %>
     <h3>Reviews</h3>
     <hr>
     <% if @has_review %>
@@ -54,13 +61,5 @@
         <% end %>
       <% end %>
     </div>
-  </div>
-</div>
-<div class="container">
-  <div data-controller="map"
-      id='map'
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-      data-map-markers-value="<%= @markers.to_json %>"
-      style='width: 75%; height: 300px;'>
   </div>
 </div>
