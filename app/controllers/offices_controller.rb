@@ -8,6 +8,13 @@ class OfficesController < ApplicationController
     else
       @offices = policy_scope(Office).all
     end
+    # The `geocoded` scope filters only offices with coordinates
+    @markers = @offices.geocoded.map do |office|
+      {
+        lat: office.latitude,
+        lng: office.longitude
+      }
+    end
   end
 
   def show
