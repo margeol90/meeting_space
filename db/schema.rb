@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_073907) do
     t.date "start_date"
     t.date "end_date"
     t.float "total_price"
-    t.integer "status"
+    t.integer "status", default: 0, null: false
     t.bigint "user_id", null: false
     t.bigint "office_id", null: false
     t.datetime "created_at", null: false

@@ -8,6 +8,9 @@ class Booking < ApplicationRecord
   # validates :status, presence: true
   validate :end_date_after_start_date
 
+  # status of booking
+  enum status: { pending: 0, confirmed: 1, declined: 2}
+
   private
 
   def end_date_after_start_date
