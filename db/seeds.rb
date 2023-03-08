@@ -10,9 +10,16 @@ Office.destroy_all
 User.destroy_all
 
 puts "Creating users"
-user1 = User.create!(first_name: "Landlord", last_name: "Name", email: "landlord@test.com", password: "12345678")
-user2 = User.create!(first_name: "Professional", last_name: "Name", email: "professional@test.com",
-                     password: "12345678")
+user1 = User.create!(first_name: "Landlord", last_name: "Name", email: "landlord@test.com", password: "123456")
+user2 = User.create!(first_name: "Professional", last_name: "Name", email: "professional@test.com", password: "123456")
+user3 = User.create!(first_name: "Margarita", last_name: "Dagla", email: "margarita@test.com", password: "123456")
+user4 = User.create!(first_name: "Jide", last_name: "Muritala", email: "jide@test.com", password: "123456")
+user5 = User.create!(first_name: "Fran", last_name: "Lago", email: "fran@test.com", password: "123456")
+user6 = User.create!(first_name: "Michael", last_name: "Garbutt", email: "michael@test.com", password: "123456")
+user7 = User.create!(first_name: "John", last_name: "Smith", email: "john@test.com", password: "123456")
+user8 = User.create!(first_name: "Kevin", last_name: "Davies", email: "kevin@test.com", password: "123456")
+user9 = User.create!(first_name: "Michael", last_name: "Owen", email: "owen@test.com", password: "123456")
+user10 = User.create!(first_name: "Fernando", last_name: "Hierro", email: "fernando@test.com", password: "123456")
 
 puts "Creating offices"
 office1 = Office.create!(
