@@ -1,8 +1,15 @@
-<div class="container">
-  <h1><%= "Review your stay at #{@booking.office.name}"%></h1>
-  <%= simple_form_for [@booking, @review] do |f| %>
-    <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience" %>
-    <%= f.input :comment %>
-    <%= f.submit "Submit review", class: "btn btn-primary" %>
+  <% content_for :title do %>
+    <%= "Review" %>
   <% end %>
+<div class="container">
+  <h1 class="text-center">Write a review for
+  </br>
+  <%= @booking.office.name %></h1>
+  <div class="form">
+    <%= simple_form_for [@booking, @review] do |f| %>
+      <%= f.input :ratings, collection: (1..5).to_a, label: "Rate your experience" %>
+      <%= f.input :comment %>
+      <%= f.submit "Submit review", class: "btn-confirm" %>
+    <% end %>
+  </div>
 </div>

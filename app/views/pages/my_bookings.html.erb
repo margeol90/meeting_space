@@ -21,9 +21,56 @@
           <p>Total cost: <%= booking.total_price %>€</p>
         </div>
         <%= link_to "Edit", edit_booking_path(booking), class: "btn-edit" %>
+        <%= link_to "Review",  new_booking_review_path(booking), class: "btn-mint" %>
         <%= link_to "View", office_path(booking.office), class: "btn-confirm" %>
         <%= link_to "Cancel", booking_path(booking), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
       </div>
     <% end %>
   </div>
+
+  <div class="my-3">
+    <h3>Past Bookings</h3>
+    <div class="booking-cards">
+      <% past_bookings = @bookings.select { |booking| booking.end_date < current_day }%>
+      <% if !past_bookings.nil? %>
+        <% past_bookings.each do |booking| %>
+          <div class="booking-card">
+            <h4>
+              <%= booking.office.name %>
+            </h4>
+            <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+            <p>Total cost: <%= booking.total_price %>€</p>
+            <div class="my-2">
+            <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>You have no bookings</p>
+      <% end %>
+    </div>
+  </div>
+
+  <% cancelled_bookings = @bookings.select { |booking| booking.status == 2 }%>
+  <% if !cancelled_bookings.nil? %>
+    <div class="my-3">
+      <h3>Cancelled Bookings</h3>
+      <div class="booking-cards">
+        <% cancelled_bookings.each do |booking| %>
+          <div class="booking-card">
+            <h4>
+              <%= booking.office.name %>
+            </h4>
+            <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+            <p>Total cost: <%= booking.total_price %>€</p>
+            <div class="my-2">
+            <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <p>You have no bookings</p>
+  <% end %>
 </div>

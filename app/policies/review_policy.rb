@@ -7,11 +7,10 @@ class ReviewPolicy < ApplicationPolicy
   end
 
   def new?
-    return create?
+    true
   end
 
   def create?
-    record.booking.user == current_user
+    record.booking.user == user
   end
-
 end

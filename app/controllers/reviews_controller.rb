@@ -9,6 +9,8 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.booking = @booking
+    authorize @review
+
     if @review.save!
       redirect_to office_path(@booking.office)
     else
@@ -19,10 +21,10 @@ class ReviewsController < ApplicationController
   private
 
   def set_booking
-    @booking = Booking.find(:booking_id)
+    @booking = Booking.find(params[:booking_id])
   end
 
   def review_params
-    params.require(:review).permit(:comment, :rating)
+    params.require(:review).permit(:comment, :ratings)
   end
 end
