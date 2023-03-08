@@ -1,7 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :office
-  # has_one :review, dependent: :destroy
+  has_one :review, dependent: :destroy
 
   validates :start_date, presence: true
   validates :end_date, presence: true
@@ -9,7 +9,7 @@ class Booking < ApplicationRecord
   validate :end_date_after_start_date
 
   # status of booking
-  enum status: { pending: 0, confirmed: 1, declined: 2}
+  enum status: { pending: 0, confirmed: 1, declined: 2 }
 
   private
 
