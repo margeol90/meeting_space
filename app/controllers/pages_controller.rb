@@ -7,4 +7,8 @@ class PagesController < ApplicationController
   def my_bookings
     @bookings = Booking.where(user_id: current_user.id)
   end
+
+  def my_properties
+    @offices = Office.where(user_id: current_user.id)
+  end
 end
