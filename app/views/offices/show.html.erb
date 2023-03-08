@@ -8,7 +8,7 @@
     <div class="card">
       <h2 class="card-title"><%= @office.name %></h2>
       <%= cl_image_tag @office.photo.key, class:"card-img-top", width:700, crop: :fill, style: "border-radius: 15px;" if @office.photo.attached?%>
-      <p class="card-text"><%= @office.description.truncate(20, separator: ' ')%></p>
+      <p class="card-text"><%= @office.description%></p>
       <% if policy(@office).edit? %>
         <%= link_to "Edit", edit_office_path, class:"btn btn-success"%>
       <% end %>
@@ -17,7 +17,7 @@
       <% end %>
     </div>
     <div class="card">
-      <h3>Location</h3>
+      <h2 class="card-title">Location</h2>
       <p><%= @office.address %></p>
       <% if @office.geocoded? %>
         <div class="container">
@@ -29,6 +29,9 @@
           </div>
         </div>
       <% end %>
+    </div>
+    <div class="card">
+      <h2 class="card-title">Reviews</h2>
     </div>
   </div>
   <div class="col-2">

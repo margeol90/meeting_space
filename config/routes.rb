@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :offices do
-    resources :bookings, only: [:create ]
+    resources :bookings, only: [:create]
   end
 
   resources :bookings, only: [:destroy, :edit, :update] do
@@ -18,4 +18,5 @@ Rails.application.routes.draw do
 
   get "/my_properties", to: "pages#my_properties", as: :my_properties
   get "/my_bookings", to: "pages#my_bookings", as: :my_bookings
+  get "/my_account", to: "pages#my_account", as: :my_account
 end

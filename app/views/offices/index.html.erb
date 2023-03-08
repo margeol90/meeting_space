@@ -2,7 +2,11 @@
   <%= "Look for the office which suits you the best!" %>
 <% end %>
 <div class="text-center mt-3">
-  <h1>Office spaces</h1>
+  <% if params[:query].present? %>
+    <h1><%= "Office spaces in #{params[:query].capitalize}"%></h1>
+  <% else %>
+    <h1>Office spaces</h1>
+  <% end %>
 </div>
 <div class="container">
   <div data-controller="map"
