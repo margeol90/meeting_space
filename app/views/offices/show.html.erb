@@ -32,6 +32,28 @@
     </div>
     <div class="card">
       <h2 class="card-title">Reviews</h2>
+      <% if @has_review %>
+        <% @bookings.each do |booking| %>
+          <% if !booking.review.nil? %>
+            <ul class="list-group list-unstyled">
+              <li>
+                <span class="fa-stack-1x" >
+                  <%= icon('fa-solid', 'star' ) * booking.review&.rating + icon('fa-regular', 'star') * (5-booking.review&.rating) %>
+                </span>
+              </li>
+              <li>
+                <p><strong><%= current_user.first_name+" "+current_user.last_name %></strong></p>
+              </li>
+              <li>
+                <p><%= booking.review&.content %></p>
+              </li>
+              <hr>
+            </ul>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>This property does not have any reviews yet.</p>
+      <% end %>
     </div>
   </div>
   <div class="col-2">
