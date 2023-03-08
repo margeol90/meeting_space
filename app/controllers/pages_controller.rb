@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [:home]
 
   def home
   end
@@ -10,5 +10,9 @@ class PagesController < ApplicationController
 
   def my_properties
     @offices = Office.where(user_id: current_user.id)
+  end
+
+  def my_account
+    @user = User.find(current_user.id)
   end
 end

@@ -286,4 +286,8 @@ office15.photo.attach(io: File.open(Rails.root.join("app/assets/images/office15.
 office16.photo.attach(io: File.open(Rails.root.join("app/assets/images/office16.jpg")), filename: "office16")
 office17.photo.attach(io: File.open(Rails.root.join("app/assets/images/office17.jpg")), filename: "office17")
 
+puts "Adding user avatars"
+user1.avatar.attach(io: File.open(Rails.root.join("app/assets/images/user1.jpg")), filename: "user1")
+user2.avatar.attach(io: File.open(Rails.root.join("app/assets/images/user2.jpg")), filename: "user2")
+
 puts "Complete"
