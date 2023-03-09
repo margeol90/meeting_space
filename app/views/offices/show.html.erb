@@ -8,7 +8,8 @@
     <div class="show-office-card">
       <h2 class="card-title"><%= @office.name %></h2>
       <%= cl_image_tag @office.photo.key, width:700, crop: :fill if @office.photo.attached?%>
-      <p class="card-text"><%= @office.description%></p>
+      <p class="card-text"><%= @office.description %></p>
+      <%= truncate(@office.description, length: 2) { link_to 'Read More', '#' } %>
       <% if policy(@office).edit? %>
         <%= link_to "Edit", edit_office_path, class:"btn btn-success"%>
       <% end %>
