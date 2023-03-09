@@ -1,11 +1,20 @@
-<%# <h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p> %>
 <% content_for :title do %>
   <%= "Meetingspace, your best option for finding your space to work!" %>
 <% end %>
 <div class="container">
-  <h1 class="text-center my-2">MeetingSpace</h1>
-  <p class="text-center">The perfect space for your next meeting</p>
+  <h1 class="text-center my-2">Book meeting spaces anywhere</h1>
+</div>
+
+<div class="container">
+  <div class="banner">
+    <div class="banner-content text-center">
+      <h3>Find offices and meeting rooms to book for <br>the day or for company events</h3>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="container">
   <%= form_with url: offices_path, method: :get, class: "d-flex w-50 p-3 align-middle mx-auto" do %>
     <%= text_field_tag :query,params[:query], class: "form-control", placeholder: "Find a Space" %>
     <%= submit_tag "Search", class: "light-blue-btn mx-3" %>
@@ -13,3 +22,4 @@
   <div class="h-100 d-flex align-items-center justify-content-center">
     <%= link_to "View All", offices_path, class: "light-blue-btn" %>
   </div>
+</div>
