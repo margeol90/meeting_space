@@ -25,7 +25,7 @@
 }
 
 .card-attr {
-  // font-size: 0.9rem;
+  font-size: 0.9rem;
   letter-spacing: 0.1rem;
   line-height: 1.7;
   color: white;
@@ -33,14 +33,14 @@
 }
 
 .card-price {
-  // font-size: 1.1rem;
+  font-size: 1.1rem;
   line-height: 1.7;
   color: white;
   margin-bottom: 0.8rem;
 }
 
 .card-rating {
-  // font-size: 1.1rem;
+  font-size: 1.1rem;
   letter-spacing: 0.1rem;
   line-height: 1.7;
   color: white;
@@ -186,7 +186,7 @@
       color: #FFFFFF;
       text-decoration: none;
       text-align: center;
-      padding-top: 5px;
+      padding-top: 4px;
       font-size: 16px;
     };
 
@@ -212,4 +212,50 @@
     line-height: 26px;
     color: #000000;
   }
+}
+
+.show-office-card {
+  box-sizing: border-box;
+  width: 722px;
+  height: 718px;
+  background: #FFFFFF;
+  border: 3px solid #256D85;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    img {
+      width: 651px;
+      height: 379px;
+      margin-left: 35.5px;
+    };
+}
+
+.show-office-reviews {
+  box-sizing: border-box;
+  width: 722px;
+  border: 3px solid #256D85;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.show-booking {
+  width: 365px;
+  background: #256D85;
+  border-radius: 5px;
+  position: sticky;
+
+  .simple_form {
+    display: flex;
+    flex-direction: column;
+
+    .flatpickr-calendar.inline {
+      align-self: center;
+    };
+
+    .btn-confirm {
+      align-self: center;
+
+    };
+
+  };
+
 }
