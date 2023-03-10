@@ -1,6 +1,10 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: %i[edit update destroy]
-  before_action :set_office, only: %i[new create]
+  before_action :set_office, only: %i[index new create]
+
+  def index
+    @bookings = policy_scope(Booking)
+  end
 
   def create
     @booking = Booking.new(booking_params)

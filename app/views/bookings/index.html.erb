@@ -1,0 +1,8 @@
+<h1>Bookings of this property</h1>
+
+<h2>Pending</h2>
+<% bookings = @bookings.select { |booking| booking.office_id == @office.id } %>
+<% bookings.each do |booking| %>
+  <li><%= booking.office.name %> -- <% booking.status %></li>
+
+<% end %>
