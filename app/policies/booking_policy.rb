@@ -23,7 +23,7 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def update?
-    return record.user == user
+    return record.user == user || record.office.user == user
   end
 
   def destroy?

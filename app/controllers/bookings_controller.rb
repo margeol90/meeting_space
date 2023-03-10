@@ -26,7 +26,11 @@ class BookingsController < ApplicationController
 
   def update
     @booking.update(booking_params)
-    redirect_to my_bookings_path
+    if current_user == @booking.user
+      redirect_to my_bookings_path
+    elsif current_user == @booking.office.user
+      redirect_to office_bookings_path(@booking.office)
+    end
   end
 
   def destroy
@@ -47,7 +51,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date, :status)
   end
 
   def set_booking
