@@ -27,9 +27,13 @@
               <% if policy(office).destroy? %>
                 <%= link_to "Delete your office", office_path(office), class: "btn-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
               <% end %>
+              <%= link_to "Bookings", office_bookings_path(office), class: "btn-mint" %>
             </div>
           </div>
         </div>
+        <% office.bookings.each do |booking| %>
+          <%= booking %>
+        <% end %>
       <% end %>
     </div>
   </div>
