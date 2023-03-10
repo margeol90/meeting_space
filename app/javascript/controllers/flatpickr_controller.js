@@ -9,11 +9,15 @@ export default class extends Controller {
   connect() {
     flatpickr(this.startDateTarget, {})
     flatpickr(this.endDateTarget, {})
-    const picker = flatpickr("#start_date", {
-      "plugins": [rangePlugin({ input: "#end_date"})],
-      minDate: "today",
-      // calendar is always visible with below:
-      inline: true
-    })
+    const newBookingForm = document.getElementById('new_booking');
+    if (newBookingForm) {
+      const picker = flatpickr("#start_date", {
+        "plugins": [rangePlugin({ input: "#end_date"})],
+        minDate: "today",
+        // calendar is always visible with below:
+        inline: true,
+        disable: JSON.parse(newBookingForm.dataset.unavailableDates)
+      })
+    }
   }
 }
