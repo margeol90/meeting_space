@@ -13,5 +13,8 @@ application.register("hello", HelloController)
 import MapController from "./map_controller"
 application.register("map", MapController)
 
+import ReadMoreController from "./read_more_controller"
+application.register("read-more", ReadMoreController)
+
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
