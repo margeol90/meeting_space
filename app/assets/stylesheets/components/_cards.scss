@@ -214,6 +214,19 @@
   }
 }
 
+.quote-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  background: white;
+  padding: 8px 16px;
+  border: 1px solid rgb(235,235,235);
+}
+
+.quote-card .quote-content {
+  flex-grow: 1;
+  padding: 0 24px;
+}
 .container-flexbox {
   display: flex;
   justify-content: center;
