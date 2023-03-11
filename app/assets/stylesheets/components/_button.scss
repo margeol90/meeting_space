@@ -35,8 +35,7 @@
   text-decoration: none;
 
   &:hover {
-    background-color: $mint;
-    color:rgb(42, 42, 42);
+    color:white;
   }
 }
 
@@ -55,17 +54,17 @@
 }
 
 .btn-delete {
-padding: 10px 20px;
+padding: 5px 10px;
 border-radius: 5px;
 text-decoration: none;
 color: rgb(45, 45, 45);
-background-color: #2B4865;
+background-color: $red;
 border: none;
 color: white;
 
-  &:hover {
-    color: rgb(55, 55, 55)
-  }
+&:hover {
+  color: rgb(55, 55, 55)
+}
 }
 
 .btn-confirm-new {
@@ -80,4 +79,14 @@ color: white;
     background-color: $light-gray;
     color:black;
 }
+}
+
+.btn-new {
+padding: 5px 10px;
+border-radius: 5px;
+text-decoration: none;
+color: rgb(45, 45, 45);
+background-color: $dark-blue;
+border: none;
+color: white;
 }
