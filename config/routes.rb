@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :offices do
     resources :bookings, only: [:index, :create]
+    resources :office_facilities, only: [:new, :create]
   end
 
   resources :bookings, only: [:destroy, :edit, :update] do
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :reviews, only: [:destroy]
+  resources :office_facilities, only: [:edit, :update, :destroy]
 
   get "/my_properties", to: "pages#my_properties", as: :my_properties
   get "/my_bookings", to: "pages#my_bookings", as: :my_bookings
