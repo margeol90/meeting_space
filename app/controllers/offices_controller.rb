@@ -13,7 +13,7 @@ class OfficesController < ApplicationController
       {
         lat: office.latitude,
         lng: office.longitude,
-        info_window_html: render_to_string(partial: "popup", locals: { office: office }),
+        info_window_html: render_to_string(partial: "popup", locals: { office: }),
         image_url: helpers.asset_url("favicon.png")
       }
     end
@@ -29,6 +29,8 @@ class OfficesController < ApplicationController
       info_window_html: render_to_string(partial: "popup", locals: { office: @office }),
       image_url: helpers.asset_url("favicon.png")
     }]
+
+    @has_review = @bookings.any? { |booking| !booking.review.nil? }
   end
 
   def new

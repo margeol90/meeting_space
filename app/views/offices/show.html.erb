@@ -5,10 +5,11 @@
     <% content_for :title do %>
       <%= @office.name %>
     <% end %>
-    <div class="card">
+    <div class="show-office-card">
       <h2 class="card-title"><%= @office.name %></h2>
-      <%= cl_image_tag @office.photo.key, class:"card-img-top", width:700, crop: :fill, style: "border-radius: 15px;" if @office.photo.attached?%>
-      <p class="card-text"><%= @office.description%></p>
+      <%= cl_image_tag @office.photo.key, width:700, crop: :fill if @office.photo.attached?%>
+      <p class="card-text"><%= @office.description %></p>
+      <%= truncate(@office.description, length: 2) { link_to 'Read More', '#' } %>
       <% if policy(@office).edit? %>
         <%= link_to "Edit", edit_office_path, class:"btn btn-success"%>
       <% end %>
@@ -16,33 +17,47 @@
         <%= link_to "Delete your propierty", office_path(@office), class: "btn btn-danger my-2", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
       <% end %>
     </div>
-    <div class="card">
-      <h2 class="card-title">Location</h2>
-      <p><%= @office.address %></p>
-      <% if @office.geocoded? %>
-        <div class="container">
-          <div data-controller="map"
-            id='map'
-            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-            data-map-markers-value="<%= @markers.to_json %>"
-            style='width: 75%; height: 300px;'>
-          </div>
-        </div>
-      <% end %>
+    <div data-controller="map"
+      id='show-map'
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      data-map-markers-value="<%= @markers.to_json %>"
+      style='width: 722px; height: 300px;'>
     </div>
-    <div class="card">
+    <div class="show-office-reviews">
       <h2 class="card-title">Reviews</h2>
+      <% if @has_review %>
+        <% @bookings.each do |booking| %>
+          <% unless booking.review.nil? %>
+            <ul class="list-group list-unstyled">
+              <li>
+                <span class="fa-stack-1x">
+                  <%= icon('fa-solid', 'star' ) * booking.review&.ratings + icon('fa-regular', 'star') * (5-booking.review&.ratings) %>
+                </span>
+              </li>
+              <li>
+                <p><strong><%= current_user.first_name+" "+current_user.last_name %></strong></p>
+              </li>
+              <li>
+                <p><%= booking.review&.comment %></p>
+              </li>
+              <hr>
+            </ul>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>This property does not have any reviews yet.</p>
+      <% end %>
     </div>
   </div>
-  <div class="col-2">
-    <div class="card p-3">
-      <% unless @office.user == current_user %>
-        <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr',  unavailable_dates: @office.unavailable_dates.to_json } do |f| %>
-          <%= f.input :start_date, as: :string, label: false, input_html: { data: { flatpickr_target: "startDate" }, id: 'start_date', class: "d-none" } %>
-          <%= f.input :end_date, as: :string, label: false, input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date', class: "d-none" } %>
-          <%= f.submit class: "btn-confirm" %>
-        <% end %>
+  <div class="show-booking">
+    <% unless @office.user == current_user %>
+      <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr',  unavailable_dates: @office.unavailable_dates.to_json } do |f| %>
+        <%= f.input :start_date, as: :string, label: false, input_html: { data: { flatpickr_target: "startDate" }, id: 'start_date', class: "d-none" } %>
+        <%= f.input :end_date, as: :string, label: false, input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date', class: "d-none" } %>
+        <%= f.submit class: "btn-confirm" %>
       <% end %>
-    </div>
+    <% else %>
+      <p>This property does not have any reviews yet.</p>
+    <% end %>
   </div>
 </div>
