@@ -1,11 +1,12 @@
-<%= simple_form_for(@office) do |f| %>
+<%= simple_form_for (@office) do |f| %>
   <%= f.input :name %>
   <%= f.input :meeting_rooms %>
   <%= f.input :max_capacity %>
   <%= f.input :price %>
   <%= f.input :description %>
   <%= f.input :address %>
-  <%#= f.input :photo, as: :file %>
+  <%= f.input :photo, as: :file %>
+  <%# <%= f.input :facility, collection: Facility.all, input_html: {multiple: true} %>
   <%= f.submit class: "btn-confirm" %>
   <%= link_to "Cancel", offices_path, style: "color:white" %>
 <% end %>
