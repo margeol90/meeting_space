@@ -280,18 +280,19 @@
   background-position: center;
   border: 5px solid rgb(240, 240, 240);
   //width: 50%;
-  justify-content: center;
+  //justify-content: center;
   height: 200px;
   background-repeat: no-repeat;
   border-radius:20px;
-  align-items: center;
-  align-content: center;
+  //align-items: center;
+  //align-content: center;
  }
 
  .content {
   padding: 10px;
   background-color: white;
-  border-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
  }
 
  .card-final {
@@ -305,13 +306,6 @@
   //display: flex;
  }
 
- .about {
-  align-items: center;
-  justify-content: center;
-  background-position: center;
-  align-content: center;
-  //width: 50%;
- }
 .show-office-card {
   box-sizing: border-box;
   width: 722px;
