@@ -67,3 +67,17 @@ color: white;
     color: rgb(55, 55, 55)
   }
 }
+
+.btn-confirm-new {
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: $mint-green;
+  color: black;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $light-gray;
+    color:black;
+}
+}
