@@ -6,9 +6,9 @@
     grid-template-columns: 1fr 1fr;
   }
 
-   @media screen and (min-width: 992px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+  //  @media screen and (min-width: 992px) {
+  //   grid-template-columns: 1fr 1fr 1fr;
+  // }
 }
 
 .booking-card {
@@ -26,4 +26,9 @@
   border: 1px solid $red;
   border-radius: 15px;
   background-color: rgba(255, 0, 0, 0.2);
+}
+
+.hyperlinked-title {
+  text-decoration: underline;
+  color: $dark-blue;
 }

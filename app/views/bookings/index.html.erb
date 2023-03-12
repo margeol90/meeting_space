@@ -1,8 +1,12 @@
 <div class="container">
-  <h1 class="text-center my-3">Bookings for <%=  @office.name %></h1>
+  <div class="text-center my-3">
+    <h1>Bookings for <%=  @office.name %></h1>
+    <small><%= @office.address %></small>
+    <h5>TOTAL REVENUE € <b><%= @cost %></b></h5>
+  </div>
   <% bookings = @bookings.select { |booking| booking.office_id == @office.id } %>
   <div class="my-5">
-    <h2>Pending(<%= (bookings.select {|x| x.pending?}).count %>)</h2>
+    <h3>Pending(<%= (bookings.select {|x| x.pending?}).count %>)</h3>
     <div class="booking-cards">
       <% bookings.each do |booking| %>
         <% if booking.pending? %>
@@ -11,11 +15,11 @@
             <p>Requested by <%= booking.user.first_name %> <%= cl_image_tag booking.user.avatar.key, width: 70, crop: :fill, class: "rounded-circle" %></p>
             <p>Total: €<%= booking.total_price %></p>
             <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-            <%= simple_form_for booking do |f| %>
+            <%= simple_form_for [booking.office, booking] do |f| %>
               <%= f.input :status, as: :hidden, input_html: { value: 'confirmed'} %>
               <%= f.submit 'Confirm', class: 'btn-confirm' %>
             <% end %>
-            <%= simple_form_for booking do |f| %>
+            <%= simple_form_for [booking.office, booking] do |f| %>
               <%= f.input :status, as: :hidden, input_html: { value: 'declined'} %>
               <%= f.submit 'Decline', class: 'btn-error' %>
             <% end %>
@@ -25,26 +29,30 @@
     </div>
   </div>
   <div class="my-5">
-    <h2>Confirmed(<%= (bookings.select {|x| x.confirmed?}).count %>)</h2>
+    <h3>Confirmed(<%= (bookings.select {|x| x.confirmed?}).count %>)</h3>
     <div class="booking-cards">
       <% bookings.each do |booking| %>
         <% if booking.confirmed? %>
           <div class="booking-card">
             <h5><%= link_to booking.office.name, office_path(booking.office) %> </h5>
-            <p>Total: €<%= booking.total_price %></p>
-            <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+            <p><b>Total: </b>€<%= booking.total_price %></p>
+            <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+            <p>Reservation made by <%= booking.user.first_name %></p>
           </div>
         <% end %>
       <% end %>
     </div>
   </div>
   <div class="my-5">
-    <h2>Declined(<%= (bookings.select {|x| x.declined?}).count %>)</h2>
+    <h3>Declined(<%= (bookings.select {|x| x.declined?}).count %>)</h3>
     <div class="booking-cards">
       <% bookings.each do |booking| %>
         <% if booking.declined? %>
           <div class="booking-card">
-            <%= booking.office.name %> -- <%= booking.status %>
+            <h5><%= link_to booking.office.name, office_path(booking.office) %> </h5>
+            <p><b>Total: </b>€<%= booking.total_price %></p>
+            <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+            <p>Reservation made by <%= booking.user.first_name %></p>
           </div>
         <% end %>
       <% end %>
