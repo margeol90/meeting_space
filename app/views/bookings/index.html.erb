@@ -4,7 +4,6 @@
     <small><%= @office.address %></small>
     <h5>TOTAL REVENUE € <b><%= @cost %></b></h5>
   </div>
-
   <% bookings = @bookings.select { |booking| booking.office_id == @office.id } %>
   <div class="my-5">
     <h3>Pending(<%= (bookings.select {|x| x.pending?}).count %>)</h3>

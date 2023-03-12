@@ -23,7 +23,7 @@
             <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
             <p><b>Total cost:</b> <%= booking.total_price %>€</p>
           </div>
-          <%= link_to  edit_office_booking_path(booking.office_id, booking), class: "rounded-edit" do %>
+          <%= link_to  edit_booking_path(booking), class: "rounded-edit" do %>
             <i class="fa-regular fa-pen-to-square fa-lg"></i>
           <% end %>
           <%= link_to booking_path(booking), class: "rounded-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>

@@ -23,6 +23,7 @@ class BookingsController < ApplicationController
   end
 
   def edit
+    @office = @booking.office
   end
 
   def update
