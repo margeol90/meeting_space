@@ -65,7 +65,7 @@ class OfficesController < ApplicationController
 
   def destroy
     @office.destroy
-    redirect_to my_offices_path, notice: "Property has been permanently deleted from your list"
+    redirect_to my_properties_path, notice: "Property has been permanently deleted from your list"
   end
 
   private
@@ -78,4 +78,5 @@ class OfficesController < ApplicationController
     @office = Office.find(params[:id])
     authorize @office
   end
+
 end
