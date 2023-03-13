@@ -9,7 +9,7 @@
       <h2 class="card-title"><%= @office.name %></h2>
       <%= cl_image_tag @office.photo.key, width:700, crop: :fill if @office.photo.attached?%>
       <div data-controller="read-more" data-read-more-more-text-value="Read more" data-read-more-less-text-value="Read less">
-        <p class="line-clamp" data-read-more-target="content">
+        < class="line-clamp" data-read-more-target="content">
           <%= @office.description %>
         </p>
         <button data-action="read-more#toggle" class="btn-confirm">Read more</button>
@@ -19,6 +19,14 @@
       <% end %>
       <% if policy(@office).destroy? %>
         <%= link_to "Delete your propierty", office_path(@office), class: "btn btn-danger my-2", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      <% end %>
+    </div>
+    <div class="show-facilities">
+      <h2 class="card-title">Facilities</h2>
+      <% @office.facilities.each do |element| %>
+        <ul>
+          <li><%= element.name %></li>
+        </ul>
       <% end %>
     </div>
     <div data-controller="map"
@@ -39,7 +47,7 @@
                 </span>
               </li>
               <li>
-                <p><strong><%= current_user.first_name+" "+current_user.last_name %></strong></p>
+                <p class="review-user"><strong><%= booking.user.first_name+" "+booking.user.last_name %></strong></p>
               </li>
               <li>
                 <p><%= booking.review&.comment %></p>

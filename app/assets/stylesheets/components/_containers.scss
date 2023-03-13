@@ -50,56 +50,14 @@
 
 .show-container {
   display: flex;
-  justify-content:space-between;
-  gap: 1rem;
-  align-items: start;
-
-  // Medium devices (tablets, to 768)
-  @media screen and (max-width: 768px) {
-    display: grid;
-    width: 300px;
-  }
-
-  // Medium devices (tablets, 768px and up)
-  @media screen and (min-width: 768px) {
-    grid-template-columns: 300px;
-  }
-
-  // Large devices (desktops, 992px and up)
-  @media screen and (min-width: 992px) {
-    grid-template-columns: 300px;
-  }
-
-  // Largest devices (desktops, 1200px and up)
-  @media only screen and (min-width: 1200px) {
-    grid-template-columns: 400px;
-  }
+  justify-content: center;
+  margin-top: 40px;
+  gap: 40px;
 }
 
 .show-office-container {
-  width: 300px;
   display: grid;
-  gap: 1rem;
-
-    // Medium devices (tablets, to 768px)
-    @media screen and (max-width: 768px) {
-      width: 300px;
-    }
-  
-    // Medium devices (tablets, 768px and up)
-    @media screen and (min-width: 768px) {
-      width: 300px;
-    }
-  
-    // Large devices (desktops, 992px and up)
-    @media screen and (min-width: 992px) {
-      width: 300px;
-    }
-  
-    // Largest devices (desktops, 1200px and up)
-    @media only screen and (min-width: 1200px) {
-      grid-template-columns: 400px;
-    }
+  gap: 40px;
 }
 
 .account-container {
@@ -120,4 +78,3 @@
   margin-top: 80px;
   margin-left: 195px;
 }
-
