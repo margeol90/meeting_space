@@ -1,0 +1,21 @@
+.rounded-edit {
+  text-decoration: none;
+  color: $dark-blue;
+  margin: 5px;
+
+  :hover {
+    transform: translateY(-2px);
+    transition: transform 250ms;
+  }
+}
+
+.rounded-delete {
+  text-decoration: none;
+  color: $red;
+  margin: 5px;
+
+  :hover {
+    transform: translateY(-2px);
+    transition: transform 250ms;
+  }
+}

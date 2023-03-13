@@ -1,4 +1,6 @@
 class OfficesController < ApplicationController
+  # attr_accessor :facility
+
   before_action :set_office, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: %i[index show]
 
@@ -44,7 +46,7 @@ class OfficesController < ApplicationController
     authorize @office
 
     if @office.save!
-      redirect_to office_path(@office)
+      redirect_to  new_office_office_facility_path(@office)
     else
       render :new, status: :unprocessable_entity
     end
@@ -63,17 +65,18 @@ class OfficesController < ApplicationController
 
   def destroy
     @office.destroy
-    redirect_to my_offices_path, notice: "Property has been permanently deleted from your list"
+    redirect_to my_properties_path, notice: "Property has been permanently deleted from your list"
   end
 
   private
 
   def office_params
-    params.require(:office).permit(:name, :meeting_rooms, :price, :address, :description, :max_capacity, :photo)
+    params.require(:office).permit(:name, :meeting_rooms, :price, :address, :description, :max_capacity, :photo, :facility)
   end
 
   def set_office
     @office = Office.find(params[:id])
     authorize @office
   end
+
 end

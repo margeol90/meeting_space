@@ -1,0 +1,14 @@
+  <% content_for :title do %>
+    Add facilities to <%= @office.name %>
+  <% end %>
+<h1 class=text-center>Add facilities</h1>
+ <div>
+    <div class="form">
+      <p>Select the facilities available in your office property</p>
+      <%= simple_form_for [@office, @office_facility] do |f| %>
+        <%= f.association :facility, as: :check_boxes %>
+        <%= f.submit class: "btn-confirm" %>
+        <%= link_to "Cancel", :back, style: "color:white" %>
+      <% end %>
+    </div>
+ </div>

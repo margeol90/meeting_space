@@ -297,4 +297,19 @@ puts "Adding user avatars"
 user1.avatar.attach(io: File.open(Rails.root.join("app/assets/images/user1.jpg")), filename: "user1")
 user2.avatar.attach(io: File.open(Rails.root.join("app/assets/images/user2.jpg")), filename: "user2")
 
+puts "creating facilities"
+Facility.create!(name: "Microwave")
+Facility.create!(name: "Monitor")
+Facility.create!(name: "Fridge")
+Facility.create!(name: "Desk space")
+Facility.create!(name: "Printer")
+Facility.create!(name: "Projector")
+Facility.create!(name: "Parking")
+Facility.create!(name: "Coffee-machine")
+Facility.create!(name: "Conference technology")
+Facility.create!(name: "Fast Wi-Fi")
+Facility.create!(name: "Accessibility")
+Facility.create!(name: "Proximity to train station")
+Facility.create!(name: "Proximity to bus stop")
+
 puts "Complete"

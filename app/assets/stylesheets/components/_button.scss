@@ -35,8 +35,7 @@
   text-decoration: none;
 
   &:hover {
-    background-color: $mint;
-    color:rgb(42, 42, 42);
+    color:white;
   }
 }
 
@@ -55,15 +54,39 @@
 }
 
 .btn-delete {
-padding: 10px 20px;
+padding: 5px 10px;
 border-radius: 5px;
 text-decoration: none;
 color: rgb(45, 45, 45);
-background-color: #2B4865;
+background-color: $red;
 border: none;
 color: white;
 
+&:hover {
+  color: rgb(55, 55, 55)
+}
+}
+
+.btn-confirm-new {
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: $mint-green;
+  color: black;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  text-decoration: none;
+
   &:hover {
-    color: rgb(55, 55, 55)
-  }
+    background-color: $light-gray;
+    color:black;
+}
+}
+
+.btn-new {
+padding: 5px 10px;
+border-radius: 5px;
+text-decoration: none;
+color: rgb(45, 45, 45);
+background-color: $dark-blue;
+border: none;
+color: white;
 }

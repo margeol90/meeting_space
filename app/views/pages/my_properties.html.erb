@@ -4,6 +4,8 @@
      <div class="col-md-2">
       <h3><%= current_user.first_name %></h3>
       <p>Last login: <%= current_user.last_sign_in_at  %></p>
+      <h3>Want to add a new Office?</h3>
+      <%= link_to "New", new_office_path, class: "btn-new" %>
     </div>
   <div class="col-sm-6 col-md-10">
     <% @offices.each do |office| %>
@@ -25,7 +27,7 @@
                 <%= link_to "Edit", edit_office_path(office), class: "btn-edit" %>
               <% end %>
               <% if policy(office).destroy? %>
-                <%= link_to "Delete your office", office_path(office), class: "btn-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                <%= link_to "Delete", office_path(office), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
               <% end %>
               <%= link_to "Bookings", office_bookings_path(office), class: "btn-mint" %>
             </div>
