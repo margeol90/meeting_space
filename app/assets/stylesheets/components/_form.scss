@@ -1,4 +1,4 @@
-.two-columns{
+.two-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -34,4 +34,23 @@
   @media screen and (min-width: 992px) {
     width: 30%;
   }
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  margin-top: 100px;
+  border-color: black;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+  background-color: white;
+}
+.logo-background{
+  background-color: $dark-blue;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
 }
