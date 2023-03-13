@@ -339,6 +339,12 @@
     margin-left: 35.5px;
   };
 
+  .line-clamp {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--read-more-line-clamp, 2);
+  };
 }
 
 .show-office-reviews {
