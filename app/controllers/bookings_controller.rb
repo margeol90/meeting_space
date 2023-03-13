@@ -1,9 +1,10 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: %i[edit update destroy]
-  before_action :set_office, only: %i[index new create]
+  before_action :set_office, only: %i[index new create revenue]
 
   def index
     @bookings = policy_scope(Booking)
+    @cost = revenue(@bookings)
   end
 
   def create
@@ -22,6 +23,7 @@ class BookingsController < ApplicationController
   end
 
   def edit
+    @office = @booking.office
   end
 
   def update
@@ -61,5 +63,15 @@ class BookingsController < ApplicationController
 
   def set_office
     @office = Office.find(params[:office_id])
+  end
+
+  def revenue(bookings)
+    revenue = 0
+    bookings.each do |booking|
+      if booking.confirmed?
+        revenue += booking.total_price
+      end
+    end
+    return revenue
   end
 end

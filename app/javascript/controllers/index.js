@@ -13,5 +13,10 @@ application.register("hello", HelloController);
 import MapController from "./map_controller";
 application.register("map", MapController);
 
+import { Application } from "@hotwired/stimulus";
+import ReadMore from "stimulus-read-more";
+
+application.register("read-more", ReadMore);
+
 import StarRatingController from "./star_rating_controller";
 application.register("star-rating", StarRatingController);

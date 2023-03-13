@@ -17,7 +17,7 @@
     grid-template-columns: 300px;
   }
 
-  // Medium devices (tablets, 768px and up)
+  // Medium devices (tablets, to 768px)
   @media screen and (min-width: 768px) {
     grid-template-columns: 300px 300px;
   }
@@ -50,18 +50,56 @@
 
 .show-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 80px;
+  justify-content:space-between;
+  gap: 1rem;
+  align-items: start;
+
+  // Medium devices (tablets, to 768)
+  @media screen and (max-width: 768px) {
+    display: grid;
+    width: 300px;
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 300px;
+  }
+
+  // Large devices (desktops, 992px and up)
+  @media screen and (min-width: 992px) {
+    grid-template-columns: 300px;
+  }
+
+  // Largest devices (desktops, 1200px and up)
+  @media only screen and (min-width: 1200px) {
+    grid-template-columns: 400px;
+  }
 }
 
 .show-office-container {
-  width: 40%;
+  width: 300px;
   display: grid;
   gap: 1rem;
+
+    // Medium devices (tablets, to 768px)
+    @media screen and (max-width: 768px) {
+      width: 300px;
+    }
+  
+    // Medium devices (tablets, 768px and up)
+    @media screen and (min-width: 768px) {
+      width: 300px;
+    }
+  
+    // Large devices (desktops, 992px and up)
+    @media screen and (min-width: 992px) {
+      width: 300px;
+    }
+  
+    // Largest devices (desktops, 1200px and up)
+    @media only screen and (min-width: 1200px) {
+      grid-template-columns: 400px;
+    }
 }
 
 .account-container {

@@ -28,7 +28,7 @@ office1 = Office.create!(
   meeting_rooms: (1..10).to_a.sample,
   price: (300..1500).to_a.sample,
   address: "12 Hay Hill, London W1J 8NR, United Kingdom",
-  description: "LONDON’S PREMIUM BUSINESS MEMBERS CLUB & OFFICE SPACE IN MAYFAIR/bConceived and built as a private members club for business, the six-storey building is unique in providing business leaders and entrepreneurs with high-specification facilities in which to work alongside exceptional leisure space and five-star service, all in the heart of Mayfair.",
+  description: "LONDON’S PREMIUM BUSINESS MEMBERS CLUB & OFFICE SPACE IN MAYFAIR. Conceived and built as a private members club for business, the six-storey building is unique in providing business leaders and entrepreneurs with high-specification facilities in which to work alongside exceptional leisure space and five-star service, all in the heart of Mayfair.",
   user_id: user1.id
 )
 office2 = Office.create!(
@@ -296,5 +296,20 @@ office17.photo.attach(io: File.open(Rails.root.join("app/assets/images/office17.
 puts "Adding user avatars"
 user1.avatar.attach(io: File.open(Rails.root.join("app/assets/images/user1.jpg")), filename: "user1")
 user2.avatar.attach(io: File.open(Rails.root.join("app/assets/images/user2.jpg")), filename: "user2")
+
+puts "creating facilities"
+Facility.create!(name: "Microwave")
+Facility.create!(name: "Monitor")
+Facility.create!(name: "Fridge")
+Facility.create!(name: "Desk space")
+Facility.create!(name: "Printer")
+Facility.create!(name: "Projector")
+Facility.create!(name: "Parking")
+Facility.create!(name: "Coffee-machine")
+Facility.create!(name: "Conference technology")
+Facility.create!(name: "Fast Wi-Fi")
+Facility.create!(name: "Accessibility")
+Facility.create!(name: "Proximity to train station")
+Facility.create!(name: "Proximity to bus stop")
 
 puts "Complete"
