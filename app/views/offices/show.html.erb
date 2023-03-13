@@ -2,17 +2,17 @@
 <% current_day = DateTime.current.to_date %>
 <div class="show-container">
   <div class="show-office-container">
-    <% content_for :title do %>
-      <%= @office.name %>
-    <% end %>
     <div class="show-office-card">
+      <% content_for :title do %>
+        <%= @office.name %>
+      <% end %>
       <h2 class="card-title"><%= @office.name %></h2>
       <%= cl_image_tag @office.photo.key, width:700, crop: :fill if @office.photo.attached?%>
       <div data-controller="read-more" data-read-more-more-text-value="Read more" data-read-more-less-text-value="Read less">
         <p class="line-clamp" data-read-more-target="content">
           <%= @office.description %>
         </p>
-        <button data-action="read-more#toggle">Read more</button>
+        <button data-action="read-more#toggle" class="btn-confirm">Read more</button>
       </div>
       <% if policy(@office).edit? %>
         <%= link_to "Edit", edit_office_path, class:"btn btn-success"%>
@@ -60,8 +60,6 @@
         <%= f.input :end_date, as: :string, label: false, input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date', class: "d-none" } %>
         <%= f.submit class: "btn-confirm" %>
       <% end %>
-    <% else %>
-      <p>This property does not have any reviews yet.</p>
     <% end %>
   </div>
 </div>
