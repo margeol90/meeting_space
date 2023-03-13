@@ -28,7 +28,7 @@ office1 = Office.create!(
   meeting_rooms: (1..10).to_a.sample,
   price: (300..1500).to_a.sample,
   address: "12 Hay Hill, London W1J 8NR, United Kingdom",
-  description: "LONDON’S PREMIUM BUSINESS MEMBERS CLUB & OFFICE SPACE IN MAYFAIR/bConceived and built as a private members club for business, the six-storey building is unique in providing business leaders and entrepreneurs with high-specification facilities in which to work alongside exceptional leisure space and five-star service, all in the heart of Mayfair.",
+  description: "LONDON’S PREMIUM BUSINESS MEMBERS CLUB & OFFICE SPACE IN MAYFAIR. Conceived and built as a private members club for business, the six-storey building is unique in providing business leaders and entrepreneurs with high-specification facilities in which to work alongside exceptional leisure space and five-star service, all in the heart of Mayfair.",
   user_id: user1.id
 )
 office2 = Office.create!(
