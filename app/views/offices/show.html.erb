@@ -21,7 +21,7 @@
         <%= link_to "Delete your propierty", office_path(@office), class: "btn btn-danger my-2", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
       <% end %>
     </div>
-    <div class="d-flex" style="gap:20px; margin-left:20px;">
+    <div class="d-flex" style="gap:20px; margin-left:20px; margin-bottom:0px;">
       <p><%= "Max capacity #{@office.max_capacity}" %></p>
       <p><%= "Meeting rooms #{@office.meeting_rooms}" %></p>
     </div>
