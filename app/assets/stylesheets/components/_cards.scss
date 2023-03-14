@@ -218,7 +218,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
-  background: white;
+  background: $mint;
   padding: 8px 16px;
   border: 1px solid rgb(235,235,235);
 }
@@ -336,14 +336,30 @@
   img {
     width: 651px;
     height: 379px;
-    margin-left: 35.5px;
+    display: block;
+    margin: auto;
   };
+
+  p {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  };
+
+  h2 {
+    margin: 20px;
+  }
 
   .line-clamp {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--read-more-line-clamp, 2);
+  };
+
+  .btn-confirm {
+    margin-bottom: 20px;
+    margin-left: 20px;
   };
 }
 
@@ -353,6 +369,49 @@
   border: 3px solid #256D85;
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  h2 {
+    margin: 20px;
+  };
+
+  ul {
+    margin: 20px;
+    border: 3px solid #256D85;
+
+    .review-user {
+      margin-top: 20px;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    p {
+      margin-left: 20px;
+    }
+  };
+
+  span {
+    color:#8FE3CF;
+    padding: 55px 0;
+    text-shadow: 0 0 3px #002B5B;
+  };
+
+  hr {
+    border-top: none;
+  }
+}
+
+.show-facilities {
+  box-sizing: border-box;
+  width: 722px;
+  border: 3px solid #256D85;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  h2 {
+    margin: 20px;
+  };
+
+  p {
+    margin-left: 20px;
+  };
 }
 
 .show-booking {
@@ -368,12 +427,13 @@
     flex-direction: column;
 
     .flatpickr-calendar.inline {
-      align-self: center;
+      margin:auto;
+      margin-top: 20px;
     };
 
     .btn-confirm {
       align-self: center;
-
+      margin-bottom: 20px
     };
 
   };

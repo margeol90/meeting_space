@@ -85,6 +85,81 @@
         </div>
       </div>
 
+  <% bookings = @bookings.select { |booking| booking.office_id == @office.id } %>
+  <div class="warpper">
+    <input class="radio" id="one" name="group" type="radio" checked>
+    <input class="radio" id="two" name="group" type="radio">
+    <input class="radio" id="three" name="group" type="radio">
+
+    <div class="tabs">
+      <label class="tab" id="one-tab" for="one">Pending(<%= (bookings.select {|x| x.pending?}).count %>)</label>
+      <label class="tab" id="two-tab" for="two">Confirmed(<%= (bookings.select {|x| x.confirmed?}).count %>)</label>
+      <label class="tab" id="three-tab" for="three">Declined(<%= (bookings.select {|x| x.declined?}).count %>)</label>
+    </div>
+
+    <div class="panels">
+      <div class="panel" id="one-panel">
+
+        <div class="my-5">
+          <div class="booking-cards">
+            <% bookings.each do |booking| %>
+              <% if booking.pending? %>
+                <div class="booking-card">
+                  <h5><%= link_to booking.office.name, office_path(booking.office) %> </h5>
+                  <p>Requested by <%= booking.user.first_name %> <%= cl_image_tag booking.user.avatar.key, width: 70, crop: :fill, class: "rounded-circle" %></p>
+                  <p>Total: €<%= booking.total_price %></p>
+                  <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                  <%= simple_form_for (booking) do |f| %>
+                    <%= f.input :status, as: :hidden, input_html: { value: 'confirmed'} %>
+                    <%= f.submit 'Confirm', class: 'btn-confirm' %>
+                  <% end %>
+                  <%= simple_form_for(booking) do |f| %>
+                    <%= f.input :status, as: :hidden, input_html: { value: 'declined'} %>
+                    <%= f.submit 'Decline', class: 'btn-error' %>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+      <div class="panel" id="two-panel">
+
+        <div class="my-5">
+          <div class="booking-cards">
+            <% bookings.each do |booking| %>
+              <% if booking.confirmed? %>
+                <div class="booking-card">
+                  <h5><%= link_to booking.office.name, office_path(booking.office) %> </h5>
+                  <p><b>Total: </b>€<%= booking.total_price %></p>
+                  <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                  <p>Reservation made by <%= booking.user.first_name %></p>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+      <div class="panel" id="three-panel">
+
+        <div class="my-5">
+          <div class="booking-cards">
+            <% bookings.each do |booking| %>
+              <% if booking.declined? %>
+                <div class="booking-card">
+                  <h5><%= link_to booking.office.name, office_path(booking.office) %> </h5>
+                  <p><b>Total: </b>€<%= booking.total_price %></p>
+                  <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                  <p>Reservation made by <%= booking.user.first_name %></p>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
     </div>
 
   </div>
