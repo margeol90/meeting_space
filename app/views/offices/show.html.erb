@@ -6,13 +6,18 @@
       <% content_for :title do %>
         <%= @office.name %>
       <% end %>
-      <div class="d-flex">
+      <div class="d-flex justify-content-between">
         <h2 class="card-title"><%= @office.name %></h2>
-        <div class="ratings-average"><% array=[] %>
-          <% @office.bookings.each do |booking| %>
-            <% array.push(booking.review&.ratings) %>
+        <div class="ratings-average">
+          <% if @has_review %>
+            <% array=[] %>
+            <% @office.bookings.each do |booking| %>
+              <% array.push(booking.review&.ratings) %>
+            <% end %>
+            <p><%= array.sum(&:to_i)/array.compact.length %></p>
+          <% else %>
+            <%= " " %>
           <% end %>
-          <p><%= array.sum(&:to_i)/array.compact.length %></p>
         </div>
       </div>
       <%= cl_image_tag @office.photo.key, width:700, crop: :fill if @office.photo.attached?%>
