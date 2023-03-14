@@ -9,7 +9,7 @@
       <h2 class="card-title"><%= @office.name %></h2>
       <%= cl_image_tag @office.photo.key, width:700, crop: :fill if @office.photo.attached?%>
       <div data-controller="read-more" data-read-more-more-text-value="Read more" data-read-more-less-text-value="Read less">
-        < class="line-clamp" data-read-more-target="content">
+        <p class="line-clamp" data-read-more-target="content">
           <%= @office.description %>
         </p>
         <button data-action="read-more#toggle" class="btn-confirm">Read more</button>
