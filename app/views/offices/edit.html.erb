@@ -1,8 +1,9 @@
 <h1 class=text-center>Update your property</h1>
- <div>
-    <div class="form">
+<div>
+  <div class="form">
     <p>Make sure to regulalry update your properties if there are any significant changes to your space. Make sure any information is accurate</p>
     <p>Any changes you make are instantly updated on the page</p>
     <%= render "form", office: @office %>
-    </div>
- </div>
+    <%= link_to "Add some facilites", new_office_office_facility_path(@office), class:"btn-confirm-new", style:"width:150px;"%>
+  </div>
+</div>
