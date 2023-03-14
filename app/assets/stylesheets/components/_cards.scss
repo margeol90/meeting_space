@@ -403,6 +403,20 @@
   }
 }
 
+.ratings-average {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin:-20px 00px 10px 50px;
+
+  background: #9EDCD1;
+
+  p {
+    text-align: center;
+    font-size: x-large;
+  }
+}
+
 .show-facilities {
   box-sizing: border-box;
   width: 722px;
