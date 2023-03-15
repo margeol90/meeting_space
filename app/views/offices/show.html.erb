@@ -40,7 +40,7 @@
     </div>
     <div class="show-facilities">
       <h2 class="card-title">Facilities</h2>
-      <% @office.facilities.each do |element| %>
+      <% Facility.find(@office.facility_ids).each do |element| %>
         <ul>
           <li><%= element.name %></li>
         </ul>
