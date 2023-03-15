@@ -12,6 +12,7 @@ export default class extends Controller {
     const newBookingForm = document.getElementsByClassName("new_booking")[0];
     const editBookingForm = document.getElementsByClassName("edit_booking")[0];
     const bookingForm = newBookingForm ? newBookingForm : editBookingForm;
+    console.log(bookingForm);
     if (bookingForm) {
       const picker = flatpickr("#start_date", {
         plugins: [rangePlugin({ input: "#end_date" })],
