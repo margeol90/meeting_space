@@ -64,7 +64,10 @@
                 </span>
               </li>
               <li>
-                <p class="review-user"><strong><%= booking.user.first_name+" "+booking.user.last_name %></strong></p>
+                <div class="d-flex">
+                  <%= cl_image_tag booking.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if booking.user.avatar.attached? %>
+                  <p class="review-user"><strong><%= booking.user.first_name+" "+booking.user.last_name %></strong><%= " #{booking.review&.created_at.strftime("%A, %B %e, %Y")}" %></p>
+                </div>
               </li>
               <li>
                 <p><%= booking.review&.comment %></p>
