@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_11_091135) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_191321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,14 +61,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_091135) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "office_facilities", force: :cascade do |t|
-    t.bigint "office_id", null: false
-    t.bigint "facility_id", null: false
-    t.integer "quantity"
+  create_table "notifications", force: :cascade do |t|
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.string "type", null: false
+    t.jsonb "params"
+    t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["facility_id"], name: "index_office_facilities_on_facility_id"
-    t.index ["office_id"], name: "index_office_facilities_on_office_id"
+    t.index ["read_at"], name: "index_notifications_on_read_at"
+    t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
   create_table "offices", force: :cascade do |t|
@@ -83,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_091135) do
     t.integer "max_capacity"
     t.float "latitude"
     t.float "longitude"
+    t.integer "facility_ids", default: [], array: true
     t.index ["user_id"], name: "index_offices_on_user_id"
   end
 
@@ -118,8 +121,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_091135) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "offices"
   add_foreign_key "bookings", "users"
-  add_foreign_key "office_facilities", "facilities"
-  add_foreign_key "office_facilities", "offices"
   add_foreign_key "offices", "users"
   add_foreign_key "reviews", "bookings"
 end

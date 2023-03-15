@@ -84,3 +84,5 @@ gem "cloudinary"
 gem "pg_search"
 
 gem "geocoder"
+
+gem "noticed", "~> 1.6"
