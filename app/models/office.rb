@@ -4,8 +4,6 @@ class Office < ApplicationRecord
   has_one_attached :photo
   belongs_to :user
   has_many :bookings, dependent: :destroy
-  has_many :office_facilities, dependent: :destroy
-  has_many :facilities, through: :office_facilities
   # has_many :reviews, through: :bookings
 
   validates :name, presence: true, uniqueness: true

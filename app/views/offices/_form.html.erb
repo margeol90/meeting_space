@@ -5,7 +5,8 @@
   <%= f.input :price %>
   <%= f.input :description %>
   <%= f.input :address %>
-  <%#= f.input :photo, as: :file %>
+  <%= f.input :photo, as: :file %>
+  <%= f.input :facility_ids, collection: (Facility.all.each {|x| x.name}), as: :check_boxes %>
   <%= f.submit class: "btn-confirm-new" %>
   <%= link_to "Cancel", offices_path, style: "color:white" %>
 <% end %>
