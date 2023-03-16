@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = policy_scope(Booking)
-    @cost = revenue(@bookings)
+    @cost = revenue(@office.bookings)
   end
 
   def create
@@ -68,9 +68,7 @@ class BookingsController < ApplicationController
   def revenue(bookings)
     revenue = 0
     bookings.each do |booking|
-      if booking.confirmed?
-        revenue += booking.total_price
-      end
+      revenue += booking.total_price if booking.confirmed?
     end
     return revenue
   end

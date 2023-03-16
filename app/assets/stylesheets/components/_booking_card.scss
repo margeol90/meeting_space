@@ -29,12 +29,20 @@
   border-radius: 5px;
 }
 
-.status {
+.status-p {
   width: fit-content;
   padding: 5px;
   border: 1px solid $red;
   border-radius: 15px;
   background-color: rgba(255, 0, 0, 0.2);
+}
+
+.status-c{
+  width: fit-content;
+  padding: 5px;
+  border: 1px solid $dark-blue;
+  border-radius: 15px;
+  background-color: $mint-green;
 }
 
 .hyperlinked-title {
