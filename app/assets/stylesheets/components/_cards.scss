@@ -214,19 +214,8 @@
   }
 }
 
-.quote-card {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-  background: $mint;
-  padding: 8px 16px;
-  border: 1px solid rgb(235,235,235);
-}
 
-.quote-card .quote-content {
-  flex-grow: 1;
-  padding: 0 24px;
-}
+
 .container-flexbox {
   display: flex;
   justify-content: center;
@@ -456,3 +445,27 @@
   };
 
 }
+
+  // new office page
+  .new-image {
+    max-width: 100%;
+    max-height: 60%;
+    margin-bottom: 30px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    overflow: hidden;
+  }
+  .quote-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    background: $mint;
+    padding: 8px 16px;
+    border: 1px solid rgb(235,235,235);
+    border-radius: 4px;
+  }
+
+  .quote-card .quote-content {
+    flex-grow: 1;
+    padding: 0 24px;
+  }

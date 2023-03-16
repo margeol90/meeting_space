@@ -78,3 +78,15 @@
   margin-top: 80px;
   margin-left: 195px;
 }
+// new office page
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.side-bar {
+  margin-left: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 40px
+}
