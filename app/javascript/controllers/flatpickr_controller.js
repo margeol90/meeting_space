@@ -9,17 +9,20 @@ export default class extends Controller {
   connect() {
     flatpickr(this.startDateTarget, {});
     flatpickr(this.endDateTarget, {});
-    const newBookingForm = document.getElementsByClassName("new_booking")[0];
-    const editBookingForm = document.getElementsByClassName("edit_booking")[0];
-    const bookingForm = newBookingForm ? newBookingForm : editBookingForm;
-    console.log(bookingForm);
-    if (bookingForm) {
-      const picker = flatpickr("#start_date", {
-        plugins: [rangePlugin({ input: "#end_date" })],
+    // const newBookingForm = document.getElementById("new_booking");
+    // console.log(newBookingForm);
+    const startDateInput = document.getElementById("booking_start_date");
+    const endDateInput = document.getElementById("booking_end_date");
+    // const editBookingForm = document.getElementsByClassName("edit_booking")[0];
+    // const bookingForm = newBookingForm ? newBookingForm : editBookingForm;
+    // console.log(bookingForm);
+    if (startDateInput) {
+      const picker = flatpickr(".range_start", {
+        plugins: [rangePlugin({ input: ".range_end" })],
         minDate: "today",
         // calendar is always visible with below:
         inline: true,
-        disable: JSON.parse(bookingForm.dataset.unavailableDates),
+        // disable: JSON.parse(bookingForm.dataset.unavailableDates),
       });
     }
   }

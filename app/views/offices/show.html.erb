@@ -89,12 +89,6 @@
     </div>
   </div>
   <div class="show-booking">
-    <% unless @office.user == current_user %>
-      <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr',  unavailable_dates: @office.unavailable_dates.to_json } do |f| %>
-        <%= f.input :start_date, as: :string, label: false, input_html: { data: { flatpickr_target: "startDate" }, id: 'start_date', class: "d-none" } %>
-        <%= f.input :end_date, as: :string, label: false, input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date', class: "d-none" } %>
-        <%= f.submit class: "btn-confirm" %>
-      <% end %>
-    <% end %>
+    <%= link_to new_booking_path(@office) %>
   </div>
 </div>

@@ -63,9 +63,9 @@
 .account-container {
 
   box-sizing: border-box;
-  position: absolute;
-  width: 1012px;
+  width: 700px;
   height: 279px;
+  margin: auto;
   left: 195px;
   top: 230px;
   background: #FFFFFF;
@@ -75,8 +75,8 @@
 }
 
 .account-header {
-  margin-top: 80px;
-  margin-left: 195px;
+  text-align: center;
+  margin: 20px 0px 20px 0px;
 }
 // new office page
 .two-columns {

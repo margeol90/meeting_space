@@ -7,6 +7,11 @@ class BookingsController < ApplicationController
     @cost = revenue(@bookings)
   end
 
+  def new
+    @booking = Booking.new
+    authorize @booking
+  end
+
   def create
     @booking = Booking.new(booking_params)
     authorize @booking
@@ -17,6 +22,7 @@ class BookingsController < ApplicationController
       redirect_to my_bookings_path
       flash[:notice] = "Your booking has been successful!"
     else
+      render :new, status: :unprocessable_entity
       redirect_to office_path(@office)
       flash[:alert] = "Your booking was not successful. Please try again"
     end
@@ -68,9 +74,7 @@ class BookingsController < ApplicationController
   def revenue(bookings)
     revenue = 0
     bookings.each do |booking|
-      if booking.confirmed?
-        revenue += booking.total_price
-      end
+      revenue += booking.total_price if booking.confirmed?
     end
     return revenue
   end
