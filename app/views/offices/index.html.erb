@@ -19,6 +19,8 @@
 <div class="container">
   <%= form_with url: offices_path, method: :get, class: "d-flex w-50 p-3 align-middle mx-auto" do %>
     <%= text_field_tag :query,params[:query], class: "form-control", placeholder: "Find a Space" %>
+    <%= number_field_tag :price, placeholder: "Minimum price per day", value: params[:price] %>
+    <%= select_tag :facilities, placeholder: "Select the facilities", value: params[:facility_ids]%>
     <%= submit_tag "Search", class: "light-blue-btn mx-3" %>
   <% end %>
 </div>

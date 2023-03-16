@@ -14,9 +14,15 @@
             <% @office.bookings.each do |booking| %>
               <% array.push(booking.review&.ratings) %>
             <% end %>
-            <p><%= array.sum(&:to_f)/array.compact.length %></p>
+            <% if array.sum(&:to_f)/array.compact.length == 5 %>
+              <p><%= "#{array.sum(&:to_i)/array.compact.length}/5" %></p>
+            <% else %>
+              <p><%= "#{array.sum(&:to_f)/array.compact.length}/5" %></p>
+            <% end %>
           <% else %>
-            <%= " " %>
+            <style type="text/css">
+              .ratings-average{display:none};<%= " " %>
+            </style>
           <% end %>
         </div>
       </div>
@@ -37,6 +43,7 @@
     <div class="d-flex" style="gap:100px; justify-content:center; height:10px; margin-bottom:10px;">
       <p><%= "Max capacity #{@office.max_capacity} people" %></p>
       <p><%= "Meeting rooms #{@office.meeting_rooms}" %></p>
+      <p><%= "Price per day #{@office.price}€" %></p>
     </div>
     <div class="show-facilities">
       <h2 class="card-title">Facilities</h2>
