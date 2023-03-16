@@ -10,7 +10,6 @@ class OfficesController < ApplicationController
     else
       @offices = policy_scope(Office).all
     end
-    @offices = policy_scope(Office).where("price >= ?", params[:price]) if params[:price].present?
     # The `geocoded` scope filters only offices with coordinates
     @markers = @offices.geocoded.map do |office|
       {

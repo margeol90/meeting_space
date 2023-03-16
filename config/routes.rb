@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :office_facilities, only: %i[new create]
   end
 
-  resources :bookings, only: %i[destroy edit update new create] do
+  resources :bookings, only: %i[destroy edit update] do
     resources :reviews, only: %i[new create]
   end
 
