@@ -7,16 +7,16 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :offices do
-    resources :bookings, only: [:index, :create]
-    resources :office_facilities, only: [:new, :create]
+    resources :bookings, only: %i[index create]
+    resources :office_facilities, only: %i[new create]
   end
 
-  resources :bookings, only: [:destroy, :edit, :update] do
-    resources :reviews, only: [:new, :create]
+  resources :bookings, only: %i[destroy edit update] do
+    resources :reviews, only: %i[new create]
   end
 
   resources :reviews, only: [:destroy]
-  resources :office_facilities, only: [:edit, :update, :destroy]
+  resources :office_facilities, only: %i[edit update destroy]
 
   get "/my_properties", to: "pages#my_properties", as: :my_properties
   get "/my_bookings", to: "pages#my_bookings", as: :my_bookings

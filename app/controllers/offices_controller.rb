@@ -86,5 +86,4 @@ class OfficesController < ApplicationController
     @office = Office.find(params[:id])
     authorize @office
   end
-
 end
