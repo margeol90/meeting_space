@@ -31,9 +31,15 @@
                     </h4>
                   <% end %>
                   <small><i class="fa-solid fa-map-pin"></i>  <%= booking.office.address %></small>
-                  <div class="status">
-                    <%= booking.status.capitalize %>
-                  </div>
+                  <% if booking.confirmed? %>
+                    <div class="status-c">
+                      <i class="fa-regular fa-circle-check"> </i><%= booking.status.capitalize %>
+                    </div>
+                  <% else %>
+                    <div class="status-p">
+                      <i class="fa-regular fa-hourglass-half"></i><%= booking.status.capitalize %>
+                    </div>
+                  <% end %>
                   <div class="my-2">
                     <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
                     <p><b>Total cost:</b> <%= booking.total_price %>€</p>

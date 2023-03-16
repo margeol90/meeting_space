@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = policy_scope(Booking)
-    @cost = revenue(@bookings)
+    @cost = revenue(@office.bookings)
   end
 
   def create
