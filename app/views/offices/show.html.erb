@@ -14,7 +14,11 @@
             <% @office.bookings.each do |booking| %>
               <% array.push(booking.review&.ratings) %>
             <% end %>
-            <p><%= "#{array.sum(&:to_f)/array.compact.length}/5" %></p>
+            <% if array.sum(&:to_f)/array.compact.length == 5 %>
+              <p><%= "#{array.sum(&:to_i)/array.compact.length}/5" %></p>
+            <% else %>
+              <p><%= "#{array.sum(&:to_f)/array.compact.length}/5" %></p>
+            <% end %>
           <% else %>
             <style type="text/css">
               .ratings-average{display:none};<%= " " %>
