@@ -8,6 +8,8 @@ class Office < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 
   include PgSearch::Model
 
@@ -16,9 +18,6 @@ class Office < ApplicationRecord
                   using: {
                     tsearch: { prefix: true }
                   }
-
-  geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
 
   def unavailable_dates
     bookings.pluck(:start_date, :end_date).map do |range|
