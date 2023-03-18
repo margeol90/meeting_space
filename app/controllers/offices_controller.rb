@@ -35,6 +35,7 @@ class OfficesController < ApplicationController
     }]
 
     @has_review = @bookings.any? { |booking| !booking.review.nil? }
+    mark_notification_as_read
   end
 
   def new
@@ -88,5 +89,12 @@ class OfficesController < ApplicationController
   def set_office
     @office = Office.find(params[:id])
     authorize @office
+  end
+
+  def mark_notification_as_read
+    if current_user
+      notifications_to_mark_as_read = @office.notifications_as_office.where(recipient: current_user)
+      notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
+    end
   end
 end

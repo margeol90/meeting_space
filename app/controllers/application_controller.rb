@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user! # devise
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_notifications, if: :current_user
   include Pundit::Authorization
 
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -23,5 +24,11 @@ class ApplicationController < ActionController::Base
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
+  end
+
+  def set_notifications
+    notifications = Notification.where(recipient: current_user).newest_first.limit(10)
+    @unread = notifications.unread
+    @read = notifications.read
   end
 end
