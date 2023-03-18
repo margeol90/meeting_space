@@ -3,7 +3,6 @@ class CreateOfficeFacilities < ActiveRecord::Migration[7.0]
     create_table :office_facilities do |t|
       t.references :office, null: false, foreign_key: true
       t.references :facility, null: false, foreign_key: true
-      t.integer :quantity
 
       t.timestamps
     end

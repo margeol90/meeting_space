@@ -5,6 +5,9 @@ class Office < ApplicationRecord
   belongs_to :user
   has_many :bookings, dependent: :destroy
   # has_many :reviews, through: :bookings
+  has_many :office_facilities, dependent: :destroy
+  has_many :facilities, through: :office_facilities
+  accepts_nested_attributes_for :office_facilities
 
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true

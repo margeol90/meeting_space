@@ -6,7 +6,15 @@
   <%= f.input :description %>
   <%= f.input :address %>
   <%= f.input :photo, as: :file %>
-  <%= f.input :facility_ids, collection: (Facility.all.each {|x| x.name}), as: :check_boxes %>
+  <div class="d-flex flex-column mb-3">
+    <%= f.collection_check_boxes :facility_ids, Facility.all, :id, :name, include_hidden: false, item_label_class: "ps-1" %>
+
+  <%# or if we want to add quantities, with Javascript, use the below instead: %>
+    <%# <%= f.simple_fields_for :office_facilities do |fi| %>
+        <%# <%= fi.input :facility_id, collection: Facility.all, label_method: :name, label_value: :id, include_hidden: false, item_label_class: "ps-1" %>
+        <%# <%= fi.input :quantity %>
+     <%# <% end %>
+  </div>
   <%= f.submit class: "btn-confirm-new" %>
   <%= link_to "Cancel", offices_path, style: "color:white" %>
 <% end %>

@@ -39,15 +39,15 @@ class OfficesController < ApplicationController
 
   def new
     @office = Office.new
+    @office.office_facilities.build
     authorize @office
   end
 
   def create
     @office = Office.new(office_params)
     @office.user = current_user
-    @office.facility_ids.compact
-    authorize @office
 
+    authorize @office
     if @office.save!
       redirect_to  office_path(@office)
     else
@@ -81,6 +81,7 @@ class OfficesController < ApplicationController
                                    :description,
                                    :max_capacity,
                                    :photo,
+                                  #  office_facilities_attributes: [:facility_id, :quantity], IF WE USE QUANTITIES REPLACE BELOW LINE WITH THIS ONE
                                    facility_ids: [])
   end
 
