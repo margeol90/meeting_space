@@ -82,8 +82,10 @@ class OfficesController < ApplicationController
                                    :description,
                                    :max_capacity,
                                    :photo,
-                                  #  office_facilities_attributes: [:facility_id, :quantity], IF WE USE QUANTITIES REPLACE BELOW LINE WITH THIS ONE
-                                   facility_ids: [])
+                                   # IF WE USE QUANTITIES USE THIS ONE
+                                   office_facilities_attributes: [:_destroy, :facility_id, :quantity])
+                                  # IF WE DON'T WANT QUANTITIES USE:
+                                  #  facility_ids: [])
   end
 
   def set_office
