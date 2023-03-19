@@ -1,9 +1,10 @@
 class Booking < ApplicationRecord
+  # ASSOCIATIONS
   belongs_to :user
   belongs_to :office
   has_one :review, dependent: :destroy
-  has_noticed_notifications
 
+  # VALIDATIONS
   validates :start_date, presence: true
   validates :end_date, presence: true
   # validates :status, presence: true
@@ -11,6 +12,11 @@ class Booking < ApplicationRecord
 
   # status of booking
   enum status: { pending: 0, confirmed: 1, declined: 2 }
+
+  # NOTIFICATIONS
+  after_create_commit :notify_recipient
+  # before_destroy :cleanup_notifications
+  has_noticed_notifications model_name: 'Notification'
 
   private
 
@@ -20,4 +26,12 @@ class Booking < ApplicationRecord
     errors.add(:end_date, "must be after the start date") if end_date < start_date
   end
 
+  def notify_recipient
+    # With office.user we deliver to the owner of the office and not the owner of the booking
+    BookingNotification.with(booking: self, office: office).deliver_later(office.user)
+  end
+
+  # def cleanup_notifications
+  #   notifications_as_booking.destroy_all unless notifications_as_booking.nil?
+  # end
 end
