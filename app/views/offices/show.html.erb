@@ -89,6 +89,30 @@
         <p>This property does not have any reviews yet.</p>
       <% end %>
     </div>
+    <% past_bookings = @bookings.select { |booking| booking.end_date < current_day }%>
+    <% if !past_bookings.nil? %>
+      <% past_bookings.each do |booking| %>
+        <div class="booking-card">
+          <h4>
+            <%= booking.office.name %>
+          </h4>
+          <% if booking.confirmed? && current_day > booking.end_date %>
+            <div class="form">
+              <%= simple_form_for [booking, review] do |f| %>
+                <%= f.input :ratings, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
+                <%= f.input :comment %>
+                <%= f.submit "Submit review", class: "btn-confirm" %>
+              <% end %>
+            </div>
+          <% end %>
+          <div class="my-2">
+            <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>You have no bookings</p>
+    <% end %>
   </div>
   <div class="show-booking">
     <% unless @office.user == current_user %>

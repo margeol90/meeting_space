@@ -12,6 +12,8 @@ class OfficesController < ApplicationController
     end
     @offices = @offices.where("max_capacity <= ?", params[:max_capacity]) if params[:max_capacity].present?
     @offices = @offices.where("price <= ?", params[:price]) if params[:price].present?
+    # @offices = @offices.where("offices_facilities <= ?", params[:price]) if params[:price].present?
+
     # The `geocoded` scope filters only offices with coordinates
     @markers = @offices.geocoded.map do |office|
       {
@@ -36,6 +38,8 @@ class OfficesController < ApplicationController
 
     @has_review = @bookings.any? { |booking| !booking.review.nil? }
     mark_notification_as_read
+
+    @booking = Booking.find(params[:booking_id])
   end
 
   def new
@@ -83,9 +87,9 @@ class OfficesController < ApplicationController
                                    :max_capacity,
                                    :photo,
                                    # IF WE USE QUANTITIES USE THIS ONE
-                                   office_facilities_attributes: [:_destroy, :facility_id, :quantity])
-                                  # IF WE DON'T WANT QUANTITIES USE:
-                                  #  facility_ids: [])
+                                   office_facilities_attributes: %i[_destroy facility_id quantity])
+    # IF WE DON'T WANT QUANTITIES USE:
+    #  facility_ids: [])
   end
 
   def set_office
