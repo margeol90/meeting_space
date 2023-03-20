@@ -38,8 +38,6 @@ class OfficesController < ApplicationController
 
     @has_review = @bookings.any? { |booking| !booking.review.nil? }
     mark_notification_as_read
-
-    @booking = Booking.find(params[:booking_id])
   end
 
   def new

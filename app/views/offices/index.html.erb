@@ -52,7 +52,11 @@
                   <% office.bookings.each do |booking| %>
                     <% array.push(booking.review&.ratings) %>
                   <% end %>
-                  <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_f)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
+                  <% if array.sum(&:to_f)/array.compact.length == 5 %>
+                    <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
+                  <% else %>
+                    <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_f)/array.compact.length).round(1)}/5" %></p>
+                  <% end %>
                 <% else %>
                   <i class="fa-solid fa-star"></i>
                   <span><%= "Not rated yet" %></span>
