@@ -1,4 +1,4 @@
-<%= simple_form_for(@office) do |f| %>
+<%= simple_form_for @office, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
   <%= f.input :name %>
   <%= f.input :meeting_rooms %>
   <%= f.input :max_capacity %>
@@ -7,13 +7,21 @@
   <%= f.input :address %>
   <%= f.input :photo, as: :file %>
   <div class="d-flex flex-column mb-3">
-    <%= f.collection_check_boxes :facility_ids, Facility.all, :id, :name, include_hidden: false, item_label_class: "ps-1" %>
+    <template data-nested-form-target="template">
+      <%= f.fields_for :office_facilities, OfficeFacility.new, child_index: 'NEW_RECORD' do |facility| %>
+        <%= render "facilities_form", f: facility %>
+      <% end %>
+    </template>
 
-  <%# or if we want to add quantities, with Javascript, use the below instead: %>
-    <%# <%= f.simple_fields_for :office_facilities do |fi| %>
-        <%# <%= fi.input :facility_id, collection: Facility.all, label_method: :name, label_value: :id, include_hidden: false, item_label_class: "ps-1" %>
-        <%# <%= fi.input :quantity %>
-     <%# <% end %>
+    <%= f.fields_for :office_facilities do |facility| %>
+      <%= render "facilities_form", f: facility %>
+    <% end %>
+
+    <!-- Inserted elements will be injected before that target. -->
+    <div data-nested-form-target="target"></div>
+
+    <button type="button" data-action="nested-form#add" id="add_facilities"><i class="fa-solid fa-plus"></i> Add more facilities</button>
+
   </div>
   <%= f.submit class: "btn-confirm-new" %>
   <%= link_to "Cancel", offices_path, style: "color:white" %>
