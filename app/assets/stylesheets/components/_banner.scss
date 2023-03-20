@@ -1,22 +1,23 @@
 .banner {
-  height: 65vh;
+  height: 75vh;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: space-around;
+  align-items: center;
   background-image: image-url("background-home.png");
   background-size: cover;
   background-position: center;
   padding: 5px;
 
-  h3 {
+  h1 {
     color: white;
-    font-weight: lighter;
-    opacity: 0.9;
-    font-size: 30px;
+    font-weight: bold;
+    opacity: 0.75;
+    font-size: 40px;
     background-color: #256D85;
     margin-left: 5px;
     margin-bottom: 1px;
     padding: 15px 50px;
+    border-radius: 7px;
   }
 }
 
