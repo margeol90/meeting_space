@@ -15,9 +15,9 @@
               <% array.push(booking.review&.ratings) %>
             <% end %>
             <% if array.sum(&:to_f)/array.compact.length == 5 %>
-              <p><%= "#{array.sum(&:to_i)/array.compact.length}/5" %></p>
+              <p class="average"><%= "#{array.sum(&:to_i)/array.compact.length}/5" %></p>
             <% else %>
-              <p><%= "#{array.sum(&:to_f)/array.compact.length}/5" %></p>
+              <p class="average"><%= "#{(array.sum(&:to_f)/array.compact.length).round(1)}/5" %></p>
             <% end %>
           <% else %>
             <style type="text/css">
@@ -63,26 +63,36 @@
     </div>
     <div class="show-office-reviews">
       <h2 class="card-title">Reviews</h2>
+      <div class="write-review-card">
+        <% past_bookings = @bookings.select { |booking| booking.end_date < current_day && booking.user == current_user && booking.review.nil?}%>
+        <% if !past_bookings.nil? %>
+          <% past_bookings.each do |booking| %>
+            <% if booking.confirmed? && current_day > booking.end_date %>
+              <div class="form">
+                <%= simple_form_for [booking, Review.new] do |f| %>
+                  <%= f.input :ratings, collection: (1..5).to_a, label: "Rate your experience from #{booking.start_date.strftime("%A, %B %e, %Y")} to #{booking.end_date.strftime("%A, %B %e, %Y")}", input_html: {data: {controller: "star-rating"}} %>
+                  <%= f.input :comment %>
+                  <%= f.submit "Submit review", class: "btn-confirm" %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+        <% end %>
+      </div>
       <% if @has_review %>
         <% @bookings.each do |booking| %>
           <% unless booking.review.nil? %>
-            <ul class="list-group list-unstyled">
-              <li>
-                <span class="fa-stack-1x">
-                  <%= icon('fa-solid', 'star' ) * booking.review&.ratings + icon('fa-regular', 'star') * (5-booking.review&.ratings) %>
-                </span>
-              </li>
-              <li>
-                <div class="d-flex">
-                  <%= cl_image_tag booking.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if booking.user.avatar.attached? %>
-                  <p class="review-user"><strong><%= booking.user.first_name+" "+booking.user.last_name %></strong><%= " #{booking.review&.created_at.strftime("%A, %B %e, %Y")}" %></p>
-                </div>
-              </li>
-              <li>
+            <div class="review-card">
+              <div class="d-flex" style="margin-bottom:10px;">
+                <%= cl_image_tag booking.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if booking.user.avatar.attached? %>
+                <p class="review-user"><strong><%= booking.user.first_name+" "+booking.user.last_name %></strong><%= " #{booking.review&.created_at.strftime("%A, %B %e, %Y")}" %></p>
+              </div>
+              <div class="d-flex">
                 <p><%= booking.review&.comment %></p>
-              </li>
-              <hr>
-            </ul>
+                <span class="fa-stack-1x"><%= icon('fa-solid', 'star' ) * booking.review&.ratings + icon('fa-regular', 'star') * (5-booking.review&.ratings) %></span>
+              </div>
+            </div>
           <% end %>
         <% end %>
       <% else %>
