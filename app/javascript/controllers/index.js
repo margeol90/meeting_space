@@ -20,3 +20,6 @@ application.register("read-more", ReadMore);
 
 import StarRatingController from "./star_rating_controller";
 application.register("star-rating", StarRatingController);
+
+import TypedJsController from "./typed_js_controller"
+application.register("typed-js", TypedJsController)
