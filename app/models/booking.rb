@@ -14,9 +14,10 @@ class Booking < ApplicationRecord
   enum status: { pending: 0, confirmed: 1, declined: 2 }
 
   # NOTIFICATIONS
-  after_create_commit :notify_recipient
-  # before_destroy :cleanup_notifications
+  after_commit :notify_recipient, on: :create
+  after_commit :notify_renter, on: :update
   has_noticed_notifications model_name: 'Notification'
+  # before_destroy :cleanup_notifications
 
   private
 
@@ -29,6 +30,10 @@ class Booking < ApplicationRecord
   def notify_recipient
     # With office.user we deliver to the owner of the office and not the owner of the booking
     BookingNotification.with(booking: self, office: office).deliver_later(office.user)
+  end
+
+  def notify_renter
+    BookingUpdateNotification.with(booking: self, office: office).deliver_later(user)
   end
 
   # def cleanup_notifications
