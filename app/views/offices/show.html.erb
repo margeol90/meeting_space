@@ -47,14 +47,20 @@
       <p><%= "Meeting rooms #{@office.meeting_rooms}" %></p>
       <p><%= "Price per day #{@office.price}€" %></p>
     </div>
-    <div class="show-facilities">
-      <h2 class="card-title">Facilities</h2>
-      <% @office.facilities.each do |element| %>
-        <ul>
-          <li><%= element.name.capitalize %></li>
-        </ul>
-      <% end %>
-    </div>
+    <% unless @office.facilities.empty? %>
+      <div class="show-facilities">
+        <h2 class="card-title">Facilities</h2>
+        <% @office.facilities.each do |element| %>
+          <ul>
+            <li><%= element.name.capitalize %></li>
+          </ul>
+        <% end %>
+      </div>
+    <% else %>
+      <style type="text/css">
+        .show-facilities{display:none};<%= " " %>
+      </style>
+    <% end %>
     <div data-controller="map"
       id='show-map'
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"

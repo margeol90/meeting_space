@@ -8,21 +8,30 @@
     <h1>Office spaces</h1>
   <% end %>
 </div>
-<div class="container">
+<div class="container" style="display: flex !important; justify-content:center;">
   <div data-controller="map"
       id='index-map'
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
       data-map-markers-value="<%= @markers.to_json %>"
-      style='width: 100%; height: 300px;'>
+      style='width: 95%; height: 300px;'>
   </div>
 </div>
 <div class="container">
-  <%= form_with url: offices_path, method: :get, class: "d-flex w-50 p-3 align-middle mx-auto" do %>
-    <%= text_field_tag :query,params[:query], class: "form-control", placeholder: "Find a Space" %>
-    <%= number_field_tag :price, placeholder: "Minimum price per day", value: params[:price] %>
-    <%= number_field_tag :max_capacity, placeholder: "Maximum capacity", value: params[:max_capacity] %>
-    <%= select_tag :facility,  collection: OfficeFacility.facility_id, label_method: :name, label_value: :id, include_hidden: false, item_label_class: "ps-1" %>
-    <%= submit_tag "Search", class: "light-blue-btn mx-3" %>
+  <%= form_with url: offices_path, method: :get, class: "index-search-form" do %>
+    <div class="d-flex flex-column">
+      <%= label_tag :price, "Look for a city", style:"text-align:center;" %>
+      <%= text_field_tag :query,params[:query] %>
+    </div>
+    <div class="d-flex flex-column">
+      <%= label_tag :price, "Minimum price per day", style:"text-align:center;" %>
+      <%= number_field_tag :price, label: "Minimum price per day", value: params[:price] %>
+    </div>
+    <div class="d-flex flex-column">
+      <%= label_tag :max_capacity, "Maximum capacity", style:"text-align:center;" %>
+      <%= number_field_tag :max_capacity, placeholder: "Maximum capacity", value: params[:max_capacity] %>
+    </div>
+    <%# <%= select_tag :facility,  collection: OfficeFacility.facility_id, label_method: :name, label_value: :id, include_hidden: false, item_label_class: "ps-1" %>
+    <%= submit_tag "Search", class: "custom-button", style:"height:40px; margin-top:10px;" %>
   <% end %>
 </div>
 <div class="index-container">

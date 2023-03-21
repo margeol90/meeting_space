@@ -5,59 +5,52 @@
 <% current_day = DateTime.current.to_date %>
 <div class="container">
   <h1 class="text-center">My Bookings</h1>
-
-
   <div class="warpper">
     <input class="radio" id="one" name="group" type="radio" checked>
     <input class="radio" id="two" name="group" type="radio">
     <input class="radio" id="three" name="group" type="radio">
-
     <div class="tabs">
       <label class="tab" id="one-tab" for="one">Upcoming</label>
       <label class="tab" id="two-tab" for="two">Past</label>
       <label class="tab" id="three-tab" for="three">Declined</label>
     </div>
-
     <div class="panels">
       <div class="panel" id="one-panel">
-
-          <div class="booking-cards">
-            <% @bookings.each do |booking| %>
-              <% if booking.end_date > current_day && (booking.confirmed? || booking.pending?) %>
-                <div class="booking-card">
-                  <%= link_to office_path(booking.office) do %>
-                    <h4 class="hyperlinked-title">
-                      <%= booking.office.name %>
-                    </h4>
-                  <% end %>
-                  <small><i class="fa-solid fa-map-pin"></i>  <%= booking.office.address %></small>
-                  <% if booking.confirmed? %>
-                    <div class="status-c">
-                      <i class="fa-regular fa-circle-check"> </i><%= booking.status.capitalize %>
-                    </div>
-                  <% else %>
-                    <div class="status-p">
-                      <i class="fa-regular fa-hourglass-half"></i><%= booking.status.capitalize %>
-                    </div>
-                  <% end %>
-                  <div class="my-2">
-                    <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                    <p><b>Total cost:</b> <%= booking.total_price %>€</p>
+        <div class="booking-cards">
+          <% @bookings.each do |booking| %>
+            <% if booking.end_date > current_day && (booking.confirmed? || booking.pending?) %>
+              <div class="booking-card">
+                <%= link_to office_path(booking.office) do %>
+                  <h4 class="hyperlinked-title">
+                    <%= booking.office.name %>
+                  </h4>
+                <% end %>
+                <small><i class="fa-solid fa-map-pin"></i>  <%= booking.office.address %></small>
+                <% if booking.confirmed? %>
+                  <div class="status-c">
+                    <i class="fa-regular fa-circle-check"> </i><%= booking.status.capitalize %>
                   </div>
-                  <%= link_to  edit_booking_path(booking), class: "rounded-edit" do %>
-                    <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                  <% end %>
-                  <%= link_to booking_path(booking), class: "rounded-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-                    <i class="fa-regular fa-trash-can fa-lg"></i>
-                  <% end %>
+                <% else %>
+                  <div class="status-p">
+                    <i class="fa-regular fa-hourglass-half"></i><%= booking.status.capitalize %>
+                  </div>
+                <% end %>
+                <div class="my-2">
+                  <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                  <p><b>Total cost:</b> <%= booking.total_price %>€</p>
                 </div>
-              <% end %>
+                <%= link_to  edit_booking_path(booking), class: "rounded-edit" do %>
+                  <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                <% end %>
+                <%= link_to booking_path(booking), class: "rounded-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+                  <i class="fa-regular fa-trash-can fa-lg"></i>
+                <% end %>
+              </div>
             <% end %>
-          </div>
-
+          <% end %>
+        </div>
       </div>
       <div class="panel" id="two-panel">
-
         <div class="booking-cards">
           <% past_bookings = @bookings.select { |booking| booking.end_date < current_day }%>
           <% if !past_bookings.nil? %>
@@ -67,40 +60,35 @@
                   <%= booking.office.name %>
                 </h4>
                 <p></b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                <p><b>Total cost:</b> <%= booking.total_price %>€</p>
-                <% if booking.confirmed? && current_day > booking.end_date %>
-                  <p><small>If you're happy with your experience please leave a <%= link_to "review",  new_booking_review_path(booking) %></small></p>
-                <% end %>
-                <div class="my-2">
-                <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
-                </div>
-              </div>
+            <p><b>Total cost:</b> <%= booking.total_price %>€</p>
+            <% if booking.confirmed? && current_day > booking.end_date %>
+              <p><small>If you're happy with your experience please leave a <%= link_to "review",  new_booking_review_path(booking) %></small></p>
             <% end %>
-          <% else %>
-            <p>You have no bookings</p>
-          <% end %>
-        </div>
-
-      </div>
-      <div class="panel" id="three-panel">
-
-        <% cancelled_bookings = @bookings.select { |booking| booking.declined? }%>
-        <div class="booking-cards">
-          <% cancelled_bookings.each do |booking| %>
-            <div class="booking-card">
-              <h4><%= booking.office.name %></h4>
-              <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-              <p>Total cost: <%= booking.total_price %>€</p>
-              <div class="my-2">
+            <div class="my-2">
               <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
-              </div>
             </div>
-          <% end %>
-        </div>
-
-      </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>You have no bookings</p>
+      <% end %>
     </div>
-
   </div>
-
+  <div class="panel" id="three-panel">
+    <% cancelled_bookings = @bookings.select { |booking| booking.declined? }%>
+    <div class="booking-cards">
+      <% cancelled_bookings.each do |booking| %>
+        <div class="booking-card">
+          <h4><%= booking.office.name %></h4>
+          <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+          <p>Total cost: <%= booking.total_price %>€</p>
+          <div class="my-2">
+            <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
 </div>
