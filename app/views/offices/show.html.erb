@@ -107,12 +107,16 @@
     </div>
   </div>
   <div class="show-booking">
-    <% unless @office.user == current_user %>
-      <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr',  unavailable_dates: @office.unavailable_dates.to_json } do |f| %>
-        <%= f.input :start_date, as: :string, label: false, input_html: { data: { flatpickr_target: "startDate" }, id: 'start_date', class: "d-none" } %>
-        <%= f.input :end_date, as: :string, label: false, input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date', class: "d-none" } %>
-        <%= f.submit class: "btn-confirm" %>
-      <% end %>
+    <div id="office-booking-dates" data-unavailable="<%= @office.unavailable_dates.to_json %>"></div>
+    <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr' } do |f| %>
+      <p><strong>Pick a date</strong></p>
+      <%= f.input :start_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "startDate" }, class: "range_start d-none"} %>
+      <%= f.input :end_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "endDate" }, class: "range_end d-none"} %>
+      <button type="button" id="clear_button" title="clear" data-clear>Clear</button>
+      <p><strong>Price per day: </strong><span id="office-price-per-day"><%= @office.price.to_int %></span> €</p>
+      <p>Book for <span id="total-days">0</span><span id="string-days"> days</span></p>
+      <p>Total cost: <span id="total-cost">0</span> €</p>
+      <%= f.submit disabled: true, class: 'btn btn-primary mt-3', id: 'submit_button' %>
     <% end %>
   </div>
 </div>
