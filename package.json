@@ -5,6 +5,7 @@
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
     "@popperjs/core": "^2.11.6",
+    "@wework/ray-core": "^1.16.9",
     "bootstrap": "^5.2.3",
     "flatpickr": "^4.6.13",
     "star-rating.js": "^4.3.0",
