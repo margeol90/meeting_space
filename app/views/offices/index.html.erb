@@ -21,7 +21,7 @@
     <%= text_field_tag :query,params[:query], class: "form-control", placeholder: "Find a Space" %>
     <%= number_field_tag :price, placeholder: "Minimum price per day", value: params[:price] %>
     <%= number_field_tag :max_capacity, placeholder: "Maximum capacity", value: params[:max_capacity] %>
-    <%= select_tag :facilities, placeholder: "Select the facilities", value: params[:facility_ids] %>
+    <%= select_tag :facility,  collection: OfficeFacility.facility_id, label_method: :name, label_value: :id, include_hidden: false, item_label_class: "ps-1" %>
     <%= submit_tag "Search", class: "light-blue-btn mx-3" %>
   <% end %>
 </div>

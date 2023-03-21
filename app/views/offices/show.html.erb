@@ -88,9 +88,9 @@
                 <%= cl_image_tag booking.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if booking.user.avatar.attached? %>
                 <p class="review-user"><strong><%= booking.user.first_name+" "+booking.user.last_name %></strong><%= " #{booking.review&.created_at.strftime("%A, %B %e, %Y")}" %></p>
               </div>
-              <div class="d-flex">
+              <div class="d-flex justify-content-between">
                 <p><%= booking.review&.comment %></p>
-                <span class="fa-stack-1x"><%= icon('fa-solid', 'star' ) * booking.review&.ratings + icon('fa-regular', 'star') * (5-booking.review&.ratings) %></span>
+                <span class="review-stars"><%= icon('fa-solid', 'star' ) * booking.review&.ratings + icon('fa-regular', 'star') * (5-booking.review&.ratings) %></span>
               </div>
             </div>
           <% end %>
