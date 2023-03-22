@@ -107,20 +107,22 @@
     </div>
   </div>
   <div class="show-booking">
-    <div id="office-booking-dates" data-unavailable="<%= @office.unavailable_dates.to_json %>"></div>
-    <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr' } do |f| %>
-      <div style="color:white; align-self:center; margin-top:40px;">
-        <h3><strong>Pick a date</strong></h3>
-      </div>
-      <%= f.input :start_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "startDate" }, class: "range_start d-none"} %>
-      <%= f.input :end_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "endDate" }, class: "range_end d-none"} %>
-      <button type="button" id="clear_button" style="width: 60px; align-self:center; margin-bottom:20px; background-color:#002B5B; color:white;" title="clear" data-clear>Clear</button>
-      <div style="margin-left:30px; color:white;">
-        <p><strong>Price per day: </strong><span id="office-price-per-day"><%= @office.price.to_int %></span> €</p>
-        <p>Book for <span id="total-days">0</span><span id="string-days"> days</span></p>
-        <p>Total cost: <span id="total-cost">0</span> €</p>
-      </div>
-      <%= f.submit disabled: true, class: 'btn-confirm', id: 'submit_button' %>
+    <% unless @office.user == current_user %>
+      <div id="office-booking-dates" data-unavailable="<%= @office.unavailable_dates.to_json %>"></div>
+      <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr' } do |f| %>
+        <div style="color:white; align-self:center; margin-top:40px;">
+          <h3><strong>Pick a date</strong></h3>
+        </div>
+        <%= f.input :start_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "startDate" }, class: "range_start d-none"} %>
+        <%= f.input :end_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "endDate" }, class: "range_end d-none"} %>
+        <button type="button" id="clear_button" style="width: 60px; align-self:center; margin-bottom:20px; background-color:#002B5B; color:white;" title="clear" data-clear>Clear</button>
+        <div style="margin-left:30px; color:white;">
+          <p><strong>Price per day: </strong><span id="office-price-per-day"><%= @office.price.to_int %></span> €</p>
+          <p>Book for <span id="total-days">0</span><span id="string-days"> days</span></p>
+          <p>Total cost: <span id="total-cost">0</span> €</p>
+        </div>
+        <%= f.submit disabled: true, class: 'btn-confirm', id: 'submit_button' %>
+      <% end %>
     <% end %>
   </div>
 </div>
