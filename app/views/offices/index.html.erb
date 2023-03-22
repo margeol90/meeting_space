@@ -17,22 +17,15 @@
   </div>
 </div>
 <div class="container">
-  <%= form_with url: offices_path, method: :get, class: "index-search-form" do %>
-    <div class="d-flex flex-column">
-      <%= label_tag :price, "Look for a city", style:"text-align:center;" %>
-      <%= text_field_tag :query,params[:query] %>
-    </div>
-    <div class="d-flex flex-column">
-      <%= label_tag :price, "Maximum price per day", style:"text-align:center;" %>
-      <%= number_field_tag :price, nil, min: 0, value: params[:price] %>
-    </div>
-    <div class="d-flex flex-column">
-      <%= label_tag :max_capacity, "Maximum capacity", style:"text-align:center;" %>
-      <%= number_field_tag :max_capacity, nil, min: 0, value: params[:max_capacity] %>
-    </div>
-    <%# <%= select_tag :facility,  collection: OfficeFacility.facility_id, label_method: :name, label_value: :id, include_hidden: false, item_label_class: "ps-1" %>
-    <%= submit_tag "Search", class: "custom-button", style:"height:40px; margin-top:10px;" %>
-    <%= link_to "Clear", offices_path, class:'custom-button', style:"height:40px; margin-top:10px; border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+  <%= form_with url: offices_path, method: :get, class: "d-flex pt-5 pb-4 justify-content-center gap-2" do |f| %>
+    <%= f.text_field :query, value: params[:query], placeholder: "Find a Space in..." %>
+    <%= f.number_field :price, value: params[:price], min: 0, placeholder: "Max price per day" %>
+    <%= f.number_field :max_capacity, value: params[:max_capacity], min: 0, placeholder: "Max capacity" %>
+    <%= f.fields_for :facilities do |facilities_form| %>
+      <%= facilities_form.collection_select(:facility_id, Facility.all, :id, :name, { selected: params[:facilities]&.[](:facility_id), include_blank: 'Choose a Facility'}, class: (params[:facilities]&.[](:facility_id) == '' ? 'text-secondary' : '')) %>
+    <% end %>
+    <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+    <%= link_to "Clear", offices_path, class:'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
   <% end %>
 </div>
 <div class="index-container">
