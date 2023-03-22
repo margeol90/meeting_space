@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
     @booking.office = @office
     @booking.total_price = cost(@booking.start_date, @booking.end_date, @office.price)
     if @booking.save!
+      NotificationsChannel.broadcast_to(@booking.office.user)
       redirect_to my_bookings_path
       flash[:notice] = "Your booking has been successful!"
     else
