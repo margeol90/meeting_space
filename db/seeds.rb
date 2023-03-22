@@ -8,7 +8,7 @@
 puts "Destroying all offices, facilities and users"
 Office.destroy_all
 # User.destroy_all
-Facilities.destroy_all
+Facility.destroy_all
 
 puts "Creating users"
 user1 = User.create!(first_name: "Landlord", last_name: "Name", email: "landlord@test.com", password: "123456")
@@ -262,7 +262,7 @@ office16 = Office.create!(
   user_id: user1.id
 )
 office17 = Office.create!(
-  name: "Коворкинг (Coworking) SREDA",
+  name: "Коворкинг (Coworking) SREDA ",
   max_capacity: (10..100).to_a.sample,
   meeting_rooms: (1..10).to_a.sample,
   price: (300..1500).to_a.sample,
@@ -274,6 +274,25 @@ office17 = Office.create!(
   Microclimate is provided with modern air conditioning and ventilation systems!",
   user_id: user1.id
 )
+office18 = Office.create!(
+  name: "Emirates Co-Work, London",
+  max_capacity: (10..100).to_a.sample,
+  meeting_rooms: (1..10).to_a.sample,
+  price: (300..1500).to_a.sample,
+  address: "Hornsey Rd, London N7 7AJ",
+  description: "Rent a space inside Arsenal's Emirates Stadium. Be inspired by the history to do your best work. Offices provide a view of the pitch. Include AC, meeting rooms, high speed internet ",
+  user_id: user1.id
+)
+office19 = Office.create!(
+  name: "The Shard - London ",
+  max_capacity: (10..100).to_a.sample,
+  meeting_rooms: (1..10).to_a.sample,
+  price: (300..1500).to_a.sample,
+  address: " 32 London Bridge Street, London SE1 9SG",
+  description: "Rent office space in Western Europe's tallest building. The best views in the city, book today!",
+  user_id: user1.id
+)
+
 
 puts "Attaching office images"
 office1.photo.attach(io: File.open(Rails.root.join("app/assets/images/office1.jpg")), filename: "office1")
@@ -293,6 +312,8 @@ office14.photo.attach(io: File.open(Rails.root.join("app/assets/images/office14.
 office15.photo.attach(io: File.open(Rails.root.join("app/assets/images/office15.jpg")), filename: "office15")
 office16.photo.attach(io: File.open(Rails.root.join("app/assets/images/office16.jpg")), filename: "office16")
 office17.photo.attach(io: File.open(Rails.root.join("app/assets/images/office17.jpg")), filename: "office17")
+office18.photo.attach(io: File.open(Rails.root.join("app/assets/images/office18.jpg")), filename: "office18")
+office19.photo.attach(io: File.open(Rails.root.join("app/assets/images/office19.jpg")), filename: "office19")
 
 puts "Adding user avatars"
 user1.avatar.attach(io: File.open(Rails.root.join("app/assets/images/user1.jpg")), filename: "user1")
