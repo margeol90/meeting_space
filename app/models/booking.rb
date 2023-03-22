@@ -29,11 +29,11 @@ class Booking < ApplicationRecord
 
   def notify_recipient
     # With office.user we deliver to the owner of the office and not the owner of the booking
-    BookingNotification.with(booking: self, office: office).deliver_later(office.user)
+    BookingNotification.with(booking: self, office: office).deliver(office.user)
   end
 
   def notify_renter
-    BookingUpdateNotification.with(booking: self, office: office).deliver_later(user)
+    BookingUpdateNotification.with(booking: self, office: office).deliver(user)
   end
 
   # def cleanup_notifications

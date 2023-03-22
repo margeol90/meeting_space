@@ -1,6 +1,5 @@
 class NotificationsChannel < ApplicationCable::Channel
   def subscribed
-    notification = Notification.find(params[:id])
-    stream_for notification
+    stream_from "notifications:#{current_user.id}"
   end
 end
