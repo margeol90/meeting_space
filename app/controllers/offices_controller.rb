@@ -89,6 +89,7 @@ class OfficesController < ApplicationController
                                    :description,
                                    :max_capacity,
                                    :photo,
+                                   facilities: [],
                                    # IF WE USE QUANTITIES USE THIS ONE
                                    office_facilities_attributes: %i[_destroy facility_id quantity])
     # IF WE DON'T WANT QUANTITIES USE:

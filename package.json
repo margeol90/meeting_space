@@ -9,6 +9,7 @@
     "bootstrap": "^5.2.3",
     "flatpickr": "^4.6.13",
     "star-rating.js": "^4.3.0",
+    "stimulus-checkbox-select-all": "^5.2.0",
     "stimulus-rails-nested-form": "^4.1.0",
     "stimulus-read-more": "^4.1.0",
     "typed.js": "^2.0.132",

@@ -2323,6 +2323,11 @@ stealthy-require@^1.1.1:
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
   integrity sha512-ZnWpYnYugiOVEY5GkcuJK1io5V8QmNYChG62gSit9pQVGErXtrKuPC55ITaVSukmMta5qpMU7vqLt2Lnni4f/g==
 
+stimulus-checkbox-select-all@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/stimulus-checkbox-select-all/-/stimulus-checkbox-select-all-5.2.0.tgz#5ce778e5241978c0b6cdc2b000092c7e3dc357a2"
+  integrity sha512-gONmYrkWMkw5adNUAX8UnS5riCiO//qLpqtVcFaD63ffMmNLAbS8N03Q/e4eCjvFPTfP5tOSI0TLFNx7MRq9aA==
+
 stimulus-rails-nested-form@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/stimulus-rails-nested-form/-/stimulus-rails-nested-form-4.1.0.tgz#bfce185cff908170a4eb9973875b72517c3bc83a"
