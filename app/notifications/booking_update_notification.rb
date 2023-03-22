@@ -10,7 +10,7 @@ class BookingUpdateNotification < Noticed::Base
   # deliver_by :email, mailer: "UserMailer"
   # deliver_by :slack
   # deliver_by :custom, class: "MyDeliveryMethod"
-  deliver_by :action_cable, channel: NotificationsChannel, stream: :custom_stream, format: :action_cable_data
+  # deliver_by :action_cable
 
   # Add required params
   #
