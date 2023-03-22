@@ -34,10 +34,10 @@
         <div class="div", style="gap:20px;">
           <button data-action="read-more#toggle" class="btn-confirm">Read more</button>
           <% if policy(@office).edit? %>
-            <%= link_to "Edit", edit_office_path, class:"btn-edit"%>
+            <%= link_to "Edit", edit_office_path, class:"btn-edit", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
           <% end %>
           <% if policy(@office).destroy? %>
-            <%= link_to "Delete your propierty", office_path(@office), class: "btn-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+            <%= link_to "Delete your propierty", office_path(@office), class: "btn-delete", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
           <% end %>
         </div>
       </div>

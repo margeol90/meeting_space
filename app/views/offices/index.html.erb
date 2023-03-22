@@ -23,15 +23,16 @@
       <%= text_field_tag :query,params[:query] %>
     </div>
     <div class="d-flex flex-column">
-      <%= label_tag :price, "Minimum price per day", style:"text-align:center;" %>
-      <%= number_field_tag :price, label: "Minimum price per day", value: params[:price] %>
+      <%= label_tag :price, "Maximum price per day", style:"text-align:center;" %>
+      <%= number_field_tag :price, nil, min: 0, value: params[:price] %>
     </div>
     <div class="d-flex flex-column">
       <%= label_tag :max_capacity, "Maximum capacity", style:"text-align:center;" %>
-      <%= number_field_tag :max_capacity, placeholder: "Maximum capacity", value: params[:max_capacity] %>
+      <%= number_field_tag :max_capacity, nil, min: 0, value: params[:max_capacity] %>
     </div>
     <%# <%= select_tag :facility,  collection: OfficeFacility.facility_id, label_method: :name, label_value: :id, include_hidden: false, item_label_class: "ps-1" %>
     <%= submit_tag "Search", class: "custom-button", style:"height:40px; margin-top:10px;" %>
+    <%= link_to "Clear", offices_path, class:'custom-button', style:"height:40px; margin-top:10px; border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
   <% end %>
 </div>
 <div class="index-container">

@@ -179,8 +179,11 @@
       color: #FFFFFF;
       text-decoration: none;
       text-align: center;
-      padding-top: 4px;
+      padding-top: 2px;
       font-size: 16px;
+      border-color:darkgray;
+      border-style:outset;
+      border-width:2px;
     };
 
     .account-delete {
@@ -193,7 +196,9 @@
       text-decoration: none;
       text-align: center;
       padding: center;
-      border:none;
+      border-color:darkgray;
+      border-style:outset;
+      border-width:2px;
     };
   };
 
