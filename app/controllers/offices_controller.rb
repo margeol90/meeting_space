@@ -67,6 +67,8 @@ class OfficesController < ApplicationController
   end
 
   def update
+    @office.office_facilities.destroy_all
+    # raise
     if @office.update(office_params)
       redirect_to office_path(@office), notice: "Your property's details have been successufly saved"
     else

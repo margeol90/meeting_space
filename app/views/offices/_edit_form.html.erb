@@ -1,0 +1,28 @@
+<%= simple_form_for @office, method: :put, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :meeting_rooms %>
+  <%= f.input :max_capacity %>
+  <%= f.input :price %>
+  <%= f.input :description %>
+  <%= f.input :address %>
+  <%= f.input :photo, as: :file %>
+  <div class="d-flex flex-column mb-3">
+    <template data-nested-form-target="template">
+      <%= f.fields_for :office_facilities, OfficeFacility.new, child_index: 'NEW_RECORD' do |facility| %>
+        <%= render "facilities_form", f: facility %>
+      <% end %>
+    </template>
+
+    <%= f.fields_for :office_facilities do |facility| %>
+      <%= render "facilities_form", f: facility %>
+    <% end %>
+
+    <!-- Inserted elements will be injected before that target. -->
+    <div data-nested-form-target="target"></div>
+
+    <button type="button" data-action="nested-form#add" id="add_facilities"><i class="fa-solid fa-plus"></i> Add more facilities</button>
+
+  </div>
+  <%= f.submit class: "btn-confirm-new" %>
+  <%= link_to "Cancel", offices_path, style: "color:white" %>
+<% end %>
