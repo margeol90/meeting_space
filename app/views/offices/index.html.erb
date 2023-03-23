@@ -8,64 +8,71 @@
     <h1>Office spaces</h1>
   <% end %>
 </div>
-<div class="container">
+<div class="container" style="display: flex !important; justify-content:center;">
   <div data-controller="map"
       id='index-map'
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
       data-map-markers-value="<%= @markers.to_json %>"
-      style='width: 100%; height: 300px;'>
+      style='width: 95%; height: 300px;'>
   </div>
 </div>
-<div class="container">
-  <%= form_with url: offices_path, method: :get, class: "d-flex w-50 p-3 align-middle mx-auto" do %>
-    <%= text_field_tag :query,params[:query], class: "form-control", placeholder: "Find a Space" %>
-    <%= number_field_tag :price, placeholder: "Minimum price per day", value: params[:price] %>
-    <%= number_field_tag :max_capacity, placeholder: "Maximum capacity", value: params[:max_capacity] %>
-    <%= select_tag :facilities, placeholder: "Select the facilities", value: params[:facility_ids] %>
-    <%= submit_tag "Search", class: "light-blue-btn mx-3" %>
+<%= form_with url: offices_path, method: :get, class: "d-flex pt-5 pb-4 justify-content-center gap-2", data: { controller: 'checkbox-select-all' } do |f| %>
+  <%= f.text_field :query, value: params[:query], placeholder: "Find a Space in..." %>
+  <%= f.number_field :max_price, value: params[:max_price], min: 0, placeholder: "Max price per day" %>
+  <%= f.number_field :min_price, value: params[:min_price], min: 0, placeholder: "Min price per day" %>
+  <%= f.number_field :max_capacity, value: params[:max_capacity], min: 0, placeholder: "Max capacity" %>
+  <%= f.fields_for :facilities do |facilities_form| %>
+    <%= facilities_form.collection_select(:facility_id, Facility.all, :id, :name, { selected: params[:facilities]&.[](:facility_id), include_blank: 'Choose a Facility'}, class: (params[:facilities]&.[](:facility_id) == '' ? 'text-secondary' : '')) do |b| %>
+    <% end %>
   <% end %>
-</div>
+  <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+  <%= link_to "Clear", offices_path, class:'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+<% end %>
 <div class="index-container">
-  <div class="office-grid">
-    <% @offices.each do |office| %>
-      <div class="grid-item">
-        <%= link_to office_path(office), :class => "text-decoration-none" do %>
-          <div class="office-card">
-            <%= cl_image_tag office.photo.key, :class => "office-card-img", crop: :fill if office.photo.attached? %>
-            <div class="card-content">
-              <h1 class="card-header">
-                <strong><%= office.name %></strong>
-              </h1>
-              <div class="card-attr">
-                <i class="fa-solid fa-person-shelter"></i>
-                <span><%= office.max_capacity %></span>
-                <i class="fa-solid fa-handshake"></i>
-                <span><%= office.meeting_rooms %></span>
-              </div>
-              <div class="card-price">
-                <i class="fa-solid fa-euro"></i>
-                <span><%= "#{office.price}/day" %></span>
-              </div>
-              <div class="card-rating">
-                <% if office.bookings.any? { |booking| !booking.review.nil? } %>
-                  <% array=[] %>
-                  <% office.bookings.each do |booking| %>
-                    <% array.push(booking.review&.ratings) %>
-                  <% end %>
-                  <% if array.sum(&:to_f)/array.compact.length == 5 %>
-                    <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
+  <% if @offices.empty?  %>
+    <p>Opss, no Offices match your filters...</p>
+  <% else  %>
+    <div class="office-grid">
+      <% @offices.each do |office| %>
+        <div class="grid-item">
+          <%= link_to office_path(office), :class => "text-decoration-none" do %>
+            <div class="office-card">
+              <%= cl_image_tag office.photo.key, :class => "office-card-img", crop: :fill if office.photo.attached? %>
+              <div class="card-content">
+                <h1 class="card-header">
+                  <strong><%= office.name %></strong>
+                </h1>
+                <div class="card-attr">
+                  <i class="fa-solid fa-person-shelter"></i>
+                  <span><%= office.max_capacity %></span>
+                  <i class="fa-solid fa-handshake"></i>
+                  <span><%= office.meeting_rooms %></span>
+                </div>
+                <div class="card-price">
+                  <i class="fa-solid fa-euro"></i>
+                  <span><%= "#{office.price}/day" %></span>
+                </div>
+                <div class="card-rating">
+                  <% if office.bookings.any? { |booking| !booking.review.nil? } %>
+                    <% array=[] %>
+                    <% office.bookings.each do |booking| %>
+                      <% array.push(booking.review&.ratings) %>
+                    <% end %>
+                    <% if array.sum(&:to_f)/array.compact.length == 5 %>
+                      <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
+                    <% else %>
+                      <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_f)/array.compact.length).round(1)}/5" %></p>
+                    <% end %>
                   <% else %>
-                    <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_f)/array.compact.length).round(1)}/5" %></p>
+                    <i class="fa-solid fa-star"></i>
+                    <span><%= "Not rated yet" %></span>
                   <% end %>
-                <% else %>
-                  <i class="fa-solid fa-star"></i>
-                  <span><%= "Not rated yet" %></span>
-                <% end %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end  %>
 </div>

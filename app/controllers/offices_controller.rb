@@ -10,9 +10,14 @@ class OfficesController < ApplicationController
     else
       @offices = policy_scope(Office).all
     end
+
     @offices = @offices.where("max_capacity <= ?", params[:max_capacity]) if params[:max_capacity].present?
-    @offices = @offices.where("price <= ?", params[:price]) if params[:price].present?
-    # @offices = @offices.where("offices_facilities <= ?", params[:price]) if params[:price].present?
+    @offices = @offices.where("price <= ?", params[:max_price]) if params[:max_price].present?
+    @offices = @offices.where("price >= ?", params[:min_price]) if params[:min_price].present?
+
+    if params[:facilities].present? && params[:facilities][:facility_id] != ''
+      @offices = @offices.joins(:facilities).where(facilities: { id: params[:facilities][:facility_id] })
+    end
 
     # The `geocoded` scope filters only offices with coordinates
     @markers = @offices.geocoded.map do |office|

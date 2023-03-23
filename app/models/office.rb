@@ -12,7 +12,8 @@ class Office < ApplicationRecord
 
   # VALIDATIONS
   validates :name, presence: true, uniqueness: true
-  validates :price, presence: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :max_capacity, :meeting_rooms, numericality: { greater_than_or_equal_to: 0 }
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 

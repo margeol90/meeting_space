@@ -180,8 +180,11 @@
       color: #FFFFFF;
       text-decoration: none;
       text-align: center;
-      padding-top: 4px;
+      padding-top: 2px;
       font-size: 16px;
+      border-color:darkgray;
+      border-style:outset;
+      border-width:2px;
     };
 
     .account-delete {
@@ -194,7 +197,9 @@
       text-decoration: none;
       text-align: center;
       padding: center;
-      border:none;
+      border-color:darkgray;
+      border-style:outset;
+      border-width:2px;
     };
   };
 
@@ -292,9 +297,11 @@
     margin: 20px;
   }
 
-  .fa-stack-1x {
+  .review-stars {
     color:#8FE3CF;
     text-shadow: 0 0 3px #002B5B;
+    margin-right: 20px;
+    white-space: nowrap;
   };
 }
 

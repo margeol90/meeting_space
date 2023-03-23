@@ -3,11 +3,13 @@
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "ms_logo.svg" %>
     <% end %>
-    <%= render "shared/notifications" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= render "shared/notifications" %>
+          </li>
           <li class="nav-item dropdown">
             <% if current_user.avatar.attached? %>
               <%= cl_image_tag current_user.avatar.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -15,6 +17,7 @@
               <%= cl_image_tag "http://res.cloudinary.com/dcwwskoep/image/upload/v1678528702/j3hxxbinri977fofjcvt.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <p><strong><%= "#{current_user.first_name} #{current_user.last_name}" %></strong></p>
               <%= link_to "My account", my_account_path, class: "dropdown-item" %>
               <%= link_to "New property", new_office_path, class: "dropdown-item" %>
               <%= link_to "My properties", my_properties_path, class: "dropdown-item" %>
