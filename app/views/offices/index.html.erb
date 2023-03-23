@@ -22,20 +22,16 @@
   <%= f.number_field :min_price, value: params[:min_price], min: 0, placeholder: "Min price per day" %>
   <%= f.number_field :max_capacity, value: params[:max_capacity], min: 0, placeholder: "Max capacity" %>
   <%= f.fields_for :facilities do |facilities_form| %>
-    <label>
-      <input type="checkbox" data-checkbox-select-all-target="checkboxAll" />
-      <span>Select All / Deselect All</span>
-    </label>
-    <%= f.collection_check_boxes (:facility_id, Facility.all, :id, :name, { selected: params[:facilities]&.[](:facility_id), include_blank: 'Choose a Facility'}, class: (params[:facilities]&.[](:facility_id) == '' ? 'text-secondary' : '')) do |b| %>
-      <%= b.label do %>
-        <%= b.check_box data: { checkbox_select_all_target: 'checkbox' } %>
-        <%= b.text %>
-      <% end %>
+    <%= facilities_form.collection_select(:facility_id, Facility.all, :id, :name, { selected: params[:facilities]&.[](:facility_id), include_blank: 'Choose a Facility'}, class: (params[:facilities]&.[](:facility_id) == '' ? 'text-secondary' : '')) do |b| %>
     <% end %>
-    <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
-    <%= link_to "Clear", offices_path, class:'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
   <% end %>
-  <div class="index-container">
+  <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+  <%= link_to "Clear", offices_path, class:'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+<% end %>
+<div class="index-container">
+  <% if @offices.empty?  %>
+    <p>Opss, no Offices match your filters...</p>
+  <% else  %>
     <div class="office-grid">
       <% @offices.each do |office| %>
         <div class="grid-item">
@@ -78,4 +74,5 @@
         </div>
       <% end %>
     </div>
-  </div>
+  <% end  %>
+</div>

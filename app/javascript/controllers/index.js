@@ -24,8 +24,3 @@ application.register("star-rating", StarRatingController);
 
 import TypedJsController from "./typed_js_controller";
 application.register("typed-js", TypedJsController);
-
-// Checbox select all (search bar)
-
-import CheckboxSelectAll from "stimulus-checkbox-select-all";
-application.register("checkbox-select-all", CheckboxSelectAll);
