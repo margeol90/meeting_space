@@ -5,7 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-puts "Destroying all offices, facilities and users"
+puts "Destroying all notifications, offices, facilities and users"
+Notification.destroy_all
 Office.destroy_all
 User.destroy_all
 Facility.destroy_all
