@@ -24,6 +24,3 @@ application.register("star-rating", StarRatingController);
 
 import TypedJsController from "./typed_js_controller";
 application.register("typed-js", TypedJsController);
-
-const application = Application.start()
-application.register('nested-form', NestedForm)
