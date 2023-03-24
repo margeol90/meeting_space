@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 puts "Destroying all offices, facilities and users"
 Office.destroy_all
-# User.destroy_all
+User.destroy_all
 Facility.destroy_all
 
 puts "Creating users"
@@ -292,7 +292,36 @@ office19 = Office.create!(
   description: "Rent office space in Western Europe's tallest building. The best views in the city, book today!",
   user_id: user1.id
 )
+office20 = Office.create!(
+  name: "The Walkie Talkie",
+  max_capacity: (10..100).to_a.sample,
+  meeting_rooms: (1..10).to_a.sample,
+  price: (300..1500).to_a.sample,
+  address: " 20 Fenchurch St, London EC3M 8AF",
+  description: "Occupying a prominent site in the heart of the City of London, 20 Fenchurch Street is a landmark building that stands apart from the crowd of the City Cluster and overlooks the River Thames. There is availability on part Level 15 of this iconic feature of the London skyline.
 
+  Part Level 15 offers a high-quality existing fit-out, with open-plan workstations and meeting room facilities. Floor-to-ceiling glazing provides a steady stream of natural light throughout the day, and magnificent views creating an inspirational working environment.!",
+  user_id: user1.id
+)
+office21 = Office.create!(
+  name: "The Cheesegrater",
+  max_capacity: (10..100).to_a.sample,
+  meeting_rooms: (1..10).to_a.sample,
+  price: (300..1500).to_a.sample,
+  address: " 122 Leadenhall Street, 122 Leadenhall St, London EC3V 4AB",
+  description: "This distinctive, tapering shape is its defining characteristic. It was developed by architect RSH+P from the earliest design stage as a response to specific planning requirements: to protect views of major London landmarks, especially St Paul’s Cathedral in the City and the Palace of Westminster.",
+  user_id: user1.id
+)
+office22 = Office.create!(
+  name: "10 Downing Street",
+  max_capacity: (10..100).to_a.sample,
+  meeting_rooms: (1..10).to_a.sample,
+  price: (300..1500).to_a.sample,
+  address: "10 Downing St, London SW1A 2AA
+  ",
+  description: "Rub shoulders with the political elite by renting office space in 10 Downing Street. Offices come fully equipped with all office facilities",
+  user_id: user1.id
+)
 
 puts "Attaching office images"
 office1.photo.attach(io: File.open(Rails.root.join("app/assets/images/office1.jpg")), filename: "office1")
@@ -314,6 +343,9 @@ office16.photo.attach(io: File.open(Rails.root.join("app/assets/images/office16.
 office17.photo.attach(io: File.open(Rails.root.join("app/assets/images/office17.jpg")), filename: "office17")
 office18.photo.attach(io: File.open(Rails.root.join("app/assets/images/office18.jpg")), filename: "office18")
 office19.photo.attach(io: File.open(Rails.root.join("app/assets/images/office19.jpg")), filename: "office19")
+office20.photo.attach(io: File.open(Rails.root.join("app/assets/images/office20.jpg")), filename: "office20")
+office21.photo.attach(io: File.open(Rails.root.join("app/assets/images/office21.jpg")), filename: "office21")
+office22.photo.attach(io: File.open(Rails.root.join("app/assets/images/office22.jpg")), filename: "office22")
 
 puts "Adding user avatars"
 user1.avatar.attach(io: File.open(Rails.root.join("app/assets/images/user1.jpg")), filename: "user1")
