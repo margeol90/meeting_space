@@ -419,3 +419,41 @@
     height: 300px;
     border-radius: 5px;
   }
+
+
+  .action-cards {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 700px;
+  }
+
+  .action-card {
+    background-color: #FFFFFF;
+    color: $dark-blue;
+    border-radius: 5px;
+    border: 1px solid $dark-blue;
+    width: 220px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    &:hover {
+      background-color: $dark-blue;
+      color: #FFFFFF
+    }
+
+    p {
+      margin-bottom: 0;
+      font-size: 20px;
+    }
+  }
+
+  .member {
+    width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
