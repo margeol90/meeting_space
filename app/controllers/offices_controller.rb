@@ -15,8 +15,10 @@ class OfficesController < ApplicationController
     @offices = @offices.where("price <= ?", params[:max_price]) if params[:max_price].present?
     @offices = @offices.where("price >= ?", params[:min_price]) if params[:min_price].present?
 
-    if params[:facilities].present? && params[:facilities][:facility_id] != ''
-      @offices = @offices.joins(:facilities).where(facilities: { id: params[:facilities][:facility_id] })
+    raise if params[:facilities].present?
+
+    if params[:facilities].present?
+      @offices = @offices.joins(:facilities).where(facilities: { id: params[:facilities][:facility_id].reject { |e| e.empty? }.map { |e| e.to_i }})
     end
 
     # The `geocoded` scope filters only offices with coordinates

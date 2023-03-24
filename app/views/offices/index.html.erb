@@ -21,58 +21,74 @@
   <%= f.number_field :max_price, value: params[:max_price], min: 0, placeholder: "Max price per day" %>
   <%= f.number_field :min_price, value: params[:min_price], min: 0, placeholder: "Min price per day" %>
   <%= f.number_field :max_capacity, value: params[:max_capacity], min: 0, placeholder: "Max capacity" %>
-  <%= f.fields_for :facilities do |facilities_form| %>
-    <%= facilities_form.collection_select(:facility_id, Facility.all, :id, :name, { selected: params[:facilities]&.[](:facility_id), include_blank: 'Choose a Facility'}, class: (params[:facilities]&.[](:facility_id) == '' ? 'text-secondary' : '')) do |b| %>
-    <% end %>
-  <% end %>
-  <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
-  <%= link_to "Clear", offices_path, class:'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
-<% end %>
-<div class="index-container">
-  <% if @offices.empty?  %>
-    <p>Opss, no Offices match your filters...</p>
-  <% else  %>
-    <div class="office-grid">
-      <% @offices.each do |office| %>
-        <div class="grid-item">
-          <%= link_to office_path(office), :class => "text-decoration-none" do %>
-            <div class="office-card">
-              <%= cl_image_tag office.photo.key, :class => "office-card-img", crop: :fill if office.photo.attached? %>
-              <div class="card-content">
-                <h1 class="card-header">
-                  <strong><%= office.name %></strong>
-                </h1>
-                <div class="card-attr">
-                  <i class="fa-solid fa-person-shelter"></i>
-                  <span><%= office.max_capacity %></span>
-                  <i class="fa-solid fa-handshake"></i>
-                  <span><%= office.meeting_rooms %></span>
-                </div>
-                <div class="card-price">
-                  <i class="fa-solid fa-euro"></i>
-                  <span><%= "#{office.price}/day" %></span>
-                </div>
-                <div class="card-rating">
-                  <% if office.bookings.any? { |booking| !booking.review.nil? } %>
-                    <% array=[] %>
-                    <% office.bookings.each do |booking| %>
-                      <% array.push(booking.review&.ratings) %>
-                    <% end %>
-                    <% if array.sum(&:to_f)/array.compact.length == 5 %>
-                      <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
-                    <% else %>
-                      <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_f)/array.compact.length).round(1)}/5" %></p>
-                    <% end %>
-                  <% else %>
-                    <i class="fa-solid fa-star"></i>
-                    <span><%= "Not rated yet" %></span>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          <% end %>
+  <%# <%= f.fields_for :facilities do |facilities_form| %>
+    <%# <%= facilities_form.collection_select(:facility_id, Facility.all, :id, :name, { selected: params[:facilities]&.[](:facility_id)}, class: (params[:facilities]&.[](:facility_id) == '' ? 'text-secondary' : '')) do |b| %>
+      <%# <% end %>
+      <%# <% end %>
+      <%= f.fields_for :facilities do |facilities_form| %>
+        <div id="list1" class="dropdown-check-list" tabindex="100" data-controller="checkbox">
+          <span class="anchor">Choose a Facility</span>
+          <ul id="items" class="items">
+            <li><%= facilities_form.collection_select(:facility_id, Facility.all, :id, :name, { selected: params[:facilities]&.[](:facility_id)}, class: (params[:facilities]&.[](:facility_id) == '' ? 'text-secondary' : ''))%></li>
+          </ul>
         </div>
       <% end %>
-    </div>
-  <% end  %>
-</div>
+      <%# <div id="list1" class="dropdown-check-list" tabindex="100" data-controller="checkbox">
+    <span class="anchor">Choose a Facility</span>
+    <ul id="items" class="items">
+      <% Facility.all.each do |fac| %>
+        <%# <li><input type="checkbox" value="<%= fac.id" /><%= fac.name </li> %>
+        <%# <% end %>
+        <%# </ul> %>
+        <%# </div> %>
+        <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+        <%= link_to "Clear", offices_path, class:'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+      <% end %>
+      <div class="index-container">
+        <% if @offices.empty?  %>
+          <p>Opss, no Offices match your filters...</p>
+        <% else  %>
+          <div class="office-grid">
+            <% @offices.each do |office| %>
+              <div class="grid-item">
+                <%= link_to office_path(office), :class => "text-decoration-none" do %>
+                  <div class="office-card">
+                    <%= cl_image_tag office.photo.key, :class => "office-card-img", crop: :fill if office.photo.attached? %>
+                    <div class="card-content">
+                      <h1 class="card-header">
+                        <strong><%= office.name %></strong>
+                      </h1>
+                      <div class="card-attr">
+                        <i class="fa-solid fa-person-shelter"></i>
+                        <span><%= office.max_capacity %></span>
+                        <i class="fa-solid fa-handshake"></i>
+                        <span><%= office.meeting_rooms %></span>
+                      </div>
+                      <div class="card-price">
+                        <i class="fa-solid fa-euro"></i>
+                        <span><%= "#{office.price}/day" %></span>
+                      </div>
+                      <div class="card-rating">
+                        <% if office.bookings.any? { |booking| !booking.review.nil? } %>
+                          <% array=[] %>
+                          <% office.bookings.each do |booking| %>
+                            <% array.push(booking.review&.ratings) %>
+                          <% end %>
+                          <% if array.sum(&:to_f)/array.compact.length == 5 %>
+                            <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
+                          <% else %>
+                            <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_f)/array.compact.length).round(1)}/5" %></p>
+                          <% end %>
+                        <% else %>
+                          <i class="fa-solid fa-star"></i>
+                          <span><%= "Not rated yet" %></span>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end  %>
+      </div>
