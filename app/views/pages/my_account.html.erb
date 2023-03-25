@@ -1,5 +1,8 @@
 <% require "date" %>
 <% current_day = DateTime.current.to_date %>
+<% content_for :title do %>
+  <%= "My MeetingSpace Account" %>
+<% end %>
 <div class="div-account">
   <div class="row">
     <h1 class="account-header">My account</h1>
@@ -27,5 +30,25 @@
         <p class="login">Last login: <%= @user.last_sign_in_at  %></p>
       </div>
     </div>
+  </div>
+  <div class="action-cards">
+    <%= link_to  new_office_path, :class => "text-decoration-none" do %>
+      <div class="action-card">
+        <p><i class="fa-solid fa-plus fa-xl fa-fw"></i>List an office</p>
+      </div>
+    <% end %>
+    <%= link_to my_properties_path, :class => "text-decoration-none" do %>
+      <div class="action-card">
+        <p><i class="fa-solid fa-percent fa-xl fa-fw"></i>My properties</p>
+      </div>
+    <% end %>
+    <%= link_to my_bookings_path, :class => "text-decoration-none" do %>
+      <div class="action-card">
+        <p><i class="fa-regular fa-calendar-days fa-xl fa-fw"></i>My Bookings</p>
+      </div>
+    <% end %>
+  </div>
+  <div class="member">
+    <p>Member of <b>MeetingSpace</b> since <%= current_user.created_at.strftime("%B %Y") %></p>
   </div>
 </div>
