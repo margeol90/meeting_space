@@ -11,7 +11,7 @@ export default class extends Controller {
         items.style.display = "none";
       } else {
         items.classList.add("visible");
-        items.style.display = "block";
+        items.style.display = "flex";
       }
     };
 
