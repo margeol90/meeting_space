@@ -18,7 +18,7 @@
       <div class="panel" id="one-panel">
         <div class="booking-cards">
           <% @bookings.each do |booking| %>
-            <% if booking.end_date > current_day && (booking.confirmed? || booking.pending?) %>
+            <% if booking.end_date >= current_day && (booking.confirmed? || booking.pending?) %>
               <div class="booking-card">
                 <%= link_to office_path(booking.office) do %>
                   <h4 class="hyperlinked-title">
