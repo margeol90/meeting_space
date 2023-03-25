@@ -49,6 +49,18 @@
   box-shadow: 0 10px 30px rgba(0,0,0,.1);
 }
 
+.logo-background-booking{
+  background-color: $dark-blue;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+  width: 100%;
+  max-width: 330px;
+  margin-left: 500px;
+}
+
+
 .index-search-form {
   display: flex;
   gap: 20px;

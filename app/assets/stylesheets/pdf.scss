@@ -1,3 +1,5 @@
+@import '@wework/ray-core/scss/ray-core';
+@import "config/colors";
 
 h1, h2, h5 {
   text-align: center;
@@ -34,4 +36,14 @@ table.GeneratedTable thead {
 
 .text-center {
   text-align: center;
+}
+.logo-background-booking{
+  background-color: $dark-blue;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+  width: 100%;
+  max-width: 330px;
+  margin-left: 500px;
 }
