@@ -1,7 +1,7 @@
 <% content_for :title do %>
   <%= "Your booking information for #{@booking.office.name}" %>
 <% end %>
-<div class="container">
+<div class="container background-colour-white">
   <h1 class="text-center my-2">Booking information for <%= @booking.office.name %></h1>
   <h2 class="text-center">Invoice # <%= @booking.id %></h2>
   <h5>Owned & managed by: <%= @booking.office.user.first_name %> <%= @booking.office.user.last_name %></h4>
@@ -10,7 +10,7 @@
   <p>Don't forget to leave a  <%= link_to "review",  new_booking_review_path(@booking)%> on this property.</p>
   <%= link_to 'Download Invoice', booking_download_path(@booking, format: :pdf) %>
   <div class="my-2">
-    <table class="GeneratedTable">
+    <table class="ray-table">
       <thead>
         <tr>
           <th>Start Date</th>
@@ -45,7 +45,9 @@
       </tbody>
     </table>
     <div class="text-center my-4">
-      <%= image_tag "ms_logo.svg" %>
+    <div class="logo-background-booking">
+      <%= image_tag "https://github.com/margeol90/meeting_space/blob/master/app/assets/images/MS%20logo.png?raw=true"%>
+      </div>
       <p>12, Piccadilly Circus, UK, info@meetingspace.com, Tel: + 01 234 567 88, Fax: + 01 234 567 89</p>
       <p>VAT reg. 1234 567 89</p>
     </div>
