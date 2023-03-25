@@ -21,4 +21,5 @@ class PagesController < ApplicationController
   def property_bookings
     @bookings = Bookings.where(office_id: office.id)
   end
+
 end

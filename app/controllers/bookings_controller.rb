@@ -1,10 +1,14 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: %i[edit update destroy]
+  before_action :set_booking, only: %i[show edit update destroy]
   before_action :set_office, only: %i[index new create revenue]
 
   def index
     @bookings = policy_scope(Booking)
     @cost = revenue(@office.bookings)
+  end
+
+  def show
+    authorize @booking
   end
 
   def create
@@ -38,6 +42,22 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
     redirect_to my_bookings_path
+  end
+
+  def download
+    @booking = Booking.find(params[:booking_id])
+    authorize @booking
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "invoice",
+               template: "bookings/show",
+               formats: [:html],
+               disposition: :inline,
+               layout: 'pdf',
+               encoding: "UTF-8"
+      end
+    end
   end
 
   private
