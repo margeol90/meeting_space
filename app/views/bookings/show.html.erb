@@ -1,0 +1,53 @@
+<% content_for :title do %>
+  <%= "Your booking information for #{@booking.office.name}" %>
+<% end %>
+<div class="container">
+  <h1 class="text-center my-2">Booking information for <%= @booking.office.name %></h1>
+  <h2 class="text-center">Invoice # <%= @booking.id %></h2>
+  <h5>Owned & managed by: <%= @booking.office.user.first_name %> <%= @booking.office.user.last_name %></h4>
+  <p>Thank you for booking with MeetingSpace. We hope you have enjoyed using our platform and your experience with us has been great for your professional meeting or company event</p>
+  <p>For any feedback on our website please email <a href="mailto:info@meetingspace.com">info@meetingspace.com</a></p>
+  <p>Don't forget to leave a  <%= link_to "review",  new_booking_review_path(@booking)%> on this property.</p>
+  <%= link_to 'Download Invoice', booking_download_path(@booking, format: :pdf) %>
+  <div class="my-2">
+    <table class="GeneratedTable">
+      <thead>
+        <tr>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Day(s)</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        <tr>
+          <td><%= @booking.start_date.strftime("%b %d, %Y") %></td>
+          <td><%= @booking.end_date.strftime("%b %d, %Y") %></td>
+          <% unless @booking.start_date == @booking.end_date %>
+            <td><%= @booking.end_date - @booking.start_date %></td>
+          <% else %>
+            <td>1</td>
+          <% end %>
+          <td>£<%= @booking.total_price %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><b>VAT</b></td>
+          <td>£<%= (@booking.total_price*20)/100  %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><b>Total</b></td>
+          <td>£<%= @booking.total_price %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center my-4">
+      <%= image_tag "ms_logo.svg" %>
+      <p>12, Piccadilly Circus, UK, info@meetingspace.com, Tel: + 01 234 567 88, Fax: + 01 234 567 89</p>
+      <p>VAT reg. 1234 567 89</p>
+    </div>
+  </div>
+</div>

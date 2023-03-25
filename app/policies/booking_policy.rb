@@ -7,7 +7,11 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def show?
-    return true
+    return record.user == user
+  end
+
+  def download?
+    return show?
   end
 
   def new?
