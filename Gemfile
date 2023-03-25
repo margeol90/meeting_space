@@ -89,7 +89,6 @@ gem "noticed", "~> 1.6"
 
 
 # PDF
-gem "prawn", "~> 2.4"
 gem 'wicked_pdf'
 gem "wkhtmltopdf-binary", group: :development
 # PDF on heroku
