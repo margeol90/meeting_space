@@ -24,8 +24,5 @@ application.register("star-rating", StarRatingController);
 import TypedJsController from "./typed_js_controller";
 application.register("typed-js", TypedJsController);
 
-import Dropdown from "stimulus-dropdown";
-application.register("dropdown", Dropdown);
-
 import CheckboxController from "./checkbox_controller";
 application.register("checkbox", CheckboxController);
