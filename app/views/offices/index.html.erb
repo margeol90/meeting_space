@@ -22,8 +22,29 @@
   <%= f.number_field :min_price, value: params[:min_price], min: 0, placeholder: "Min price per day" %>
   <%= f.number_field :max_capacity, value: params[:max_capacity], min: 0, placeholder: "Max capacity" %>
   <%= f.fields_for :facilities do |facilities_form| %>
-    <%= facilities_form.collection_select(:facility_id, Facility.all, :id, :name, { selected: params[:facilities]&.[](:facility_id), include_blank: 'Choose a Facility'}, class: (params[:facilities]&.[](:facility_id) == '' ? 'text-secondary' : '')) do |b| %>
-    <% end %>
+    <div id="list1" class="dropdown-check-list" tabindex="100" data-controller="checkbox">
+      <span class="anchor">
+      <% if params[:facilities]&.[](:facility_id).present? %>
+        <% if params[:facilities]&.[](:facility_id)&.count == 1 %>
+          Choose a Facility
+        <% elsif params[:facilities]&.[](:facility_id)&.count == 2 %>
+          <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facility chosen" %>
+        <% else %>
+          <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facilities chosen" %>
+        <% end %>
+      <% else %>
+        Choose a Facility
+      <% end %>
+        </span>
+      <ul id="items" class="items">
+        <%= facilities_form.collection_check_boxes(:facility_id, Facility.all, :id, :name, { checked: params[:facilities]&.[](:facility_id) } ) do |f| %>
+          <li>
+            <%= f.label %>
+            <%= f.check_box %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
   <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
   <%= link_to "Clear", offices_path, class:'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>

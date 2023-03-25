@@ -15,10 +15,6 @@ class OfficesController < ApplicationController
     @offices = @offices.where("price <= ?", params[:max_price]) if params[:max_price].present?
     @offices = @offices.where("price >= ?", params[:min_price]) if params[:min_price].present?
 
-    if params[:facilities].present? && params[:facilities][:facility_id] != ''
-      @offices = @offices.joins(:facilities).where(facilities: { id: params[:facilities][:facility_id] })
-    end
-
     # The `geocoded` scope filters only offices with coordinates
     @markers = @offices.geocoded.map do |office|
       {
@@ -28,6 +24,11 @@ class OfficesController < ApplicationController
         image_url: helpers.asset_url("favicon.png")
       }
     end
+
+    if params[:facilities]&.[](:facility_id).present? && params[:facilities]&.[](:facility_id) != ['']
+      @offices = @offices.joins(:facilities).where(facilities: { id: params[:facilities][:facility_id].map { |e| e.to_i }}).uniq
+    end
+
   end
 
   def show
@@ -90,7 +91,6 @@ class OfficesController < ApplicationController
                                    :address,
                                    :description,
                                    :max_capacity,
-                                   :photo,
                                    # IF WE USE QUANTITIES USE THIS ONE
                                    office_facilities_attributes: %i[_destroy facility_id quantity])
     # IF WE DON'T WANT QUANTITIES USE:

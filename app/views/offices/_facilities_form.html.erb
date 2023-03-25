@@ -4,7 +4,7 @@
       <%= f.input :facility_id, collection: Facility.all, label_method: :name, label_value: :id, include_hidden: false, item_label_class: "ps-1" %>
     </div>
     <div class="col-2">
-      <%= f.input :quantity %>
+      <%= f.input :quantity, input_html: { min: '1', value: f.object.quantity || '1' } %>
     </div>
     <div class="col-2 align-self-center">
       <button type="button" data-action="nested-form#remove" class="btn-error mt-3" style="border-width:0px;" ><i class="fa-solid fa-x"></i></button>

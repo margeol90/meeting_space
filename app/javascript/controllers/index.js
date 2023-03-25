@@ -15,7 +15,6 @@ application.register("map", MapController);
 
 // Read more button (show-page)
 
-import { Application } from "@hotwired/stimulus";
 import ReadMore from "stimulus-read-more";
 application.register("read-more", ReadMore);
 
@@ -24,3 +23,9 @@ application.register("star-rating", StarRatingController);
 
 import TypedJsController from "./typed_js_controller";
 application.register("typed-js", TypedJsController);
+
+import Dropdown from "stimulus-dropdown";
+application.register("dropdown", Dropdown);
+
+import CheckboxController from "./checkbox_controller";
+application.register("checkbox", CheckboxController);
