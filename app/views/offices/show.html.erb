@@ -67,6 +67,13 @@
       data-map-markers-value="<%= @markers.to_json %>"
       style='width: 722px; height: 300px;'>
     </div>
+    <div class="show-contact">
+      <div>
+        <h2>Contact</h2>
+        <p>Email the owner of this property</p>
+      </div>
+      <%= mail_to "#{(@office.user).email}", "Contact" %>
+    </div>
     <div class="show-office-reviews">
       <h2 class="card-title">Reviews</h2>
       <div class="write-review-card">

@@ -29,6 +29,7 @@ class BookingUpdateNotification < Noticed::Base
   end
   #
   def url
-    my_bookings_path
+    @booking = Booking.find(params[:booking][:id])
+    booking_path(@booking)
   end
 end
