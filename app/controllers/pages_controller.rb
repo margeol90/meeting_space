@@ -22,4 +22,7 @@ class PagesController < ApplicationController
     @bookings = Bookings.where(office_id: office.id)
   end
 
+  def terms_and_conditions
+  end
+
 end

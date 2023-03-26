@@ -24,6 +24,23 @@ table.GeneratedTable thead {
 }
 
 
-.text-center > img {
-  width: 20%;
+.text-center {
+  justify-content: center;
+
+  .logo-background-booking {
+    margin: 0 auto;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .contact-info{
+    margin-top: 20px;
+  }
+}
+
+.download {
+  display: flex;
+  justify-content: center;
 }
