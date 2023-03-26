@@ -341,27 +341,27 @@
   };
 }
 
-// show-contact {
-//   box-sizing: border-box;
-//   justify-content: space-around;
-//   width: 722px;
-//   display: grid;
-//   grid-template-columns: 1fr 1fr;
+show-contact {
+  box-sizing: border-box;
+  justify-content: space-around;
+  width: 722px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-//   a{
-//     background-color: $mint;
-//     border-radius: 20px;
-//     width: 150px;
-//     height: 60px;
-//     color: #252525;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     margin-right: 0;
-//     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-//   }
-// }
-
+  a{
+    background-color: $mint;
+    border-radius: 20px;
+    width: 150px;
+    height: 60px;
+    color: #252525;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+}
+.
 .show-booking {
   width: 365px;
   background: white;
