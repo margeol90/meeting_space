@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   get "/my_properties", to: "pages#my_properties", as: :my_properties
   get "/my_bookings", to: "pages#my_bookings", as: :my_bookings
   get "/my_account", to: "pages#my_account", as: :my_account
+  get "/terms_and_conditions", to: "pages#terms_and_conditions"
 end
