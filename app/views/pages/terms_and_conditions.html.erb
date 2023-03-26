@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "modal" do %>
+<div id="modal">
+  <div class ="bg">
+    <div class="popup">
+      <h4>Terms&Conditions</h4>
+      <p>This is various information</p>
+      <ol>
+        <li>
+          <b>I.</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+        </li>
+        <li>
+          <b>II.</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+        </li>
+        <li>
+         <b> III.</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+        </li>
+        <li>
+          <b>IV.</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+        </li>
+      </ol>
+      <div class="justify_content_center">
+        <%= link_to "Accept", '#', data: {
+          controller: "modals",
+          action: "modals#close"
+        }, class: "btn-confirm" %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

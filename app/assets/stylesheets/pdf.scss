@@ -36,14 +36,32 @@ table.GeneratedTable thead {
 
 .text-center {
   text-align: center;
+  justify-content: center;
+
+
+  .logo-background-booking{
+    display: flex;
+    background-color: $dark-blue;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    width: 100%;
+    max-width: 330px;
+    margin: 20px auto;
+    padding-top: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    width: 100%;
+    padding: 5px;
+  }
 }
-.logo-background-booking{
-  background-color: $dark-blue;
-  padding: 8px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.1);
-  width: 100%;
-  max-width: 330px;
-  margin-left: 500px;
+
+.download {
+  display: none;
+}
+
+.empty-space {
+  height: 100px;
 }

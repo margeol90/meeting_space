@@ -120,8 +120,16 @@
           <p><strong>Price per day: </strong><span id="office-price-per-day"><%= @office.price.to_int %></span> €</p>
           <p>Book for <span id="total-days">0</span><span id="string-days"> days</span></p>
           <p>Total cost: <span id="total-cost">0</span> €</p>
+          <div class="row">
+            <div class="col-1">
+              <input type="checkbox" id="terms" name="terms" value="accept">
+            </div>
+            <div class="col-10">
+              <label for="terms"> Accept our <%= link_to "Terms&Conditions", terms_and_conditions_path, data: { turbo_frame: "modal" } %></label>
+            </div>
+          </div>
         </div>
-        <%= f.submit disabled: true, class: 'btn-confirm', id: 'submit_button' %>
+        <%= f.submit disabled: true, class: 'btn-confirm mt-3', id: 'submit_button' %>
       <% end %>
     <% end %>
   </div>
