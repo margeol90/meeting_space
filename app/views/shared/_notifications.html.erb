@@ -1,5 +1,5 @@
 <% if current_user %>
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <button type="button" class="btn" style="background-color: #256D85; border-color:#8FE3CF; padding:7px; border-style:outset; border-width:2px;">
       Notifications <span class="badge badge-light"><%= @unread.count >= 9 ? "9+" : @unread.count %></span>
     </button>
@@ -10,6 +10,7 @@
     <% end %>
     <% if @read.count > 0 && @unread.count > 0 %>
       <li>
+        <p>Older notifications</p>
         <hr class="dropdown-divider">
       </li>
     <% elsif @read.count + @unread.count == 0 %>

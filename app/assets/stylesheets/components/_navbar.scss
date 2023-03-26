@@ -19,3 +19,17 @@
     text-align: center;
   }
 }
+
+.dropdown-menu {
+  margin-right: 30px;
+  min-height: 300px;
+
+  a {
+    text-decoration: none;
+    color: $dark-blue;
+  }
+
+  small {
+    color: rgb(83, 83, 83);
+  }
+}
