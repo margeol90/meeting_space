@@ -61,7 +61,7 @@
                 </h4>
                 <p></b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
             <p><b>Total cost:</b> <%= booking.total_price %>€</p>
-            <% if booking.confirmed? && current_day > booking.end_date %>
+            <% if current_day > booking.end_date %>
               <p><small>If you're happy with your experience please leave a <%= link_to "review",  new_booking_review_path(booking) %></small></p>
             <% end %>
             <div class="my-2">
