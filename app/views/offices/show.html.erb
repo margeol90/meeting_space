@@ -29,7 +29,7 @@
       <%= cl_image_tag @office.photo.key, width:700, crop: :fill if @office.photo.attached?%>
       <div data-controller="read-more" data-read-more-more-text-value="Read more" data-read-more-less-text-value="Read less">
         <p class="line-clamp" data-read-more-target="content">
-          <%= @office.description %>
+          <%= simple_format(@office.description) %>
         </p>
         <div class="div", style="gap:20px;">
           <button data-action="read-more#toggle" class="btn-confirm">Read more</button>
