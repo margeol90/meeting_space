@@ -6,7 +6,6 @@ export default class extends Controller {
     const splide = new Splide(this.element, {
       type: 'loop',
       autoplay: true,
-      perPage: 7,
       drag: 'free',
       focus: 'center',
       pauseOnHover: false,
@@ -17,6 +16,18 @@ export default class extends Controller {
       trimSpace: false,
       pagination: false,
       easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+      perPage: 5,
+      breakpoints: {
+        1200: {
+          perPage: 3,
+        },
+        800: {
+          perPage: 2,
+        },
+        480: {
+          perPage: 1,
+        },
+      },
     });
 
     splide.mount();
