@@ -8,11 +8,12 @@ export default class extends Controller {
       autoplay: true,
       perPage: 5,
       drag: 'free',
-      //focus: 'center',
+      focus: 'center',
       pauseOnHover: true,
-      interval: 2000,
+      interval: 2500,
       lazyLoad: 'nearby',
       trimSpace: false,
+      pagination: false,
     });
 
     splide.mount();

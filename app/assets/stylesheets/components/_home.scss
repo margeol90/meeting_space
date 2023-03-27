@@ -86,23 +86,25 @@
 }
 
 .splide__slide {
-  height: 250px;
+  height: 350px;
+  width: 250px;
   background-color: #eee;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  border-radius: 5px;
 }
 
 .client-1 {
   background-image: image-url("client-01.jpg");
   background-size: cover;
   background-position: center;
-  vertical-align: bottom;
+  display: block;
   object-position: top;
   object-fit: cover;
   border-radius: 5px;
-  height: 150px;
+  height: 250px;
   width: 100%;
   background-repeat: no-repeat;
 }
@@ -111,11 +113,11 @@
   background-image: image-url("client-02.jpg");
   background-size: cover;
   background-position: center;
-  vertical-align: bottom;
+  display: block;
   object-position: top;
   object-fit: cover;
   border-radius: 5px;
-  height: 150px;
+  height: 250px;
   width: 100%;
   background-repeat: no-repeat;
 }
@@ -124,11 +126,11 @@
   background-image: image-url("client-03.jpg");
   background-size: cover;
   background-position: center;
-  vertical-align: bottom;
+  display: block;
   object-position: top;
   object-fit: cover;
   border-radius: 5px;
-  height: 150px;
+  height: 250px;
   width: 100%;
   background-repeat: no-repeat;
 }
@@ -137,11 +139,11 @@
   background-image: image-url("client-04.jpg");
   background-size: cover;
   background-position: center;
-  vertical-align: bottom;
+  display: block;
   object-position: top;
   object-fit: cover;
   border-radius: 5px;
-  height: 150px;
+  height: 250px;
   width: 100%;
   background-repeat: no-repeat;
 }
@@ -150,11 +152,11 @@
   background-image: image-url("client-05.jpg");
   background-size: cover;
   background-position: center;
-  vertical-align: bottom;
+  display: block;
   object-position: top;
   object-fit: cover;
   border-radius: 5px;
-  height: 150px;
+  height: 250px;
   width: 100%;
   background-repeat: no-repeat;
 }
@@ -163,11 +165,11 @@
   background-image: image-url("client-06.jpg");
   background-size: cover;
   background-position: center;
-  vertical-align: bottom;
+  display: block;
   object-position: top;
   object-fit: cover;
   border-radius: 5px;
-  height: 150px;
+  height: 250px;
   width: 100%;
   background-repeat: no-repeat;
 }
@@ -176,11 +178,11 @@
   background-image: image-url("client-07.jpg");
   background-size: cover;
   background-position: center;
-  vertical-align: bottom;
+  display: block;
   object-position: top;
   object-fit: cover;
   border-radius: 5px;
-  height: 150px;
+  height: 250px;
   width: 100%;
   background-repeat: no-repeat;
 }
@@ -189,11 +191,11 @@
   background-image: image-url("client-08.jpg");
   background-size: cover;
   background-position: center;
-  vertical-align: bottom;
+  display: block;
   object-position: top;
   object-fit: cover;
   border-radius: 5px;
-  height: 150px;
+  height: 250px;
   width: 100%;
   background-repeat: no-repeat;
 }
@@ -202,11 +204,15 @@
   background-image: image-url("client-09.jpg");
   background-size: cover;
   background-position: center;
-  vertical-align: bottom;
+  display: block;
   object-position: top;
   object-fit: cover;
   border-radius: 5px;
-  height: 150px;
+  height: 250px;
   width: 100%;
   background-repeat: no-repeat;
+}
+
+.card-body {
+  width: 250px;
 }
