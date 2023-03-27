@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     resources :office_facilities, only: %i[new create]
   end
 
-  resources :bookings, only: %i[destroy edit update] do
+  resources :bookings, only: %i[show destroy edit update] do
     resources :reviews, only: %i[new create]
+    get "/download", to: "bookings#download"
   end
 
   resources :reviews, only: [:destroy]
@@ -21,4 +22,5 @@ Rails.application.routes.draw do
   get "/my_properties", to: "pages#my_properties", as: :my_properties
   get "/my_bookings", to: "pages#my_bookings", as: :my_bookings
   get "/my_account", to: "pages#my_account", as: :my_account
+  get "/terms_and_conditions", to: "pages#terms_and_conditions"
 end

@@ -86,3 +86,10 @@ gem "pg_search"
 gem "geocoder"
 
 gem "noticed", "~> 1.6"
+
+
+# PDF
+gem 'wicked_pdf'
+gem "wkhtmltopdf-binary", group: :development
+# PDF on heroku
+gem "wkhtmltopdf-heroku", group: :production

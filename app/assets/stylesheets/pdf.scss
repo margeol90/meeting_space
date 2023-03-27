@@ -1,0 +1,67 @@
+@import '@wework/ray-core/scss/ray-core';
+@import "config/colors";
+
+h1, h2, h5 {
+  text-align: center;
+}
+table.GeneratedTable {
+  width: 100%;
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-width: 1px;
+  border-color: #383838;
+  border-style: solid;
+  color: #ffffff;
+
+  .table-body {
+    color:#383838;
+  }
+}
+
+table.GeneratedTable td, table.GeneratedTable th {
+  border-width: 1px;
+  border-color: #383838;
+  border-style: solid;
+  padding: 3px;
+}
+
+table.GeneratedTable thead {
+  background-color: #256d85;
+}
+
+
+.text-center > img {
+  width: 20%;
+}
+
+.text-center {
+  text-align: center;
+  justify-content: center;
+
+
+  .logo-background-booking{
+    display: flex;
+    background-color: $dark-blue;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    width: 100%;
+    max-width: 330px;
+    margin: 20px auto;
+    padding-top: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    width: 100%;
+    padding: 5px;
+  }
+}
+
+.download {
+  display: none;
+}
+
+.empty-space {
+  height: 100px;
+}

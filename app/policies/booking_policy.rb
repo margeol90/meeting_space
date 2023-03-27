@@ -10,6 +10,10 @@ class BookingPolicy < ApplicationPolicy
     return true
   end
 
+  def download?
+    return show?
+  end
+
   def new?
     return create?
   end

@@ -34,10 +34,10 @@
         <div class="div", style="gap:20px;">
           <button data-action="read-more#toggle" class="btn-confirm">Read more</button>
           <% if policy(@office).edit? %>
-            <%= link_to "Edit", edit_office_path, class:"btn-edit"%>
+            <%= link_to "Edit", edit_office_path, class:"btn-edit", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
           <% end %>
           <% if policy(@office).destroy? %>
-            <%= link_to "Delete your propierty", office_path(@office), class: "btn-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+            <%= link_to "Delete your propierty", office_path(@office), class: "btn-delete", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
           <% end %>
         </div>
       </div>
@@ -47,19 +47,32 @@
       <p><%= "Meeting rooms #{@office.meeting_rooms}" %></p>
       <p><%= "Price per day #{@office.price}€" %></p>
     </div>
-    <div class="show-facilities">
-      <h2 class="card-title">Facilities</h2>
-      <% @office.facilities.each do |element| %>
-        <ul>
-          <li><%= element.name.capitalize %></li>
-        </ul>
-      <% end %>
-    </div>
+    <% unless @office.facilities.empty? %>
+      <div class="show-facilities">
+        <h2 class="card-title">Facilities</h2>
+        <% @office.facilities.each do |element| %>
+          <ul>
+            <li><%= element.name.capitalize %></li>
+          </ul>
+        <% end %>
+      </div>
+    <% else %>
+      <style type="text/css">
+        .show-facilities{display:none};<%= " " %>
+      </style>
+    <% end %>
     <div data-controller="map"
       id='show-map'
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
       data-map-markers-value="<%= @markers.to_json %>"
       style='width: 722px; height: 300px;'>
+    </div>
+    <div class="show-contact">
+      <div>
+        <h2>Contact</h2>
+        <p>Email the owner of this property</p>
+      </div>
+      <%= mail_to "#{(@office.user).email}", "Contact" %>
     </div>
     <div class="show-office-reviews">
       <h2 class="card-title">Reviews</h2>
@@ -88,9 +101,9 @@
                 <%= cl_image_tag booking.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if booking.user.avatar.attached? %>
                 <p class="review-user"><strong><%= booking.user.first_name+" "+booking.user.last_name %></strong><%= " #{booking.review&.created_at.strftime("%A, %B %e, %Y")}" %></p>
               </div>
-              <div class="d-flex">
+              <div class="d-flex justify-content-between">
                 <p><%= booking.review&.comment %></p>
-                <span class="fa-stack-1x"><%= icon('fa-solid', 'star' ) * booking.review&.ratings + icon('fa-regular', 'star') * (5-booking.review&.ratings) %></span>
+                <span class="review-stars"><%= icon('fa-solid', 'star' ) * booking.review&.ratings + icon('fa-regular', 'star') * (5-booking.review&.ratings) %></span>
               </div>
             </div>
           <% end %>
@@ -102,10 +115,28 @@
   </div>
   <div class="show-booking">
     <% unless @office.user == current_user %>
-      <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr',  unavailable_dates: @office.unavailable_dates.to_json } do |f| %>
-        <%= f.input :start_date, as: :string, label: false, input_html: { data: { flatpickr_target: "startDate" }, id: 'start_date', class: "d-none" } %>
-        <%= f.input :end_date, as: :string, label: false, input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date', class: "d-none" } %>
-        <%= f.submit class: "btn-confirm" %>
+      <div id="office-booking-dates" data-unavailable="<%= @office.unavailable_dates.to_json %>"></div>
+      <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr' } do |f| %>
+        <div style="color:black; align-self:center; margin-top:40px;">
+          <h3><strong>Pick a date</strong></h3>
+        </div>
+        <%= f.input :start_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "startDate" }, class: "range_start d-none"} %>
+        <%= f.input :end_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "endDate" }, class: "range_end d-none"} %>
+        <button type="button" id="clear_button" style="width: 60px; align-self:center; margin-bottom:20px; background-color:#002B5B; color:white;" title="clear" data-clear>Clear</button>
+        <div style="margin-left:30px; color:black;">
+          <p><strong>Price per day: </strong><span id="office-price-per-day"><%= @office.price.to_int %></span> €</p>
+          <p>Book for <span id="total-days">0</span><span id="string-days"> days</span></p>
+          <p>Total cost: <span id="total-cost">0</span> €</p>
+          <div class="row">
+            <div class="col-1">
+              <input type="checkbox" id="terms" name="terms" value="accept">
+            </div>
+            <div class="col-10">
+              <label for="terms"> Accept our <%= link_to "Terms&Conditions", terms_and_conditions_path, data: { turbo_frame: "modal" } %></label>
+            </div>
+          </div>
+        </div>
+        <%= f.submit disabled: true, class: 'btn-confirm mt-3', id: 'submit_button' %>
       <% end %>
     <% end %>
   </div>

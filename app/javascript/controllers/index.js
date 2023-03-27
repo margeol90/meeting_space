@@ -2,24 +2,28 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application";
+import { application } from "./application"
 
-import FlatpickrController from "./flatpickr_controller";
-application.register("flatpickr", FlatpickrController);
+import CheckboxController from "./checkbox_controller"
+application.register("checkbox", CheckboxController)
 
-import HelloController from "./hello_controller";
-application.register("hello", HelloController);
+import FlatpickrController from "./flatpickr_controller"
+application.register("flatpickr", FlatpickrController)
 
-import MapController from "./map_controller";
-application.register("map", MapController);
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
 
-import { Application } from "@hotwired/stimulus";
-import ReadMore from "stimulus-read-more";
+import MapController from "./map_controller"
+application.register("map", MapController)
 
-application.register("read-more", ReadMore);
+import ModalsController from "./modals_controller"
+application.register("modals", ModalsController)
 
-import StarRatingController from "./star_rating_controller";
-application.register("star-rating", StarRatingController);
+import StarRatingController from "./star_rating_controller"
+application.register("star-rating", StarRatingController)
 
 import TypedJsController from "./typed_js_controller"
 application.register("typed-js", TypedJsController)
+
+import ReadMore from 'stimulus-read-more'
+application.register('read-more', ReadMore)

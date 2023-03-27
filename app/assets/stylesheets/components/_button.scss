@@ -92,7 +92,7 @@ color: white;
 }
 
 
-.fa-plus {
+.button .fa-plus {
   display: flex;
   color: black;
   background-color: $mint-green;
@@ -122,10 +122,17 @@ color: white;
   background-color: #256D85;
   opacity: 0.8;
   color: white;
+  border-style:outset;
+  border-color:darkgray;
+  border-width: 1.5px;
 
   &:hover {
     color:white;
     background-color: #01526d;
     box-shadow: 1px 3px 3px rgba(0, 10, 6, 0.4);
+    text-decoration: none;
+    border-style:outset;
+    border-color:darkgray;
+    border-width: 1.5px;
   }
 }

@@ -15,9 +15,14 @@ class PagesController < ApplicationController
 
   def my_account
     @user = User.find(current_user.id)
+    @bookings = Booking.where(user_id: @user)
   end
 
   def property_bookings
     @bookings = Bookings.where(office_id: office.id)
   end
+
+  def terms_and_conditions
+  end
+
 end

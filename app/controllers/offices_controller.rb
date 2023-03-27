@@ -10,9 +10,10 @@ class OfficesController < ApplicationController
     else
       @offices = policy_scope(Office).all
     end
+
     @offices = @offices.where("max_capacity <= ?", params[:max_capacity]) if params[:max_capacity].present?
-    @offices = @offices.where("price <= ?", params[:price]) if params[:price].present?
-    # @offices = @offices.where("offices_facilities <= ?", params[:price]) if params[:price].present?
+    @offices = @offices.where("price <= ?", params[:max_price]) if params[:max_price].present?
+    @offices = @offices.where("price >= ?", params[:min_price]) if params[:min_price].present?
 
     # The `geocoded` scope filters only offices with coordinates
     @markers = @offices.geocoded.map do |office|
@@ -23,6 +24,11 @@ class OfficesController < ApplicationController
         image_url: helpers.asset_url("favicon.png")
       }
     end
+
+    if params[:facilities]&.[](:facility_id).present? && params[:facilities]&.[](:facility_id) != ['']
+      @offices = @offices.joins(:facilities).where(facilities: { id: params[:facilities][:facility_id].map { |e| e.to_i }}).uniq
+    end
+
   end
 
   def show
@@ -62,6 +68,8 @@ class OfficesController < ApplicationController
   end
 
   def update
+    @office.office_facilities.destroy_all
+    # raise
     if @office.update(office_params)
       redirect_to office_path(@office), notice: "Your property's details have been successufly saved"
     else
@@ -83,7 +91,6 @@ class OfficesController < ApplicationController
                                    :address,
                                    :description,
                                    :max_capacity,
-                                   :photo,
                                    # IF WE USE QUANTITIES USE THIS ONE
                                    office_facilities_attributes: %i[_destroy facility_id quantity])
     # IF WE DON'T WANT QUANTITIES USE:

@@ -1,0 +1,54 @@
+.dropdown-check-list {
+  display: inline-block;
+  position:relative;
+}
+.dropdown-check-list .anchor {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px 50px 5px 10px;
+  border: 1px solid #ccc;
+  background-color:white;
+  color:rgb(118, 118, 118);
+  height: 100%;
+  border-width: 1px;
+  border-radius: 3px;
+  border-color: rgb(118, 118, 118);
+}
+.dropdown-check-list .anchor:after {
+  position: absolute;
+  content: "";
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  padding: 5px;
+  right: 10px;
+  top: 20%;
+  -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+.dropdown-check-list .anchor:active:after {
+  right: 8px;
+  top: 21%;
+}
+.dropdown-check-list ul.items {
+  padding: 2px;
+  display: none;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  flex-direction: column;
+  position: absolute;
+  background-color: rgba(255,255,255,0.95);
+  z-index: 1;
+  min-width: max-content;
+  padding: 10px 10px 6px 10px;
+  border-radius: 4px;
+}
+.dropdown-check-list ul.items li {
+  list-style: none;
+  margin-bottom: 4px;
+}
