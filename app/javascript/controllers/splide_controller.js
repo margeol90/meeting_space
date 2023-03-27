@@ -1,14 +1,18 @@
 import { Controller } from '@hotwired/stimulus';
-import Splide from '@splidejs/splide';
+import Splide, { EVENT_LAZYLOAD_LOADED } from '@splidejs/splide';
 
 export default class extends Controller {
   connect() {
     const splide = new Splide(this.element, {
       type: 'loop',
       autoplay: true,
-      perPage: 3,
+      perPage: 5,
+      drag: 'free',
+      //focus: 'center',
       pauseOnHover: true,
       interval: 2000,
+      lazyLoad: 'nearby',
+      trimSpace: false,
     });
 
     splide.mount();
