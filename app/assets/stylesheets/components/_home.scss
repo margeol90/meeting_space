@@ -86,7 +86,7 @@
 }
 
 .splide__slide {
-  height: 350px;
+  height: 380px;
   width: 250px;
   background-color: #eee;
   display: flex;
@@ -216,4 +216,10 @@
 .card-body {
   width: 250px;
   border-radius: 15px;
+}
+
+.comment {
+  text-align: justify;
+  text-justify: inter-word;
+  padding-bottom: 10px;
 }
