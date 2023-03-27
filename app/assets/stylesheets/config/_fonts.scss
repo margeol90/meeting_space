@@ -1,12 +1,12 @@
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
-$body-font:  'Titillium Web', sans-serif;
-$headers-font: 'Titillium Web', sans-serif;
-//@import '@wework/ray-core/scss/ray-core';
+//@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+//$body-font:  'Titillium Web', sans-serif;
+//$headers-font: 'Titillium Web', sans-serif;
+@import '@wework/ray-core/scss/ray-core';
 
 // Define fonts for body and headers
-//$body-font:  $ray-font-stack-sans-serif;
-//$headers-font: $ray-font-stack-sans-serif;
+$body-font:  $ray-font-stack-sans-serif;
+$headers-font: $ray-font-stack-sans-serif;
 
 
 // To use a font file (.woff) uncomment following lines
