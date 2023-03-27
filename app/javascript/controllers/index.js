@@ -27,3 +27,6 @@ application.register("typed-js", TypedJsController)
 
 import ReadMore from 'stimulus-read-more'
 application.register('read-more', ReadMore)
+
+import SplideController from './splide_controller'
+application.register('splide', SplideController)
