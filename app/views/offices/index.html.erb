@@ -13,7 +13,7 @@
       id='index-map'
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
       data-map-markers-value="<%= @markers.to_json %>"
-      style='width: 95%; height: 300px; border-radius:5px;'>
+      style='width: 95%; height: 300px;'>
   </div>
 </div>
 <%= form_with url: offices_path, method: :get, class: "d-flex pt-5 pb-4 justify-content-center gap-2", data: { controller: 'checkbox-select-all' } do |f| %>
