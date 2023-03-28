@@ -59,7 +59,11 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
-  color: black;
+  color: inherit;
+
+  span, i, p, h2 {
+    color:black !important;
+  }
 }
 
 .card-product {
@@ -363,9 +367,16 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   };
 
-  h3 {
+  h2 {
     margin-top: auto;
     margin-bottom: auto;
+    margin-left: 20px;
+    padding-bottom:10px;
+  };
+
+  p {
+    margin-top:auto;
+    margin-bottom:auto;
   };
 
   #miniavatar {

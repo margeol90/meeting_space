@@ -45,8 +45,8 @@
           <% if policy(@office).destroy? %>
             <%= link_to "Delete your propierty", office_path(@office), class: "btn-delete", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
           <% end %>
-          <% unless @bookings.empty? %>
-          <%= link_to "Bookings", office_bookings_path(@office), class: "btn-mint", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+          <% if current_user == @office.user %>
+            <%= link_to "Bookings", office_bookings_path(@office), class: "btn-mint", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" unless @bookings.empty? %>
           <% end %>
         </div>
       </div>
@@ -65,8 +65,13 @@
       <div class="show-facilities">
         <h2 class="card-title">Facilities</h2>
         <% @office.facilities.each do |element| %>
+          <% office_facility = OfficeFacility.where(office_id:@office.id, facility_id:element.id) %>
           <ul>
-            <li><%= element.name.capitalize %></li>
+            <% if office_facility.first.quantity == 1 %>
+              <li><%= element.name.capitalize %></li>
+            <% else %>
+              <li><%= "#{element.name.capitalize} (x#{office_facility.first.quantity})" %></li>
+            <% end %>
           </ul>
         <% end %>
       </div>
@@ -82,10 +87,11 @@
       style='width: 722px; height: 300px;'>
     </div>
     <div class="show-contact">
+      <h2>Contact</h2>
       <div class="d-flex justify-content-between">
         <div class="d-flex" style="gap:20px;">
           <%= cl_image_tag @office.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if @office.user.avatar.attached? %>
-          <h3>Email to <strong><%= "#{@office.user.first_name} #{@office.user.last_name}" %></strong>, owner</h3>
+          <p>Email to <strong><%= "#{@office.user.first_name} #{@office.user.last_name}" %></strong>, owner</p>
         </div>
         <%= mail_to "#{(@office.user).email}", "Contact" %>
       </div>

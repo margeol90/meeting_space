@@ -1,5 +1,5 @@
 <% if current_user %>
-  <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white; padding-top:12px;">
+  <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
       Notifications <span class="badge badge-light"><%= @unread.count >= 9 ? "9+" : @unread.count %></span>
   </a>
   <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
