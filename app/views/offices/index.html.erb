@@ -13,7 +13,7 @@
       id='index-map'
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
       data-map-markers-value="<%= @markers.to_json %>"
-      style='width: 95%; height: 300px;'>
+      style='width: 95%; height: 300px; border-radius:5px;'>
   </div>
 </div>
 <%= form_with url: offices_path, method: :get, class: "d-flex pt-5 pb-4 justify-content-center gap-2", data: { controller: 'checkbox-select-all' } do |f| %>
@@ -24,18 +24,18 @@
   <%= f.fields_for :facilities do |facilities_form| %>
     <div id="list1" class="dropdown-check-list" tabindex="100" data-controller="checkbox">
       <span class="anchor">
-      <% if params[:facilities]&.[](:facility_id).present? %>
-        <% if params[:facilities]&.[](:facility_id)&.count == 1 %>
-          Choose a Facility
-        <% elsif params[:facilities]&.[](:facility_id)&.count == 2 %>
-          <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facility chosen" %>
+        <% if params[:facilities]&.[](:facility_id).present? %>
+          <% if params[:facilities]&.[](:facility_id)&.count == 1 %>
+            Choose a Facility
+          <% elsif params[:facilities]&.[](:facility_id)&.count == 2 %>
+            <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facility chosen" %>
+          <% else %>
+            <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facilities chosen" %>
+          <% end %>
         <% else %>
-          <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facilities chosen" %>
+          Choose a Facility
         <% end %>
-      <% else %>
-        Choose a Facility
-      <% end %>
-        </span>
+      </span>
       <ul id="items" class="items">
         <%= facilities_form.collection_check_boxes(:facility_id, Facility.all, :id, :name, { checked: params[:facilities]&.[](:facility_id) } ) do |f| %>
           <li>
