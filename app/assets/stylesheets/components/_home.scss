@@ -98,119 +98,38 @@
 
 .client-1 {
   background-image: image-url("client-01.jpg");
-  background-size: cover;
-  background-position: center;
-  display: block;
-  object-position: top;
-  object-fit: cover;
-  border-radius: 5px;
-  height: 250px;
-  width: 100%;
-  background-repeat: no-repeat;
 }
 
 .client-2 {
   background-image: image-url("client-02.jpg");
-  background-size: cover;
-  background-position: center;
-  display: block;
-  object-position: top;
-  object-fit: cover;
-  border-radius: 5px;
-  height: 250px;
-  width: 100%;
-  background-repeat: no-repeat;
 }
 
 .client-3 {
   background-image: image-url("client-03.jpg");
-  background-size: cover;
-  background-position: center;
-  display: block;
-  object-position: top;
-  object-fit: cover;
-  border-radius: 5px;
-  height: 250px;
-  width: 100%;
-  background-repeat: no-repeat;
 }
 
 .client-4 {
   background-image: image-url("client-04.jpg");
-  background-size: cover;
-  background-position: center;
-  display: block;
-  object-position: top;
-  object-fit: cover;
-  border-radius: 5px;
-  height: 250px;
-  width: 100%;
-  background-repeat: no-repeat;
 }
 
 .client-5 {
   background-image: image-url("client-05.jpg");
-  background-size: cover;
-  background-position: center;
-  display: block;
-  object-position: top;
-  object-fit: cover;
-  border-radius: 5px;
-  height: 250px;
-  width: 100%;
-  background-repeat: no-repeat;
 }
 
 .client-6 {
   background-image: image-url("client-06.jpg");
-  background-size: cover;
-  background-position: center;
-  display: block;
-  object-position: top;
-  object-fit: cover;
-  border-radius: 5px;
-  height: 250px;
-  width: 100%;
-  background-repeat: no-repeat;
 }
 
 .client-7 {
   background-image: image-url("client-07.jpg");
-  background-size: cover;
-  background-position: center;
-  display: block;
-  object-position: top;
-  object-fit: cover;
-  border-radius: 5px;
-  height: 250px;
-  width: 100%;
-  background-repeat: no-repeat;
 }
 
 .client-8 {
   background-image: image-url("client-08.jpg");
-  background-size: cover;
-  background-position: center;
-  display: block;
-  object-position: top;
-  object-fit: cover;
-  border-radius: 5px;
-  height: 250px;
-  width: 100%;
-  background-repeat: no-repeat;
 }
 
 .client-9 {
   background-image: image-url("client-09.jpg");
-  background-size: cover;
-  background-position: center;
-  display: block;
-  object-position: top;
-  object-fit: cover;
-  border-radius: 5px;
-  height: 250px;
-  width: 100%;
-  background-repeat: no-repeat;
 }
 
 .card-body {
@@ -222,4 +141,16 @@
   text-align: justify;
   text-justify: inter-word;
   padding-bottom: 10px;
+}
+
+.city-card-picture-container {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  object-position: top;
+  object-fit: cover;
+  border-radius: 5px;
+  height: 250px;
+  width: 100%;
+  background-repeat: no-repeat;
 }
