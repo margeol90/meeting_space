@@ -1,8 +1,11 @@
 <div class="navbar navbar-expand-sm navbar-dark navbar-lewagon">
   <div class="container-fluid">
+  <div>
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "ms_logo.svg" %>
     <% end %>
+    <%= link_to "View all", offices_path, style:"color:white; text-decoration:none;"%>
+  </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">

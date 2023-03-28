@@ -1,11 +1,13 @@
-<% content_for :title do %>
-  <%= "Edit your MeetingSpace" %>
-<% end %>
-<h1 class=text-center>Update your property</h1>
-<div>
-  <div class="form">
-    <p>Make sure to regularly update your properties if there are any significant changes to your space. Make sure any information is accurate</p>
-    <p>Any changes you make are instantly updated on the page</p>
-    <%= render "form", office: @office %>
+<div class="container" style="width:932px;">
+  <% content_for :title do %>
+    <%= "Edit your MeetingSpace" %>
+  <% end %>
+  <h1 class=text-center>Update your property</h1>
+  <div>
+    <div class="form">
+      <p>Make sure to regularly update your properties if there are any significant changes to your space. Make sure any information is accurate</p>
+      <p>Any changes you make are instantly updated on the page</p>
+      <%= render "form", office: @office %>
+    </div>
   </div>
 </div>

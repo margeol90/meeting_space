@@ -24,18 +24,18 @@
   <%= f.fields_for :facilities do |facilities_form| %>
     <div id="list1" class="dropdown-check-list" tabindex="100" data-controller="checkbox">
       <span class="anchor">
-      <% if params[:facilities]&.[](:facility_id).present? %>
-        <% if params[:facilities]&.[](:facility_id)&.count == 1 %>
-          Choose a Facility
-        <% elsif params[:facilities]&.[](:facility_id)&.count == 2 %>
-          <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facility chosen" %>
+        <% if params[:facilities]&.[](:facility_id).present? %>
+          <% if params[:facilities]&.[](:facility_id)&.count == 1 %>
+            Choose a Facility
+          <% elsif params[:facilities]&.[](:facility_id)&.count == 2 %>
+            <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facility chosen" %>
+          <% else %>
+            <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facilities chosen" %>
+          <% end %>
         <% else %>
-          <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facilities chosen" %>
+          Choose a Facility
         <% end %>
-      <% else %>
-        Choose a Facility
-      <% end %>
-        </span>
+      </span>
       <ul id="items" class="items">
         <%= facilities_form.collection_check_boxes(:facility_id, Facility.all, :id, :name, { checked: params[:facilities]&.[](:facility_id) } ) do |f| %>
           <li>
@@ -70,8 +70,7 @@
                   <span><%= office.meeting_rooms %></span>
                 </div>
                 <div class="card-price">
-                  <i class="fa-solid fa-euro"></i>
-                  <span><%= "#{office.price}/day" %></span>
+                  <span><%= office.price %> <%= icon('fa solid', 'euro') %> day</span>
                 </div>
                 <div class="card-rating">
                   <% if office.bookings.any? { |booking| !booking.review.nil? } %>
