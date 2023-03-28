@@ -16,8 +16,17 @@ export default class extends Controller {
       trimSpace: false,
       pagination: false,
       easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
-      perPage: 5,
+      perPage: 7,
       breakpoints: {
+        1700: {
+          perPage: 6,
+        },
+        1500: {
+          perPage: 5,
+        },
+        1350: {
+          perPage: 4,
+        },
         1200: {
           perPage: 3,
         },

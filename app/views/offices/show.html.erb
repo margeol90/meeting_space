@@ -26,6 +26,12 @@
           <% end %>
         </div>
       </div>
+      <div class="container">
+        <div class="d-flex align-items-baseline">
+          <span class=""><%= icon('fa-solid', 'location-dot') %></span>
+          <p class=""><%= @office.address %></p>
+        </div>
+      </div>
       <%= cl_image_tag @office.photo.key, width:700, crop: :fill if @office.photo.attached?%>
       <div data-controller="read-more" data-read-more-more-text-value="Read more" data-read-more-less-text-value="Read less">
         <p class="line-clamp" data-read-more-target="content">
