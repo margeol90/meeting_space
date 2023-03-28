@@ -1,44 +1,48 @@
-.card-white-image-1 {
-  background-image: image-url("office-image-1.jpg");
-  background-size: cover;
-  background-position: center;
-  background-color: white;
-  //border: 5px solid rgb(240, 240, 240);
-  //padding: 8px;
-  width: 100%;
-  height: 300px;
-  border-radius: 5px;
-}
+.home-cards-white {
 
-.card-white-image-2 {
-  background-image: image-url("office-image-2.jpg");
-  background-size: cover;
-  background-position: center;
-  background-color: white;
-  //border: 5px solid rgb(240, 240, 240);
-  //padding: 8px;
-  width: 100%;
-  height: 300px;
-  border-radius: 5px;
-}
+  .card-white-image-1 {
+    background-image: image-url("office-image-1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-color: white;
+    //border: 5px solid rgb(240, 240, 240);
+    // padding: 8px;
+    width: 100%;
+    height: 300px;
+    border-radius: 5px 5px 0px 0px;
+  }
 
-.card-white-image-3 {
-  background-image: image-url("office-image-3.jpg");
-  background-size: cover;
-  background-position: center;
-  background-color: white;
-  //border: 5px solid rgb(240, 240, 240);
-  //padding: 8px;
-  width: 100%;
-  height: 300px;
-  border-radius: 5px;
+  .card-white-image-2 {
+    background-image: image-url("office-image-2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-color: white;
+    //border: 5px solid rgb(240, 240, 240);
+    // padding: 8px;
+    width: 100%;
+    height: 300px;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .card-white-image-3 {
+    background-image: image-url("office-image-3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-color: white;
+    //border: 5px solid rgb(240, 240, 240);
+    // padding: 8px;
+    width: 100%;
+    height: 300px;
+    border-radius: 5px 5px 0px 0px;
+  }
+
 }
 
 .team-pic {
   background-image: image-url("team-pic.png");
   //background-size: cover;
   background-position: center;
-  border: 5px solid rgb(240, 240, 240);
+  // border: 5px solid rgb(240, 240, 240);
   //width: 50%;
   //justify-content: center;
   height: 200px;
@@ -60,17 +64,13 @@
   justify-content: center;
   background-position: center;
   align-content: center;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40rem;
+  margin: 0 auto;
   //display: flex;
 }
 
 .why-home {
-  width: 70rem;
   font-size: 18px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 .about {

@@ -5,30 +5,29 @@
 <div class="banner">
   <div class="banner-content text-center">
     <h1>Find offices and meeting rooms to book for <br>the day or for company events</h1>
+      <%= form_with url: offices_path, method: :get, class: "d-flex w-75 p-3 align-middle mx-auto" do %>
+        <%= text_field_tag :query,params[:query], class: "form-control", placeholder: "Find spaces near #{@city}" %>
+        <%= submit_tag "Search", class: "custom-button" %>
+      <% end %>
+      <%# <div class="h-100 d-flex align-items-center justify-content-center">
+        <%= link_to "View All", offices_path, class: "custom-button" %>
+      <%# </div> %>
+      <div class="container text-center">
+        <div class="homepage-typed-js">
+            <h4><span data-controller="typed-js"></span></h4>
+        </div>
+      </div>
   </div>
 </div>
-
 <br>
-
+<br>
+<br>
 <div class="container text-center">
-  <div class="homepage-typed-js">
-      <h1><span data-controller="typed-js"></span></h1>
-  </div>
+  <h4><strong>Why MeetingSpace</strong></h4>
+  <br>
 </div>
-
 <div class="container">
-  <%= form_with url: offices_path, method: :get, class: "d-flex w-50 p-3 align-middle mx-auto" do %>
-    <%= text_field_tag :query,params[:query], class: "form-control", placeholder: "Find spaces near #{@city}" %>
-    <%= submit_tag "Search", class: "custom-button" %>
-  <% end %>
-  <div class="h-100 d-flex align-items-center justify-content-center">
-    <%= link_to "View All", offices_path, class: "custom-button" %>
-  </div>
-</div>
-<br>
-<br>
-<div class="container">
-  <div class="row">
+  <div class="row home-cards-white">
     <div class="col-md-4">
       <div class="card-white-image-1"></div>
       <div class="content">
@@ -53,53 +52,15 @@
 
 <br>
 <div class="container text-center" id="why-meetingspace">
-  <h4><strong>Why MeetingSpace</strong></h4>
-  <br>
   <div class="why-home text-center">
     <p>MeetingSpace offers you spaces with world class facilities that are designed with work in mind. Make a reservation in advance using the app and arrive ready to work immediately, plug-and-play!
       <br>Signing up for our membership also provides you with additional benefits such as 24/7 customer support and unlimited coffee.</p>
   </div>
 </div>
 <br>
-
-<br>
-<div class="container">
-  <div class="home-carousel">
-    <div id="carouselExampleAutoplaying" class="carousel slide lazy-load" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <%= image_tag "pexels-1.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag "pexels-2.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag "pexels-3.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag "pexels-5.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag "pexels-6.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </div>
-</div>
-<br>
-<br>
 <br>
 <div class="text-center">
   <h4><strong>What our clients say about MeetingSpace</strong></h4>
-  <br>
   <br>
   <div class="splide" data-controller="splide">
     <div class="splide__track">
@@ -222,7 +183,8 @@
 <div class="container">
   <div class="card-final">
     <div class="about text-center" id="about-us">
-      <h5><strong>About us</strong></h5>
+      <h4><strong>About us</strong></h4>
+      <br>
       <p>Welcome to our app designed to help you find the perfect meeting space! We are Margarita, Francisco, Jide, and Michael, and we designed this app as our final project for the Le Wagon bootcamp.
           <br>
           <br>
@@ -239,5 +201,40 @@
       </p>
     </div>
     <div class="team-pic"></div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+
+<div class="container">
+  <div class="home-carousel">
+    <div id="carouselExampleAutoplaying" class="carousel slide lazy-load" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= image_tag "pexels-1.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag "pexels-2.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag "pexels-3.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag "pexels-5.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag "pexels-6.jpg", height: "550px", width: "80%", class:"d-block w-100"%>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   </div>
 </div>
