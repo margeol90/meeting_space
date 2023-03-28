@@ -33,7 +33,7 @@ export default class extends Controller {
       customMarker.style.width = "20px"
       customMarker.style.backgroundImage = `url('${marker.image_url}')`
       customMarker.style.backgroundSize = "contain"
-      customMarker.style.backgroundColor = "blue"
+      customMarker.style.backgroundColor = "#002B5B"
 
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
       new mapboxgl.Marker({element: customMarker})
