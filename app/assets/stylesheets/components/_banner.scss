@@ -11,13 +11,27 @@
   h1 {
     color: white;
     font-weight: bold;
-    opacity: 0.75;
     font-size: 40px;
-    background-color: #256D85;
+  }
+
+  h4 {
+    color: white;
+    font-size: 30px;
+  }
+
+  .banner-content {
+    background-color: #256d85d6;
     margin-left: 5px;
     margin-bottom: 1px;
-    padding: 15px 50px;
+    padding: 50px 80px;
     border-radius: 7px;
+
+  }
+
+  .custom-button {
+    margin-left: 10px;
+    background-color: $dark-blue;
+    width: 150px;
   }
 }
 
