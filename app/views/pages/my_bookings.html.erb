@@ -55,43 +55,56 @@
           <% past_bookings = @bookings.select { |booking| booking.end_date < current_day }%>
           <% if !past_bookings.nil? %>
             <% past_bookings.each do |booking| %>
-              <div class="booking-card">
+            <div class="booking-card">
+              <div class="office-img">
+                <%= cl_image_tag booking.office.photo.key %>
+              </div>
+              <div class="office-details">
                 <h4>
                   <%= booking.office.name %>
                 </h4>
-                <p></b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-            <p><b>Total cost:</b> <%= booking.total_price %>€</p>
-            <% if current_day > booking.end_date %>
-              <p><small>If you're happy with your experience please leave a <%= link_to "review",  new_booking_review_path(booking) %></small></p>
+                <p><b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                <p><b>Total cost:</b> <%= booking.total_price %>€</p>
+                <% if current_day > booking.end_date %>
+                  <p><small>If you're happy with your experience please leave a <%= link_to "review", new_booking_review_path(booking) %></small></p>
+                <% end %>
+              </div>
+              <div class="office-buttons">
+                <div class="my-2">
+                  <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
+                </div>
+                <div class="my-2">
+                  <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
+                </div>
+                <div class="landlord-details">
+                  <% id = booking.office.user_id %>
+                  <% user = User.find(id) %>
+                  <p>Hosted by <%= user.first_name %></p>
+                  <%= cl_image_tag user.avatar.key, width: 50, height: 50, crop: :fill if user.avatar.attached? %>
+                </div>
+              </div>
+            </div>
             <% end %>
-            <div class="my-2">
-              <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
-            </div>
-            <div class="my-2">
-              <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
-            </div>
-          </div>
-        <% end %>
-      <% else %>
-        <p>You have no bookings</p>
-      <% end %>
-    </div>
-  </div>
-  <div class="panel" id="three-panel">
-    <% cancelled_bookings = @bookings.select { |booking| booking.declined? }%>
-    <div class="booking-cards">
-      <% cancelled_bookings.each do |booking| %>
-        <div class="booking-card">
-          <h4><%= booking.office.name %></h4>
-          <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-          <p>Total cost: <%= booking.total_price %>€</p>
-          <div class="my-2">
-            <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
-          </div>
+          <% else %>
+            <p>You have no bookings</p>
+          <% end %>
         </div>
-      <% end %>
+      </div>
+      <div class="panel" id="three-panel">
+        <% cancelled_bookings = @bookings.select { |booking| booking.declined? }%>
+        <div class="booking-cards">
+          <% cancelled_bookings.each do |booking| %>
+            <div class="booking-card">
+              <h4><%= booking.office.name %></h4>
+              <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+              <p>Total cost: <%= booking.total_price %>€</p>
+              <div class="my-2">
+                <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
 </div>
