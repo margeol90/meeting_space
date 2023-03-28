@@ -31,21 +31,29 @@
         <p class="line-clamp" data-read-more-target="content">
           <%= @office.description %>
         </p>
-        <div class="div", style="gap:20px;">
-          <button data-action="read-more#toggle" class="btn-confirm">Read more</button>
+        <div class="d-flex justify-content-start"; style="gap:10px; padding-bottom:20px;">
+          <a data-action="read-more#toggle" class="text-blue" style="cursor:pointer; padding: 20px 0px 0px 20px;">Read more</a>
           <% if policy(@office).edit? %>
             <%= link_to "Edit", edit_office_path, class:"btn-edit", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
           <% end %>
           <% if policy(@office).destroy? %>
             <%= link_to "Delete your propierty", office_path(@office), class: "btn-delete", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
           <% end %>
+          <% unless @bookings.empty? %>
+          <%= link_to "Bookings", office_bookings_path(@office), class: "btn-mint", style:"height:40px; margin-top:10px; border-color:black; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+          <% end %>
         </div>
       </div>
     </div>
     <div class="d-flex" style="gap:100px; justify-content:center; height:10px; margin-bottom:10px;">
-      <p><%= "Max capacity #{@office.max_capacity} people" %></p>
-      <p><%= "Meeting rooms #{@office.meeting_rooms}" %></p>
-      <p><%= "Price per day #{@office.price}€" %></p>
+      <% if current_user == @office.user %>
+        <p><%= "Max capacity #{@office.max_capacity} people" %></p>
+        <p><%= "Meeting rooms #{@office.meeting_rooms}" %></p>
+        <p><%= "Price per day #{@office.price}€" %></p>
+      <% else %>
+        <p><%= "Max capacity #{@office.max_capacity} people" %></p>
+        <p><%= "Meeting rooms #{@office.meeting_rooms}" %></p>
+      <% end %>
     </div>
     <% unless @office.facilities.empty? %>
       <div class="show-facilities">
@@ -68,11 +76,13 @@
       style='width: 722px; height: 300px;'>
     </div>
     <div class="show-contact">
-      <div>
-        <h2>Contact</h2>
-        <p>Email the owner of this property</p>
+      <div class="d-flex justify-content-between">
+        <div class="d-flex" style="gap:20px;">
+          <%= cl_image_tag @office.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if @office.user.avatar.attached? %>
+          <h3>Email to <strong><%= "#{@office.user.first_name} #{@office.user.last_name}" %></strong>, owner</h3>
+        </div>
+        <%= mail_to "#{(@office.user).email}", "Contact" %>
       </div>
-      <%= mail_to "#{(@office.user).email}", "Contact" %>
     </div>
     <div class="show-office-reviews">
       <h2 class="card-title">Reviews</h2>

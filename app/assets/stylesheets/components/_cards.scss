@@ -346,10 +346,9 @@
 
 .show-contact {
   box-sizing: border-box;
-  justify-content: space-around;
   width: 722px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
 
   a{
     background-color: $mint;
@@ -362,6 +361,16 @@
     align-items: center;
     margin-right: 0;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  };
+
+  h3 {
+    margin-top: auto;
+    margin-bottom: auto;
+  };
+
+  #miniavatar {
+    margin-top: auto;
+    margin-bottom: auto;
   }
 }
 
