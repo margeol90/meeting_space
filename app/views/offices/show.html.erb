@@ -16,6 +16,14 @@
             <% end %>
             <% if array.sum(&:to_f)/array.compact.length == 5 %>
               <p class="average"><%= "#{array.sum(&:to_i)/array.compact.length}/5" %></p>
+            <% elsif array.sum(&:to_f)/array.compact.length == 4 %>
+              <p class="average"><%= "#{array.sum(&:to_i)/array.compact.length}/5" %></p>
+            <% elsif array.sum(&:to_f)/array.compact.length == 3 %>
+              <p class="average"><%= "#{array.sum(&:to_i)/array.compact.length}/5" %></p>
+            <% elsif array.sum(&:to_f)/array.compact.length == 2 %>
+              <p class="average"><%= "#{array.sum(&:to_i)/array.compact.length}/5" %></p>
+            <% elsif array.sum(&:to_f)/array.compact.length == 1 %>
+              <p class="average"><%= "#{array.sum(&:to_i)/array.compact.length}/5" %></p>
             <% else %>
               <p class="average"><%= "#{(array.sum(&:to_f)/array.compact.length).round(1)}/5" %></p>
             <% end %>
@@ -55,7 +63,7 @@
       <% if current_user == @office.user %>
         <h5><strong>Max capacity:</strong> <%=  @office.max_capacity%> people</h5>
         <h5><strong>Meeting rooms:</strong> <%= @office.meeting_rooms %></h5>
-        <h5><strong>Price per day:</strong> <%= @office.price %>€</h5>
+        <h5><strong>Price per day:</strong> <%= @office.price.to_i %>€</h5>
       <% else %>
         <h5><strong>Max capacity:</strong> <%= @office.max_capacity %> people</h5>
         <h5><strong>Meeting rooms:</strong> <%= @office.meeting_rooms %></h5>
