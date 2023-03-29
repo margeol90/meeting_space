@@ -3,9 +3,9 @@
 <% end %>
 <div class="text-center mt-3">
   <% if params[:query].present? %>
-    <h1><%= "Office spaces in #{params[:query].capitalize}"%></h1>
+    <h1><%= "MeetingSpaces in #{params[:query].capitalize}"%></h1>
   <% else %>
-    <h1>Office spaces</h1>
+    <h1>MeetingSpaces</h1>
   <% end %>
 </div>
 <div class="container" style="display: flex !important; justify-content:center;">
@@ -18,8 +18,8 @@
 </div>
 <%= form_with url: offices_path, method: :get, class: "d-flex pt-5 pb-4 justify-content-center gap-2", data: { controller: 'checkbox-select-all' } do |f| %>
   <%= f.text_field :query, value: params[:query], placeholder: "Find a Space in..." %>
-  <%= f.number_field :max_price, value: params[:max_price], min: 0, placeholder: "Max price per day" %>
-  <%= f.number_field :min_price, value: params[:min_price], min: 0, placeholder: "Min price per day" %>
+  <%= f.number_field :max_price, value: params[:max_price], min: 0, placeholder: "Max €" %>
+  <%= f.number_field :min_price, value: params[:min_price], min: 0, placeholder: "Min €" %>
   <%= f.number_field :max_capacity, value: params[:max_capacity], min: 0, placeholder: "Max capacity" %>
   <%= f.fields_for :facilities do |facilities_form| %>
     <div id="list1" class="dropdown-check-list" tabindex="100" data-controller="checkbox">
@@ -47,7 +47,7 @@
     </div>
   <% end %>
   <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
-  <%= link_to "Clear", offices_path, class:'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+  <%= link_to "Clear", offices_path, style: "width: 60px; text-decoration: underline; align-self:center; color:#002B5B;" %>
 <% end %>
 <div class="index-container">
   <% if @offices.empty?  %>
