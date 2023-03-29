@@ -1,54 +1,56 @@
 <% content_for :title do %>
   <%= "Look for the office which suits you the best!" %>
 <% end %>
-<div class="text-center mt-3">
-  <% if params[:query].present? %>
-    <h1><%= "MeetingSpaces in #{params[:query].capitalize}"%></h1>
-  <% else %>
-    <h1>MeetingSpaces</h1>
-  <% end %>
-</div>
-<div class="container" style="display: flex !important; justify-content:center;">
-  <div data-controller="map"
+<div style="position:sticky; top:0px; background-color:#e7e7e7;">
+  <div class="text-center mt-3">
+    <% if params[:query].present? %>
+      <h1><%= "MeetingSpaces in #{params[:query].capitalize}"%></h1>
+    <% else %>
+      <h1>MeetingSpaces</h1>
+    <% end %>
+  </div>
+  <div class="container" style="display: flex !important; justify-content:center;">
+    <div data-controller="map"
       id='index-map'
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
       data-map-markers-value="<%= @markers.to_json %>"
       style='width: 95%; height: 300px;'>
-  </div>
-</div>
-<%= form_with url: offices_path, method: :get, class: "d-flex pt-5 pb-4 justify-content-center gap-2", data: { controller: 'checkbox-select-all' } do |f| %>
-  <%= f.text_field :query, value: params[:query], placeholder: "Find a Space in..." %>
-  <%= f.number_field :max_price, value: params[:max_price], min: 0, placeholder: "Max €" %>
-  <%= f.number_field :min_price, value: params[:min_price], min: 0, placeholder: "Min €" %>
-  <%= f.number_field :max_capacity, value: params[:max_capacity], min: 0, placeholder: "Max capacity" %>
-  <%= f.fields_for :facilities do |facilities_form| %>
-    <div id="list1" class="dropdown-check-list" tabindex="100" data-controller="checkbox">
-      <span class="anchor">
-        <% if params[:facilities]&.[](:facility_id).present? %>
-          <% if params[:facilities]&.[](:facility_id)&.count == 1 %>
-            Choose a Facility
-          <% elsif params[:facilities]&.[](:facility_id)&.count == 2 %>
-            <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facility chosen" %>
-          <% else %>
-            <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facilities chosen" %>
-          <% end %>
-        <% else %>
-          Choose a Facility
-        <% end %>
-      </span>
-      <ul id="items" class="items">
-        <%= facilities_form.collection_check_boxes(:facility_id, Facility.all, :id, :name, { checked: params[:facilities]&.[](:facility_id) } ) do |f| %>
-          <li>
-            <%= f.label %>
-            <%= f.check_box %>
-          </li>
-        <% end %>
-      </ul>
     </div>
+  </div>
+  <%= form_with url: offices_path, method: :get, class: "d-flex pt-5 pb-4 justify-content-center gap-2", data: { controller: 'checkbox-select-all' } do |f| %>
+    <%= f.text_field :query, value: params[:query], placeholder: "Find a Space in..." %>
+    <%= f.number_field :max_price, value: params[:max_price], min: 0, placeholder: "Max €" %>
+    <%= f.number_field :min_price, value: params[:min_price], min: 0, placeholder: "Min €" %>
+    <%= f.number_field :max_capacity, value: params[:max_capacity], min: 0, placeholder: "Max capacity" %>
+    <%= f.fields_for :facilities do |facilities_form| %>
+      <div id="list1" class="dropdown-check-list" tabindex="100" data-controller="checkbox">
+        <span class="anchor">
+          <% if params[:facilities]&.[](:facility_id).present? %>
+            <% if params[:facilities]&.[](:facility_id)&.count == 1 %>
+              Choose a Facility
+            <% elsif params[:facilities]&.[](:facility_id)&.count == 2 %>
+              <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facility chosen" %>
+            <% else %>
+              <%= "#{ params[:facilities]&.[](:facility_id)&.count - 1 } facilities chosen" %>
+            <% end %>
+          <% else %>
+            Choose a Facility
+          <% end %>
+        </span>
+        <ul id="items" class="items">
+          <%= facilities_form.collection_check_boxes(:facility_id, Facility.all, :id, :name, { checked: params[:facilities]&.[](:facility_id) } ) do |f| %>
+            <li>
+              <%= f.label %>
+              <%= f.check_box %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
+    <%= link_to "Clear", offices_path, style: "width: 60px; text-decoration: underline; align-self:center; color:#002B5B;" %>
   <% end %>
-  <%= f.submit "Search", class: 'custom-button', style:"border-color:dark-gray; padding:7px; border-style:outset; border-width:2px; text-decoration:none;" %>
-  <%= link_to "Clear", offices_path, style: "width: 60px; text-decoration: underline; align-self:center; color:#002B5B;" %>
-<% end %>
+</div>
 <div class="index-container">
   <% if @offices.empty?  %>
     <p>Opss, no Offices match your filters...</p>
