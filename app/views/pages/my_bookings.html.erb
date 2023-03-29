@@ -84,7 +84,7 @@
               <p>You don't have any past bookings!</p>
             </div>
           <% else %>
-            <% past_bookings = @bookings.select { |booking| booking.end_date < current_day }%>
+            <% past_bookings = @bookings.select { |booking| booking.end_date < current_day } %>
             <% if !past_bookings.nil? %>
               <% past_bookings.each do |booking| %>
                 <div class="booking-card">
