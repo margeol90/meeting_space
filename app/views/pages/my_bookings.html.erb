@@ -64,9 +64,14 @@
                   </div>
                 </div>
               </div>
-            <% end %>
+              <div class="my-2">
+                <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
+              </div>
+            </div>
           <% end %>
-        </div>
+        <% else %>
+          <p>You have no bookings</p>
+        <% end %>
       </div>
       <div class="panel" id="two-panel">
         <div class="booking-cards">
