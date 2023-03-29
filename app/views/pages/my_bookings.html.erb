@@ -128,7 +128,7 @@
         <div class="booking-cards">
           <% if (@bookings.select {|x| x.declined?}).count == 0 %>
             <div class="d-flex flex-column align-items-center">
-              <p>Lucky you! You don't have any past bookings...yet</p>
+              <p>Lucky you! You don't have any declined bookings...yet</p>
             </div>
           <% else %>
             <% cancelled_bookings.each do |booking| %>
