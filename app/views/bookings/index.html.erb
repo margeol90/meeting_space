@@ -24,22 +24,33 @@
 
         <div class="my-5">
           <div class="booking-cards">
-            <% bookings.each do |booking| %>
-              <% if booking.pending? %>
-                <div class="booking-card">
-                  <h5><%= link_to booking.office.name, office_path(booking.office) %> </h5>
-                  <p>Requested by <%= booking.user.first_name %> <%= cl_image_tag booking.user.avatar.key, width: 70, crop: :fill, class: "rounded-circle" %></p>
-                  <p>Total: €<%= booking.total_price %></p>
-                  <p>Dates: <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                  <%= simple_form_for (booking) do |f| %>
-                    <%= f.input :status, as: :hidden, input_html: { value: 'confirmed'} %>
-                    <%= f.submit 'Confirm', class: 'btn-confirm' %>
-                  <% end %>
-                  <%= simple_form_for(booking) do |f| %>
-                    <%= f.input :status, as: :hidden, input_html: { value: 'declined'} %>
-                    <%= f.submit 'Decline', class: 'btn-error' %>
-                  <% end %>
-                </div>
+            <% if (bookings.select {|x| x.pending?}).count == 0 %>
+              <p>There are no pending bookings, yet.</p>
+            <% else %>
+              <% bookings.each do |booking| %>
+                <% if booking.pending? %>
+                  <div class="booking-card">
+                    <div class="office-img">
+                      <%= cl_image_tag booking.office.photo.key %>
+                    </div>
+                    <div class="office-details">
+                      <p>Requested by <%= mail_to booking.user.email, booking.user.first_name %> <%= cl_image_tag booking.user.avatar.key, width: 70, crop: :fill, class: "rounded-circle" %></p>
+                      <h5><%= link_to booking.office.name, office_path(booking.office), class: "hyperlinked-title" %> </h5>
+                      <p><b>Total:</b> <%= booking.total_price %>€</p>
+                      <p><b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                    </div>
+                    <div class="office-buttons">
+                      <%= simple_form_for (booking) do |f| %>
+                        <%= f.input :status, as: :hidden, input_html: { value: 'confirmed'} %>
+                        <%= f.submit 'Confirm', class: 'btn-confirm' %>
+                      <% end %>
+                      <%= simple_form_for(booking) do |f| %>
+                        <%= f.input :status, as: :hidden, input_html: { value: 'declined'} %>
+                        <%= f.submit 'Decline', class: 'btn-error' %>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>
           </div>
@@ -50,14 +61,23 @@
 
         <div class="my-5">
           <div class="booking-cards">
-            <% bookings.each do |booking| %>
-              <% if booking.confirmed? %>
-                <div class="booking-card">
-                  <h5><%= link_to booking.office.name, office_path(booking.office) %> </h5>
-                  <p><b>Total: </b>€<%= booking.total_price %></p>
-                  <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                  <p>Reservation made by <%= booking.user.first_name %></p>
-                </div>
+            <% if (bookings.select {|x| x.confirmed?}).count == 0 %>
+              <p>There are no confirmed bookings</p>
+            <% else %>
+              <% bookings.each do |booking| %>
+                <% if booking.confirmed? %>
+                  <div class="booking-card">
+                    <div class="office-img">
+                      <%= cl_image_tag booking.office.photo.key %>
+                    </div>
+                    <div class="office-details">
+                      <h5><%= link_to booking.office.name, office_path(booking.office), class: "hyperlinked-title" %> </h5>
+                      <p><b>Total: </b>€<%= booking.total_price %></p>
+                      <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                      <p>Reservation made by <%= booking.user.first_name %> <%= cl_image_tag booking.user.avatar.key, width: 70, crop: :fill, class: "rounded-circle" %></p>
+                    </div>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>
           </div>
@@ -68,14 +88,23 @@
 
         <div class="my-5">
           <div class="booking-cards">
-            <% bookings.each do |booking| %>
-              <% if booking.declined? %>
-                <div class="booking-card">
-                  <h5><%= link_to booking.office.name, office_path(booking.office) %> </h5>
-                  <p><b>Total: </b>€<%= booking.total_price %></p>
-                  <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                  <p>Reservation made by <%= booking.user.first_name %></p>
-                </div>
+            <% if (bookings.select {|x| x.confirmed?}).count == 0 %>
+              <p>There are no declined bookings</p>
+            <% else %>
+              <% bookings.each do |booking| %>
+                <% if booking.declined? %>
+                  <div class="booking-card">
+                  <div class="office-img">
+                      <%= cl_image_tag booking.office.photo.key %>
+                    </div>
+                    <div class="office-details">
+                      <h5><%= link_to booking.office.name, office_path(booking.office), class: "hyperlinked-title" %> </h5>
+                      <p><b>Total: </b>€<%= booking.total_price %></p>
+                      <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                      <p>Reservation made by <%= booking.user.first_name %> <%= cl_image_tag booking.user.avatar.key, width: 70, crop: :fill, class: "rounded-circle" %></p>
+                    </div>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>
           </div>
