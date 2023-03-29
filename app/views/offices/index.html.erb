@@ -82,6 +82,14 @@
                     <% end %>
                     <% if array.sum(&:to_f)/array.compact.length == 5 %>
                       <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
+                    <% elsif array.sum(&:to_f)/array.compact.length == 4 %>
+                      <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
+                    <% elsif array.sum(&:to_f)/array.compact.length == 3 %>
+                      <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
+                    <% elsif array.sum(&:to_f)/array.compact.length == 2 %>
+                      <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
+                    <% elsif array.sum(&:to_f)/array.compact.length == 1 %>
+                      <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_i)/array.compact.length)}/5" %></p>
                     <% else %>
                       <p><%= icon('fa-solid', 'star') * (array.sum(&:to_i)/array.compact.length) + icon('fa-regular', 'star') * (5-array.sum(&:to_i)/array.compact.length) + " #{(array.sum(&:to_f)/array.compact.length).round(1)}/5" %></p>
                     <% end %>
