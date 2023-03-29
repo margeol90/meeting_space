@@ -121,9 +121,9 @@
   left: 195px;
   top: 230px;
   background: #FFFFFF;
-  border: 1px solid #256D85;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+  border: #E3E3E3;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   gap: 57px;
   padding: 25px;
 
@@ -486,10 +486,11 @@
   }
 
   .action-card {
-    background-color: #FFFFFF;
-    color: $dark-blue;
+    background: #FFFFFF;
     border-radius: 5px;
-    border: 1px solid $dark-blue;
+    border: #E3E3E3;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: $dark-blue;
     width: 220px;
     height: 100px;
     display: flex;
