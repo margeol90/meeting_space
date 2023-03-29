@@ -72,7 +72,7 @@
                   <span><%= office.meeting_rooms %></span>
                 </div>
                 <div class="card-price">
-                  <span><%= office.price %> <%= icon('fa solid', 'euro') %> day</span>
+                  <span><%= office.price.to_i %> <%= icon('fa solid', 'euro') %> day</span>
                 </div>
                 <div class="card-rating">
                   <% if office.bookings.any? { |booking| !booking.review.nil? } %>
