@@ -61,7 +61,7 @@
                       <%= link_to "Delete", booking_path(booking), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
                     </div>
                     <div class="my-2">
-                      <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
+                      <%= link_to "Booking info", booking_path(booking), class: "btn-mint" %>
                     </div>
                     </div>
                     <div class="landlord-details col-12 py-1 my-2">
@@ -108,7 +108,7 @@
                       <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
                     </div>
                     <div class="my-2">
-                      <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
+                      <%= link_to "Booking info", booking_path(booking), class: "btn-mint" %>
                     </div>
                     <div class="landlord-details">
                       <% id = booking.office.user_id %>
