@@ -119,13 +119,15 @@
         <% @bookings.each do |booking| %>
           <% unless booking.review.nil? %>
             <div class="review-card">
-              <div class="d-flex" style="margin-bottom:10px;">
-                <%= cl_image_tag booking.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if booking.user.avatar.attached? %>
-                <p class="review-user"><strong><%= booking.user.first_name+" "+booking.user.last_name %></strong><%= " #{booking.review&.created_at.strftime("%A, %B %e, %Y")}" %></p>
+              <div class="d-flex justify-content-between" style="margin-bottom:10px;">
+                <div class="d-flex">
+                  <%= cl_image_tag booking.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if booking.user.avatar.attached? %>
+                  <p class="review-user" ><strong><%= booking.user.first_name+" "+booking.user.last_name %></strong><%= " #{booking.review&.created_at.strftime("%A, %B %e, %Y")}" %></p>
+                </div>
+                <span class="review-stars" style="margin-top:20px;" ><%= icon('fa-solid', 'star' ) * booking.review&.ratings + icon('fa-regular', 'star') * (5-booking.review&.ratings) %></span>
               </div>
-              <div class="d-flex justify-content-between">
+              <div class="d-flex">
                 <p><%= booking.review&.comment %></p>
-                <span class="review-stars"><%= icon('fa-solid', 'star' ) * booking.review&.ratings + icon('fa-regular', 'star') * (5-booking.review&.ratings) %></span>
               </div>
             </div>
           <% end %>
