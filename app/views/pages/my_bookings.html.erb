@@ -10,15 +10,128 @@
     <input class="radio" id="two" name="group" type="radio">
     <input class="radio" id="three" name="group" type="radio">
     <div class="tabs">
-      <label class="tab" id="one-tab" for="one">Upcoming</label>
-      <label class="tab" id="two-tab" for="two">Past</label>
-      <label class="tab" id="three-tab" for="three">Declined</label>
+      <label class="tab" id="one-tab" for="one">Upcoming(<%= (@bookings.select {|x| x.end_date > Date.today}).count %>)</label>
+      <label class="tab" id="two-tab" for="two">Past(<%= (@bookings.select {|x| x.end_date < Date.today}).count %>)</label>
+      <label class="tab" id="three-tab" for="three">Declined(<%= (@bookings.select {|x| x.declined?}).count %>)</label>
     </div>
     <div class="panels">
       <div class="panel" id="one-panel">
         <div class="booking-cards">
-          <% @bookings.each do |booking| %>
-            <% if booking.end_date >= current_day && (booking.confirmed? || booking.pending?) %>
+          <% if (@bookings.select {|x| x.end_date > Date.today}).count == 0 %>
+            <div class="d-flex flex-column align-items-center">
+              <p>There are no upcoming bookings.</p>
+              <p>Book your next <%= link_to "MeetingSpace", offices_path %> anywhere in the world</p>
+              <img src="https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/globe-line-icon.png" style = "width: 200px;" alt="">
+              <p>Hoping to expand our business to Mars by 2030.</p>
+            </div>
+          <% else %>
+            <% @bookings.each do |booking| %>
+              <% if booking.end_date >= current_day && (booking.confirmed? || booking.pending?) %>
+                <div class="booking-card">
+                  <div class="office-img">
+                    <%= cl_image_tag booking.office.photo.key %>
+                  </div>
+                  <div class="office-details">
+                    <%= link_to office_path(booking.office) do %>
+                      <h4 class="hyperlinked-title">
+                        <%= booking.office.name %>
+                      </h4>
+                    <% end %>
+                    <small><i class="fa-solid fa-map-pin"></i>  <%= booking.office.address %></small>
+                    <div class="my-2">
+                      <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                      <p><b>Total cost:</b> <%= booking.total_price %>€</p>
+                    </div>
+                    <% if booking.confirmed? %>
+                      <div class="status-c">
+                        <i class="fa-regular fa-circle-check fa-fw"> </i><%= booking.status.capitalize %>
+                      </div>
+                    <% else %>
+                      <div class="status-p">
+                        <i class="fa-regular fa-hourglass-half fa-fw"></i><%= booking.status.capitalize %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="office-buttons">
+                  <div class="d-flex flex-column">
+                    <div class="my-2">
+                      <%= link_to "Edit", edit_booking_path(booking), class: "btn-edit" %>
+                    </div>
+                    <div class="my-2">
+                      <%= link_to "Delete", booking_path(booking), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                    </div>
+                    <div class="my-2">
+                      <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
+                    </div>
+                    </div>
+                    <div class="landlord-details col-12 py-1 my-2">
+                      <% id = booking.office.user_id %>
+                      <% user = User.find(id) %>
+                      <p>Hosted by <%= mail_to user.email, user.first_name %></p>
+                      <%= cl_image_tag user.avatar.key, width: 50, height: 50, crop: :fill if user.avatar.attached? %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel" id="two-panel">
+        <div class="booking-cards">
+          <% if (@bookings.select {|x| x.end_date < Date.today}).count == 0 %>
+            <div class="d-flex flex-column align-items-center">
+              <p>You don't have any past bookings!</p>
+            </div>
+          <% else %>
+            <% past_bookings = @bookings.select { |booking| booking.end_date < current_day } %>
+            <% if !past_bookings.nil? %>
+              <% past_bookings.each do |booking| %>
+                <div class="booking-card">
+                  <div class="office-img">
+                    <%= cl_image_tag booking.office.photo.key %>
+                  </div>
+                  <div class="office-details">
+                    <h4>
+                      <%= booking.office.name %>
+                    </h4>
+                    <p><b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
+                    <p><b>Total cost:</b> <%= booking.total_price %>€</p>
+                    <% if current_day > booking.end_date && booking.review.nil? && booking.confirmed? %>
+                      <p><small>If you're happy with your experience please leave a <%= link_to "review", office_path(booking.office) %></small></p>
+                    <% elsif !booking.review.nil? && booking.confirmed? %>
+                      <p><i class="fa-solid fa-star fa-fw" style="color: #8fe3cf;"></i>Thank you leaving a review!</p>
+                    <% end %>
+                  </div>
+                  <div class="office-buttons">
+                    <div class="my-2">
+                      <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
+                    </div>
+                    <div class="my-2">
+                      <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
+                    </div>
+                    <div class="landlord-details">
+                      <% id = booking.office.user_id %>
+                      <% user = User.find(id) %>
+                      <p>Hosted by <%= mail_to user.email, user.first_name %></p>
+                      <%= cl_image_tag user.avatar.key, width: 50, height: 50, crop: :fill if user.avatar.attached? %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel" id="three-panel">
+        <% cancelled_bookings = @bookings.select { |booking| booking.declined? }%>
+        <div class="booking-cards">
+          <% if (@bookings.select {|x| x.declined?}).count == 0 %>
+            <div class="d-flex flex-column align-items-center">
+              <p>Lucky you! You don't have any past bookings...yet</p>
+            </div>
+          <% else %>
+            <% cancelled_bookings.each do |booking| %>
               <div class="booking-card">
                 <div class="office-img">
                   <%= cl_image_tag booking.office.photo.key %>
@@ -34,6 +147,8 @@
                     <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
                     <p><b>Total cost:</b> <%= booking.total_price %>€</p>
                   </div>
+                </div>
+                <div class="office-buttons justify-content-around">
                   <% if booking.confirmed? %>
                     <div class="status-c">
                       <i class="fa-regular fa-circle-check fa-fw"> </i><%= booking.status.capitalize %>
@@ -43,61 +158,7 @@
                       <i class="fa-regular fa-hourglass-half fa-fw"></i><%= booking.status.capitalize %>
                     </div>
                   <% end %>
-                </div>
-                <div class="office-buttons">
-                <div class="d-flex flex-column">
-                  <div class="my-2">
-                    <%= link_to "Edit", edit_booking_path(booking), class: "btn-edit" %>
-                  </div>
-                  <div class="my-2">
-                    <%= link_to "Delete", booking_path(booking), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-                  </div>
-                  <div class="my-2">
-                    <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
-                  </div>
-                  </div>
-                  <div class="landlord-details col-12 py-1 my-2">
-                    <% id = booking.office.user_id %>
-                    <% user = User.find(id) %>
-                    <p>Hosted by <%= mail_to user.email, user.first_name %></p>
-                    <%= cl_image_tag user.avatar.key, width: 50, height: 50, crop: :fill if user.avatar.attached? %>
-                  </div>
-                </div>
-              </div>
-              <div class="my-2">
-                <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <div class="panel" id="two-panel">
-        <div class="booking-cards">
-          <% past_bookings = @bookings.select { |booking| booking.end_date < current_day }%>
-          <% if !past_bookings.nil? %>
-            <% past_bookings.each do |booking| %>
-              <div class="booking-card">
-                <div class="office-img">
-                  <%= cl_image_tag booking.office.photo.key %>
-                </div>
-                <div class="office-details">
-                  <h4>
-                    <%= booking.office.name %>
-                  </h4>
-                  <p><b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                  <p><b>Total cost:</b> <%= booking.total_price %>€</p>
-                  <% if current_day > booking.end_date %>
-                    <p><small>If you're happy with your experience please leave a <%= link_to "review", office_path(booking.office) %></small></p>
-                  <% end %>
-                </div>
-                <div class="office-buttons">
-                  <div class="my-2">
-                    <%= link_to "Book Again", office_path(booking.office), class: "btn-confirm" %>
-                  </div>
-                  <div class="my-2">
-                    <%= link_to "More info", booking_path(booking), class: "btn-mint" %>
-                  </div>
-                  <div class="landlord-details">
+                  <div class="landlord-details col-12 py-1 justify-content-around">
                     <% id = booking.office.user_id %>
                     <% user = User.find(id) %>
                     <p>Hosted by <%= mail_to user.email, user.first_name %></p>
@@ -106,49 +167,6 @@
                 </div>
               </div>
             <% end %>
-          <% else %>
-            <p>You have no bookings</p>
-          <% end %>
-        </div>
-      </div>
-      <div class="panel" id="three-panel">
-        <% cancelled_bookings = @bookings.select { |booking| booking.declined? }%>
-        <div class="booking-cards">
-          <% cancelled_bookings.each do |booking| %>
-            <div class="booking-card">
-              <div class="office-img">
-                <%= cl_image_tag booking.office.photo.key %>
-              </div>
-              <div class="office-details">
-                <%= link_to office_path(booking.office) do %>
-                  <h4 class="hyperlinked-title">
-                    <%= booking.office.name %>
-                  </h4>
-                <% end %>
-                <small><i class="fa-solid fa-map-pin"></i>  <%= booking.office.address %></small>
-                <div class="my-2">
-                  <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                  <p><b>Total cost:</b> <%= booking.total_price %>€</p>
-                </div>
-              </div>
-              <div class="office-buttons justify-content-around">
-                <% if booking.confirmed? %>
-                  <div class="status-c">
-                    <i class="fa-regular fa-circle-check fa-fw"> </i><%= booking.status.capitalize %>
-                  </div>
-                <% else %>
-                  <div class="status-p">
-                    <i class="fa-regular fa-hourglass-half fa-fw"></i><%= booking.status.capitalize %>
-                  </div>
-                <% end %>
-                <div class="landlord-details col-12 py-1 justify-content-around">
-                  <% id = booking.office.user_id %>
-                  <% user = User.find(id) %>
-                  <p>Hosted by <%= mail_to user.email, user.first_name %></p>
-                  <%= cl_image_tag user.avatar.key, width: 50, height: 50, crop: :fill if user.avatar.attached? %>
-                </div>
-              </div>
-            </div>
           <% end %>
         </div>
       </div>
