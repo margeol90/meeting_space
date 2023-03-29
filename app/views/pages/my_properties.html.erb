@@ -14,18 +14,24 @@
       <% @offices.each do |office| %>
         <div class="card-product my-3">
           <% if office.photo.attached? %>
-            <%= cl_image_tag office.photo.key %>
+            <%= cl_image_tag office.photo.key, crop: :fill %>
           <% else %>
             <img src="https://liftlearning.com/wp-content/uploads/2020/09/default-image.png" />
           <% end %>
-          <div class="card-product-infos">
-            <h2 class="my-2"><%= office.name %></h2>
-            <p><%= office.description.truncate(20, separator: ' ')%></p>
-            <div class="card-flat-attr">
-              <i class="fa-solid fa-person-shelter"></i>
-              <span><%= office.max_capacity %></span>
-              <i class="fa-solid fa-euro-sign"></i>
-              <span><%= office.price %></span>
+          <div class="d-flex justify-content-between" style="width:70%; margin-left:20px;">
+            <div class="d-flex flex-column">
+              <div>
+                <h2 class="my-2"><%= link_to "#{office.name}", office_path(office), style:"color:#002B5B" %></h2>
+                <p style="margin-top:20px;"><%= office.description.truncate(60, separator: ' ')%></p>
+              </div>
+              <div class="d-flex" style="margin-top:auto; gap:10px;">
+                <i class="fa-solid fa-person-shelter" style="margin-top:auto; margin-bottom:auto;"></i>
+                <span><%= office.max_capacity %></span>
+                <span><%= office.price %></span>
+                <i class="fa-solid fa-euro-sign" style="margin-top:auto; margin-bottom:auto;"></i>
+              </div>
+            </div>
+            <div class="d-flex flex-column" style="margin-right:10px; gap:5px;">
               <% if policy(office).edit? %>
                 <%= link_to "Edit", edit_office_path(office), class: "btn-edit" %>
               <% end %>
