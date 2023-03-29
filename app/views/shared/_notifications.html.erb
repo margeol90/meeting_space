@@ -1,14 +1,19 @@
 <% if current_user %>
-  <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
-      Notifications <span class="badge badge-light"><%= @unread.count >= 9 ? "9+" : @unread.count %></span>
-  </a>
+  <% if @unread.count > 0 %>
+    <a class="nav-link navbar-buttons-unread" href="#" id="navbarDropdown" style="padding: 10px 20px; margin-right: 10px;" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+        Notifications <span>(<%= @unread.count >= 9 ? "9+" : @unread.count %>)</span>
+    </a>
+  <% else %>
+      <a class="nav-link navbar-buttons" href="#" id="navbarDropdown" style="padding: 10px 20px; margin-right: 10px;" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+        Notifications
+    </a>
+  <% end %>
   <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
     <% @unread.each do |notification| %>
       <%= render 'shared/notification', notification: notification %>
     <% end %>
     <% if @read.count > 0 && @unread.count > 0 %>
       <li>
-        <p>Older notifications</p>
         <hr class="dropdown-divider">
       </li>
     <% elsif @read.count + @unread.count == 0 %>
