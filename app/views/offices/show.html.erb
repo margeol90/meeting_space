@@ -7,7 +7,7 @@
         <%= @office.name %>
       <% end %>
       <div class="d-flex justify-content-between">
-        <h2 class="card-title"><%= @office.name %></h2>
+        <h2 class="card-title"><strong><%= @office.name %></strong></h2>
         <div class="ratings-average">
           <% if @has_review %>
             <% array=[] %>
@@ -53,12 +53,12 @@
     </div>
     <div class="d-flex" style="gap:100px; justify-content:center; height:10px; margin-bottom:10px;">
       <% if current_user == @office.user %>
-        <p><%= "Max capacity #{@office.max_capacity} people" %></p>
-        <p><%= "Meeting rooms #{@office.meeting_rooms}" %></p>
-        <p><%= "Price per day #{@office.price}€" %></p>
+        <h5><strong>Max capacity:</strong> <%=  @office.max_capacity%> people</h5>
+        <h5><strong>Meeting rooms:</strong> <%= @office.meeting_rooms %></h5>
+        <h5><strong>Price per day:</strong> <%= @office.price %>€</h5>
       <% else %>
-        <p><%= "Max capacity #{@office.max_capacity} people" %></p>
-        <p><%= "Meeting rooms #{@office.meeting_rooms}" %></p>
+        <h5><strong>Max capacity:</strong> <%= @office.max_capacity %> people</h5>
+        <h5><strong>Meeting rooms:</strong> <%= @office.meeting_rooms %></h5>
       <% end %>
     </div>
     <% unless @office.facilities.empty? %>
@@ -91,7 +91,7 @@
       <div class="d-flex justify-content-between">
         <div class="d-flex" style="gap:20px;">
           <%= cl_image_tag @office.user.avatar.key, width: 50, height: 50, id: "miniavatar", crop: :fill if @office.user.avatar.attached? %>
-          <p>Email to <strong><%= "#{@office.user.first_name} #{@office.user.last_name}" %></strong>, owner</p>
+          <p>If you have any questions, please contact <strong><%= "#{@office.user.first_name} #{@office.user.last_name}" %></strong>, owner</p>
         </div>
         <%= mail_to "#{(@office.user).email}", "Contact" %>
       </div>
@@ -140,13 +140,12 @@
       <div id="office-booking-dates" data-unavailable="<%= @office.unavailable_dates.to_json %>"></div>
       <%= simple_form_for [@office, @booking], data: { controller: 'flatpickr' } do |f| %>
         <div style="color:black; align-self:center; margin-top:40px;">
-          <h3><strong>Pick a date</strong></h3>
+          <h3><strong><span id="office-price-per-day"><%= @office.price.to_int %></span>€</strong>/day</h3>
+          <h5>Pick a date</h5>
         </div>
         <%= f.input :start_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "startDate" }, class: "range_start d-none"} %>
         <%= f.input :end_date, as: :string, label: false, required: true, input_html: {data: { flatpickr_target: "endDate" }, class: "range_end d-none"} %>
-        <button type="button" id="clear_button" style="width: 60px; align-self:center; margin-bottom:20px; background-color:#002B5B; color:white;" title="clear" data-clear>Clear</button>
         <div style="margin-left:30px; color:black;">
-          <p><strong>Price per day: </strong><span id="office-price-per-day"><%= @office.price.to_int %></span> €</p>
           <p>Book for <span id="total-days">0</span><span id="string-days"> days</span></p>
           <p>Total cost: <span id="total-cost">0</span> €</p>
           <div class="row">
@@ -159,6 +158,7 @@
           </div>
         </div>
         <%= f.submit disabled: true, class: 'btn-confirm mt-3', id: 'submit_button' %>
+        <p type="button" id="clear_button" style="width: 60px; text-decoration: underline; align-self:center; margin-bottom:20px; color:#002B5B;" title="clear" data-clear>Clear</p>
       <% end %>
     <% end %>
   </div>
