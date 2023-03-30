@@ -107,7 +107,7 @@
     <div class="show-office-reviews">
       <h2 class="card-title">Reviews</h2>
       <div class="write-review-card">
-        <% past_bookings = @bookings.select { |booking| booking.end_date < current_day && booking.user == current_user && booking.review.nil?}%>
+        <% past_bookings = @bookings.select { |booking| booking.end_date < current_day && booking.user == current_user && booking.review.nil?  && booking.confirmed?}%>
         <% if !past_bookings.nil? %>
           <% past_bookings.each do |booking| %>
             <% if booking.confirmed? && current_day > booking.end_date %>
