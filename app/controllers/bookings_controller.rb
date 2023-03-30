@@ -53,7 +53,7 @@ class BookingsController < ApplicationController
         render pdf: "invoice",
                template: "bookings/show",
                formats: [:html],
-               disposition: :inline,
+               disposition: :attachment,
                layout: 'pdf',
                encoding: "UTF-8"
       end
