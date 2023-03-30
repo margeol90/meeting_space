@@ -40,7 +40,7 @@
                     <small><i class="fa-solid fa-map-pin"></i>  <%= booking.office.address %></small>
                     <div class="my-2">
                       <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                      <p><b>Total cost:</b> <%= booking.total_price %>€</p>
+                      <p><b>Total cost:</b> <%= booking.total_price.to_i %>€</p>
                     </div>
                     <% if booking.confirmed? %>
                       <div class="status-c">
@@ -53,13 +53,16 @@
                     <% end %>
                   </div>
                   <div class="office-buttons">
-                  <div class="d-flex flex-column">
-                    <div class="my-2">
-                      <%= link_to "Delete Booking", booking_path(booking), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-                    </div>
-                    <div class="my-2">
-                      <%= link_to "Booking info", booking_path(booking), class: "btn-mint" %>
-                    </div>
+                    <div class="d-flex flex-column">
+                      <div class="my-2">
+                        <%= link_to "Edit", edit_booking_path(booking), class: "btn-edit" %>
+                      </div>
+                      <div class="my-2">
+                        <%= link_to "Delete Booking", booking_path(booking), class: "btn-error", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                      </div>
+                      <div class="my-2">
+                        <%= link_to "Booking info", booking_path(booking), class: "btn-mint" %>
+                      </div>
                     </div>
                     <div class="landlord-details col-12 py-1 my-2">
                       <% id = booking.office.user_id %>
@@ -93,7 +96,7 @@
                       <%= booking.office.name %>
                     </h4>
                     <p><b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                    <p><b>Total cost:</b> <%= booking.total_price %>€</p>
+                    <p><b>Total cost:</b> <%= booking.total_price.to_i %>€</p>
                     <% if current_day > booking.end_date && booking.review.nil? && booking.confirmed? %>
                       <p><small>If you're happy with your experience please leave a <%= link_to "review", office_path(booking.office) %></small></p>
                     <% elsif !booking.review.nil? && booking.confirmed? %>
@@ -142,7 +145,7 @@
                   <small><i class="fa-solid fa-map-pin"></i>  <%= booking.office.address %></small>
                   <div class="my-2">
                     <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-                    <p><b>Total cost:</b> <%= booking.total_price %>€</p>
+                    <p><b>Total cost:</b> <%= booking.total_price.to_i %>€</p>
                   </div>
                 </div>
                 <div class="office-buttons justify-content-around">
