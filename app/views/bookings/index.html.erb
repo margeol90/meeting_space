@@ -36,7 +36,7 @@
                     <div class="office-details">
                       <p>Requested by <%= mail_to booking.user.email, booking.user.first_name %> <%= cl_image_tag booking.user.avatar.key, width: 70, crop: :fill, class: "rounded-circle" %></p>
                       <h5><%= link_to booking.office.name, office_path(booking.office), class: "hyperlinked-title" %> </h5>
-                      <p><b>Total:</b> <%= booking.total_price %>€</p>
+                      <p><b>Total:</b> <%= booking.total_price.to_i %>€</p>
                       <p><b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
                     </div>
                     <div class="office-buttons">
@@ -72,7 +72,7 @@
                     </div>
                     <div class="office-details">
                       <h5><%= link_to booking.office.name, office_path(booking.office), class: "hyperlinked-title" %> </h5>
-                      <p><b>Total: </b>€<%= booking.total_price %></p>
+                      <p><b>Total: </b>€<%= booking.total_price.to_i %></p>
                       <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
                       <p>Reservation made by <%= booking.user.first_name %> <%= cl_image_tag booking.user.avatar.key, width: 70, crop: :fill, class: "rounded-circle" %></p>
                     </div>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="office-details">
                       <h5><%= link_to booking.office.name, office_path(booking.office), class: "hyperlinked-title" %> </h5>
-                      <p><b>Total: </b>€<%= booking.total_price %></p>
+                      <p><b>Total: </b>€<%= booking.total_price.to_i %></p>
                       <p><b>Dates: </b><%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
                       <p>Reservation made by <%= booking.user.first_name %> <%= cl_image_tag booking.user.avatar.key, width: 70, crop: :fill, class: "rounded-circle" %></p>
                     </div>

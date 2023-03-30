@@ -43,19 +43,19 @@
           <% else %>
             <td>1</td>
           <% end %>
-          <td><%= @booking.total_price %>€</td>
+          <td><%= @booking.total_price.to_i %>€</td>
         </tr>
         <tr>
           <td></td>
           <td></td>
           <td><b>VAT</b></td>
-          <td><%= (@booking.total_price*20)/100  %>€</td>
+          <td><%= (@booking.total_price.to_i*20)/100  %>€</td>
         </tr>
         <tr>
           <td></td>
           <td></td>
           <td><b>Total</b></td>
-          <td>£<%= @booking.total_price %>€</td>
+          <td>£<%= @booking.total_price.to_i %>€</td>
         </tr>
       </tbody>
     </table>
