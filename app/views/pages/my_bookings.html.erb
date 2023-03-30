@@ -94,7 +94,7 @@
                     </h4>
                     <p><b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
                     <p><b>Total cost:</b> <%= booking.total_price %>€</p>
-                    <% if current_day > booking.end_date && booking.review.nil? && booking.confirmed? %>
+                    <% if booking.end_date < current_day && booking.user == current_user && booking.review.nil? && booking.confirmed? %>
                       <p><small>If you're happy with your experience please leave a <%= link_to "review", office_path(booking.office) %></small></p>
                     <% elsif !booking.review.nil? && booking.confirmed? %>
                       <p><i class="fa-solid fa-star fa-fw" style="color: #8fe3cf;"></i>Thank you leaving a review!</p>
