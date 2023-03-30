@@ -93,3 +93,4 @@ gem 'wicked_pdf'
 gem "wkhtmltopdf-binary", group: :development
 # PDF on heroku
 gem "wkhtmltopdf-heroku", group: :production
+gem "wkhtmltopdf-binary", group: :production
