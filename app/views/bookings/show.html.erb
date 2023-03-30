@@ -1,6 +1,8 @@
 <% content_for :title do %>
   <%= "Your booking information for #{@booking.office.name}" %>
 <% end %>
+<% require "date" %>
+<% current_day = DateTime.current.to_date %>
 <div class="container background-colour-white">
   <h1 class="text-center my-2">Booking information for <%= @booking.office.name %></h1>
   <% if @booking.confirmed? %>
@@ -8,6 +10,8 @@
     <div class="download">
       <i class="fa-solid fa-file-pdf fa-fw"></i><%= link_to 'Download Invoice', booking_download_path(@booking, format: :pdf) %>
     </div>
+  <% else %>
+    <p class="text-center my-4">You can download an invoice of your booking, once it has been confirmed.</p>
   <% end %>
   <div class="empty-space">
   </div>
@@ -15,7 +19,7 @@
   <p>Thank you for booking with MeetingSpace. We hope you have enjoyed using our platform and your experience with us has been great for your professional meeting or company event</p>
   <br>
   <p>For any feedback on our website please email <a href="mailto:info@meetingspace.com"> info@meetingspace.com</a></p>
-  <% if @booking.review.nil? && @booking.confirmed? %>
+  <% if @booking.end_date < current_day && @booking.user == current_user && @booking.review.nil? && @booking.confirmed? %>
   <p>Don't forget to leave a  <%= link_to "review",  new_booking_review_path(@booking)%> on this property.</p>
   <% end %>
   <br>
