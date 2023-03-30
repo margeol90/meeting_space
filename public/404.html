@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
-  <style>
-    .dialog {
-      width: 90%;
-      background-color: rgb(255, 255, 255);
-      color: #002B5B;
-      height: 80vh;
-      font-family: 'Titillium Web', sans-serif;
-      font-size: 30px;
-      text-align: center;
+  <head>
+    <title>The page you were looking for doesn't exist (404)</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .dialog {
+        width: 90%;
+        background-color: rgb(255, 255, 255);
+        color: #002b5b;
+        height: 80vh;
+        font-family: "Titillium Web", sans-serif;
+        font-size: 30px;
+        text-align: center;
+      }
 
-      h1 {
+      /* h1 {
         font-size: 90px;
       }
 
@@ -26,12 +30,16 @@
 
       h3 {
         font-size: 85px;
-      }
-    }
+      } */
 
-    a {
+      img {
+        width: 1000px;
+        height: 500px;
+      }
+
+      a {
         padding: 10px 20px;
-        background-color: #002B5B;
+        background-color: #002b5b;
         color: white;
         text-decoration: none;
         border-radius: 5px;
@@ -40,22 +48,42 @@
       .search {
         margin: 20px auto;
       }
-  </style>
-</head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div class="headers">
-      <h1>Oops...</h1><h2>404 error</h2>
-      <h3>So much empty (Meeting)Space....</h3>
+      .images {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+
+  <body class="rails-default-error-page">
+    <!-- This file lives in public/404.html -->
+    <div class="dialog">
+      <div class="headers">
+        <h1>Oops...</h1>
+        <h2>404 error</h2>
+        <h3>So much empty (Meeting)Space....</h3>
+      </div>
+      <p>The page you have tried to find no longer exists!</p>
+      <div class="images">
+        <img src="images/scared.jpg" alt="" />
+        <!-- <iframe
+          src="https://giphy.com/embed/lMxmtV4X60zjWHEZj6"
+          width="480"
+          height="480"
+          frameborder="0"
+          class="giphy-embed"
+          allowfullscreen
+        ></iframe> -->
+      </div>
+      <p>
+        We aren't really sure why, we barely know what we're doing here anyway!
+      </p>
+      <div class="search">
+        <p>Look for another <a href="/">MeetingSpace</a></p>
+      </div>
     </div>
-    <p>The page you have tried to find no longer exists!</p>
-    <iframe src="https://giphy.com/embed/lMxmtV4X60zjWHEZj6" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-    <p>We aren't really sure why, we barely know what we're doing here anyway!</p>
-    <div class="search">
-      <p>Look for another <a href="/">MeetingSpace</a></p>
-    </div>
-  </div>
-</body>
+  </body>
 </html>
