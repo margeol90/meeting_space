@@ -92,11 +92,12 @@
                     <%= cl_image_tag booking.office.photo.key %>
                   </div>
                   <div class="office-details">
-                    <h4>
-                      <%= booking.office.name %>
-                    </h4>
+                    <%= link_to office_path(booking.office) do %>
+                      <h4 class="hyperlinked-title">
+                        <%= booking.office.name.truncate(36) %>
+                      </h4>
+                    <% end %>
                     <p><b>Dates:</b> <%= booking.start_date.strftime("%b %d, %Y") %> to <%= booking.end_date.strftime("%b %d, %Y") %></p>
-
                     <p><b>Total cost:</b> <%= booking.total_price.to_i %>€</p>
                     <% if booking.end_date < current_day && booking.user == current_user && booking.review.nil? && booking.confirmed? %>
                       <p><small>If you're happy with your experience please leave a <%= link_to "review", office_path(booking.office) %></small></p>
