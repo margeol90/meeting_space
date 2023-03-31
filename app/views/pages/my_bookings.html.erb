@@ -80,7 +80,7 @@
       <div class="panel" id="two-panel">
         <div class="booking-cards">
           <% if (@bookings.select {|x| x.end_date < Date.today}).count == 0 %>
-            <div class="d-flex fl .ex-column align-items-center">
+            <div class="d-flex flex-column align-items-center">
               <p>You don't have any past bookings!</p>
             </div>
           <% else %>
